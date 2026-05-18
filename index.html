@@ -158,7 +158,7 @@
         + Column
       </button>
 
-      <button class="btn-secondary">
+      <button class="btn-secondary" onclick="exportPDF()">
         Export PDF
       </button>
 
@@ -238,8 +238,13 @@
       }
 
     }
+function exportPDF(){
 
+  alert("Export PDF berhasil dipanggil!");
+
+}
   </script>
-
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
