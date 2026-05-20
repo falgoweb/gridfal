@@ -1,146 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>GridFal</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    body{
-      background:#0f172a;
-      color:white;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
-    /* TOPBAR */
-
-    .topbar{
-      width:100%;
-      padding:16px;
-      background:#111827;
-      border-bottom:1px solid rgba(255,255,255,0.08);
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-
-      position:sticky;
-      top:0;
-      z-index:100;
-    }
-
-    .logo{
-      font-size:22px;
-      font-weight:bold;
-      color:#60a5fa;
-    }
-
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    button{
-      border:none;
-      outline:none;
-      padding:12px 16px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:bold;
-      transition:0.2s;
-    }
-
-    .btn-primary{
-      background:#2563eb;
-      color:white;
-    }
-
-    .btn-primary:hover{
-      background:#1d4ed8;
-    }
-
-    .btn-secondary{
-      background:#1e293b;
-      color:white;
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .btn-secondary:hover{
-      background:#334155;
-    }
-
-    /* WORKSPACE */
-
-    .workspace{
-      flex:1;
-      padding:20px;
-      overflow:auto;
-    }
-
-    .table-container{
-      background:#111827;
-      border-radius:20px;
-      padding:16px;
-      overflow:auto;
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    table{
-      border-collapse:collapse;
-      width:100%;
-      min-width:600px;
-    }
-
-    td{
-      border:1px solid rgba(255,255,255,0.08);
-      padding:14px;
-      min-width:120px;
-      height:55px;
-      color:white;
-      background:#1e293b;
-    }
-
-    td:focus{
-      outline:2px solid #3b82f6;
-      background:#334155;
-    }
-
-    /* MOBILE */
-
-    @media(max-width:768px){
-
-      .topbar{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .actions{
-        width:100%;
-      }
-
-      button{
-        flex:1;
-      }
-
-    }
-
-  </style>
 </head>
-<body>
 
-  <!-- TOPBAR -->
+<body>
 
   <div class="topbar">
 
@@ -166,8 +37,6 @@
 
   </div>
 
-  <!-- WORKSPACE -->
-
   <div class="workspace">
 
     <div class="table-container">
@@ -177,9 +46,9 @@
         <tbody>
 
           <tr>
-            <td contenteditable="true">Nama</td>
-            <td contenteditable="true">Kelas</td>
-            <td contenteditable="true">Nilai</td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
           </tr>
 
           <tr>
@@ -202,49 +71,11 @@
 
   </div>
 
-  <script>
+  <script src="script.js"></script>
 
-    // ADD ROW
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 
-    function addRow(){
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-      const table = document.getElementById("gridTable");
-      const rowCount = table.rows[0].cells.length;
-
-      const newRow = table.insertRow();
-
-      for(let i = 0; i < rowCount; i++){
-
-        const cell = newRow.insertCell();
-
-        cell.contentEditable = "true";
-
-      }
-
-    }
-
-    // ADD COLUMN
-
-    function addColumn(){
-
-      const table = document.getElementById("gridTable");
-
-      for(let i = 0; i < table.rows.length; i++){
-
-        const cell = table.rows[i].insertCell();
-
-        cell.contentEditable = "true";
-
-      }
-
-    }
-function exportPDF(){
-
-  alert("Export PDF berhasil dipanggil!");
-
-}
-  </script>
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
