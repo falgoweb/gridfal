@@ -13,22 +13,16 @@ body{
   flex-direction:column;
 }
 
-/* =========================
-   TOPBAR
-========================= */
-
+/* ================= TOPBAR ================= */
 .topbar{
   width:100%;
   padding:16px;
   background:#111827;
-
   border-bottom:1px solid rgba(255,255,255,0.08);
-
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
-
   position:sticky;
   top:0;
   z-index:100;
@@ -46,18 +40,13 @@ body{
   flex-wrap:wrap;
 }
 
-button{
+/* ================= BUTTON ================= */
+.actions button{
   border:none;
-  outline:none;
-
   padding:12px 16px;
-
   border-radius:12px;
-
   cursor:pointer;
-
   font-weight:bold;
-
   transition:0.2s;
 }
 
@@ -73,7 +62,6 @@ button{
 .btn-secondary{
   background:#1e293b;
   color:white;
-
   border:1px solid rgba(255,255,255,0.08);
 }
 
@@ -81,34 +69,20 @@ button{
   background:#334155;
 }
 
-/* =========================
-   WORKSPACE
-========================= */
-
+/* ================= WORKSPACE ================= */
 .workspace{
   flex:1;
   padding:20px;
   overflow:auto;
 }
 
-/* =========================
-   TABLE
-========================= */
-
 .table-container{
-
   background:white;
-
   border-radius:20px;
-
   padding:16px;
-
   overflow:auto;
-
   border:1px solid #d1d5db;
-
   box-shadow:0 0 15px rgba(0,0,0,0.15);
-
 }
 
 table{
@@ -117,36 +91,76 @@ table{
   min-width:600px;
 }
 
-td{
-
+td, th{
   border:1px solid #d1d5db;
-
   padding:14px;
-
   min-width:120px;
-
   height:55px;
-
   color:black;
-
   background:white;
-
+  position:relative;
 }
 
+/* ================= FOCUS ================= */
 td:focus{
-
   outline:2px solid #3b82f6;
-
   background:#f3f4f6;
-
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* ================= RESIZER (READY FOR JS) ================= */
+.resizer{
+  position:absolute;
+  top:0;
+  right:0;
+  width:5px;
+  height:100%;
+  cursor:col-resize;
+  background:transparent;
+}
 
+.resizer:hover{
+  background:#3b82f6;
+}
+
+/* ================= TABLE ZOOM ================= */
+#gridTable{
+  transform-origin: top left;
+  transition: transform 0.2s ease;
+}
+
+/* ================= ZOOM CONTROL ================= */
+.zoom-control{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  padding: 6px 8px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 999;
+
+  font-size: 14px;
+}
+
+.zoom-control button{
+  padding: 4px 8px;
+  font-size: 20px;
+  border-radius: 6px;
+  border:none;
+  background:#f0f0f0;
+  cursor:pointer;
+}
+
+/* ================= MOBILE ================= */
 @media(max-width:768px){
-
   .topbar{
     flex-direction:column;
     align-items:flex-start;
@@ -156,8 +170,7 @@ td:focus{
     width:100%;
   }
 
-  button{
+  .actions button{
     flex:1;
   }
-
-}
+  }
