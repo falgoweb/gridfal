@@ -1,300 +1,163 @@
-<body>
-
-<div class="excel-app">
-
-  <div class="toolbar">
-    <div class="logo">Mini Excel Pro</div>
-
-    <div class="toolbar-actions">
-      <button onclick="addRow()">+ Row</button>
-      <button onclick="addColumn()">+ Column</button>
-      <button onclick="clearTable()">Reset</button>
-    </div>
-  </div>
-
-  <div class="sheet-container">
-
-    <table id="excelTable">
-      <thead>
-        <tr>
-          <th class="row-number"></th>
-          <th>A</th>
-          <th>B</th>
-          <th>C</th>
-          <th>D</th>
-        </tr>
-      </thead>
-
-      <tbody id="tableBody">
-        <tr>
-          <td class="row-number">1</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
-
-</div>
-
-<script src="script.js"></script>
-</body>
-
-.container {
-  max-width: 1200px;
-  margin: auto;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-.header {
-  margin-bottom: 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
+body{
+  background:#0f172a;
+  color:white;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-.header h1 {
-  font-size: 32px;
-  font-weight: 700;
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+  width:100%;
+  padding:16px;
+  background:#111827;
+
+  border-bottom:1px solid rgba(255,255,255,0.08);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.header p {
-  color: #cbd5e1;
-  margin-top: 5px;
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  color:#60a5fa;
 }
 
-.top-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.card {
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 24px;
-  padding: 25px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.35),
-    0 0 0 1px rgba(255,255,255,0.03);
-  transition: 0.3s ease;
+button{
+  border:none;
+  outline:none;
+
+  padding:12px 16px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+  transition:0.2s;
 }
 
-.card:hover {
-  transform: translateY(-3px);
+.btn-primary{
+  background:#2563eb;
+  color:white;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 20px;
+.btn-primary:hover{
+  background:#1d4ed8;
 }
 
-.form-title {
-  margin-bottom: 20px;
-  font-size: 22px;
-  font-weight: 600;
+.btn-secondary{
+  background:#1e293b;
+  color:white;
+
+  border:1px solid rgba(255,255,255,0.08);
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.btn-secondary:hover{
+  background:#334155;
 }
 
-input {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.06);
-  color: white;
-  font-size: 15px;
-  transition: 0.3s ease;
+/* =========================
+   WORKSPACE
+========================= */
+
+.workspace{
+  flex:1;
+  padding:20px;
+  overflow:auto;
 }
 
-input::placeholder {
-  color: #cbd5e1;
+/* =========================
+   TABLE
+========================= */
+
+.table-container{
+
+  background:white;
+
+  border-radius:20px;
+
+  padding:16px;
+
+  overflow:auto;
+
+  border:1px solid #d1d5db;
+
+  box-shadow:0 0 15px rgba(0,0,0,0.15);
+
 }
 
-input:focus {
-  outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 15px rgba(34,197,94,0.35);
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:600px;
 }
 
-button {
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease;
-  font-weight: 600;
+td{
+
+  border:1px solid #d1d5db;
+
+  padding:14px;
+
+  min-width:120px;
+
+  height:55px;
+
+  color:black;
+
+  background:white;
+
 }
 
-.btn {
-  padding: 14px 18px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: white;
-  font-size: 15px;
+td:focus{
+
+  outline:2px solid #3b82f6;
+
+  background:#f3f4f6;
+
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(34,197,94,0.3);
-}
+/* =========================
+   MOBILE
+========================= */
 
-.btn-danger {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-}
+@media(max-width:768px){
 
-.btn-secondary {
-  background: rgba(255,255,255,0.08);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.search-box {
-  margin-bottom: 20px;
-}
-
-.table-wrapper {
-  overflow-x: auto;
-  border-radius: 18px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  overflow: hidden;
-  min-width: 700px;
-}
-
-thead {
-  background: rgba(255,255,255,0.08);
-}
-
-th {
-  padding: 16px;
-  text-align: left;
-  font-size: 14px;
-  color: #f8fafc;
-}
-
-td {
-  padding: 16px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  color: #e2e8f0;
-}
-
-tbody tr {
-  transition: 0.3s ease;
-}
-
-tbody tr:hover {
-  background: rgba(255,255,255,0.05);
-}
-
-.action-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.action-buttons button {
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-size: 13px;
-  color: white;
-}
-
-.empty {
-  text-align: center;
-  padding: 35px;
-  color: #cbd5e1;
-}
-
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #22c55e;
-  color: white;
-  padding: 14px 18px;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.3s ease;
-  pointer-events: none;
-  z-index: 999;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  body {
-    padding: 15px;
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
   }
 
-  .header h1 {
-    font-size: 26px;
+  .actions{
+    width:100%;
   }
 
-  .card {
-    padding: 18px;
+  button{
+    flex:1;
   }
 
-  .top-buttons {
-    width: 100%;
-  }
-
-  .top-buttons button {
-    flex: 1;
-  }
-}
-table {
-  background: rgba(255,255,255,0.03);
-}
-input::placeholder {
-  color: rgba(255,255,255,0.45);
-}
-body {
-  margin: 0;
-  background: #1e1e1e;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  overflow: hidden;
-}
-
-.excel-app {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.toolbar {
-  height: 70px;
-  background: #111827;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 700;
 }
