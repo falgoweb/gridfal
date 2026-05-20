@@ -1,49 +1,86 @@
-// =========================
+let zoom = 100;
+
+// =====================
+// ZOOM SAFE INIT
+// =====================
+function updateZoom() {
+  const table = document.getElementById("gridTable");
+  if (!table) return;
+
+  table.style.transform = `scale(${zoom / 100})`;
+  table.style.transformOrigin = "top left";
+
+  const zoomLabel = document.getElementById("zoomLevel");
+  if (zoomLabel) zoomLabel.innerText = zoom + "%";
+}
+
+function zoomIn() {
+  if (zoom < 100) {
+    zoom += 10;
+    updateZoom();
+  }
+}
+
+function zoomOut() {
+  if (zoom > 50) {
+    zoom -= 10;
+    updateZoom();
+  }
+}
+
+// =====================
 // ADD ROW
-// =========================
-
-function addRow(){
-
+// =====================
+function addRow() {
   const table = document.getElementById("gridTable");
+  const tbody = table.querySelector("tbody");
+  const cols = tbody.rows[0].cells.length;
 
-  const columnCount = table.rows[0].cells.length;
+  const row = document.createElement("tr");
 
-  const newRow = table.insertRow();
-
-  for(let i = 0; i < columnCount; i++){
-
-    const cell = newRow.insertCell();
-
+  for (let i = 0; i < cols; i++) {
+    const cell = document.createElement("td");
     cell.contentEditable = "true";
-
+    row.appendChild(cell);
   }
 
+  tbody.appendChild(row);
 }
 
-// =========================
+// =====================
 // ADD COLUMN
-// =========================
+// =====================
+function addColumn() {
+  const rows = document.querySelectorAll("#gridTable tr");
 
-function addColumn(){
+  rows.forEach(row => {
+    const cell = document.createElement("td");
+    cell.contentEditable = "true";
+    row.appendChild(cell);
+  });
+}
 
+// =====================
+// EXPORT PDF
+// =====================
+function exportPDF() {
   const table = document.getElementById("gridTable");
 
-  for(let i = 0; i < table.rows.length; i++){
+  html2canvas(table).then(canvas => {
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jspdf.jsPDF("l", "pt", "a4");
 
-    const cell = table.rows[i].insertCell();
+    const width = pdf.internal.pageSize.getWidth();
+    const height = (canvas.height * width) / canvas.width;
 
-    cell.contentEditable = "true";
-
-  }
-
+    pdf.addImage(imgData, "PNG", 0, 0, width, height);
+    pdf.save("gridfal.pdf");
+  });
 }
 
-// =========================
-// EXPORT PDF
-// =========================
-
-function exportPDF(){
-
-  alert("Export PDF berhasil dipanggil!");
-
-}
+// =====================
+// INIT SAFE
+// =====================
+window.addEventListener("DOMContentLoaded", () => {
+  updateZoom();
+});
