@@ -1,81 +1,64 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>GridFal</title>
 
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
   <div class="topbar">
-
-    <div class="logo">
-      GridFal
-    </div>
+    <div class="logo">GridFal</div>
 
     <div class="actions">
-
-      <button class="btn-primary" onclick="addRow()">
-        + Row
-      </button>
-
-      <button class="btn-primary" onclick="addColumn()">
-        + Column
-      </button>
-
-      <button class="btn-secondary" onclick="exportPDF()">
-        Export PDF
-      </button>
-
+      <button class="btn-primary" onclick="addRow()">+ Row</button>
+      <button class="btn-primary" onclick="addColumn()">+ Column</button>
+      <button class="btn-secondary" onclick="exportPDF()">Export PDF</button>
     </div>
-
   </div>
 
   <div class="workspace">
-
     <div class="table-container">
 
       <table id="gridTable">
-
         <tbody>
-
           <tr>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
           </tr>
-
           <tr>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
           </tr>
-
           <tr>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
           </tr>
-
         </tbody>
-
       </table>
 
     </div>
-
   </div>
 
-  <script src="script.js"></script>
+  <!-- ZOOM UI -->
+  <div class="zoom-control">
+    <button onclick="zoomOut()">-</button>
+    <span id="zoomLevel">100%</span>
+    <button onclick="zoomIn()">+</button>
+  </div>
 
+  <!-- LIB -->
   <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
 
 </body>
 </html>
