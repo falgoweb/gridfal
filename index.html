@@ -4,115 +4,86 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GridFal 2.0</title>
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- TOPBAR -->
-  <header class="topbar">
-    <h1 class="logo">GridFal 2.0</h1>
+<header class="topbar">
+  <h1 class="logo">GridFal 2.0</h1>
 
-<div class="actions">
+  <div class="actions">
 
-  <div class="group">
-    <button id="addRowBtn">+ Row</button>
-    <button id="addColumnBtn">+ Column</button>
-    <button id="autoNumberBtn">Auto Number</button>
-    <button onclick="resetGrid()">Reset Grid</button>
-  </div>
-
-  <div class="group">
-    <button onclick="deleteRow()">Hapus Row</button>
-    <button onclick="deleteColumn()">Hapus Column</button>
-    <button onclick="undoAction()">Undo</button>
-  </div>
-<div id="saveStatus" class="save-status">Belum disimpan</div>
-  <div class="group">
-    <button id="exportPdfBtn">Export PDF</button>
-    <button onclick="exportExcel()">Export Excel</button>
-    <button onclick="toggleTheme()">🌙 / ☀️</button>
-  </div>
-
-</div>
-  </header>
-<!-- INTRO -->
-<section class="intro">
-  <h2>GridFal 2.0</h2>
-  <p class="desc">Tool untuk membuat dan mengatur grid/tabel dengan cepat.</p>
-
-  <ul class="guide">
-    <li>➕ Tambah row & column untuk membuat grid/tabel</li>
-    <li>✏️ Klik cell untuk mengisi data</li>
-    <li>🔢 Gunakan Auto Number untuk penomoran otomatis</li>
-    <li>📤 Export hasil ke PDF / Excel (coming soon / beta)</li>
-  </ul>
-</section>
-<p class="hint">
-  👉 Klik cell untuk mulai mengedit. Gunakan tombol di atas untuk menambah struktur grid.
-</p>
-  <!-- WORKSPACE -->
-  <main class="workspace">
-
-    <div class="table-container">
-
-      <table id="gridTable">
-        <div id="emptyState" class="empty-state" style="display:none;">
-  <h3>Grid masih kosong</h3>
-  <p>Tambahkan row atau column untuk mulai membuat grid</p>
-  <div id="emptyState" class="empty-state" style="display:none;">
-  <h3>Grid masih kosong</h3>
-  <p>Tekan "+ Row" atau "+ Column" untuk mulai</p>
-</div>
-</div>
-<tbody>
-  <tr>
-    <td contenteditable="true">No</td>
-    <td contenteditable="true">Nama Item</td>
-    <td contenteditable="true">Nama Item</td>
-  </tr>
-
-  <tr>
-    <td contenteditable="true">1</td>
-    <td contenteditable="true">Contoh A</td>
-    <td contenteditable="true">10000</td>
-  </tr>
-
-  <tr>
-    <td contenteditable="true">2</td>
-    <td contenteditable="true">Contoh B</td>
-    <td contenteditable="true">20000</td>
-  </tr>
-</tbody>
-      </table>
-
+    <div class="group">
+      <button id="addRowBtn">+ Row</button>
+      <button id="addColumnBtn">+ Column</button>
+      <button onclick="resetGrid()">Reset Grid</button>
     </div>
 
-  </main>
+    <div class="group">
+      <button onclick="deleteRow()">Hapus Row</button>
+      <button onclick="deleteColumn()">Hapus Column</button>
+      <button onclick="undoAction()">Undo</button>
+    </div>
 
-  <!-- ZOOM -->
-  <div class="zoom-control">
-    <button id="zoomOutBtn">-</button>
-    <span id="zoomLevel">100%</span>
-    <button id="zoomInBtn">+</button>
+    <div id="saveStatus" class="save-status">Belum disimpan</div>
+
+    <div class="group">
+      <button id="exportPdfBtn">Export PDF</button>
+      <button onclick="exportExcel()">Export Excel</button>
+      <button onclick="toggleTheme()">🌙 / ☀️</button>
+    </div>
+
   </div>
+</header>
 
-  <!-- ONLY 1 SCRIPT -->
-  <script src="script.js"></script>
-<div id="onboarding" class="onboarding">
-  <div class="onboarding-box">
-    <h2>Selamat datang di GridFal 2.0</h2>
-    <p>Ini tool untuk membuat grid dengan cepat.</p>
+<section class="intro">
+  <h2>GridFal 2.0</h2>
+  <p class="desc">Tool untuk membuat grid/tabel dengan cepat.</p>
 
-    <ol>
-      <li>Klik <b>+ Row</b> atau <b>+ Column</b></li>
-      <li>Isi data langsung di tabel</li>
-      <li>Gunakan Auto Number jika perlu</li>
-    </ol>
+  <p class="hint-main">
+    🔧 Mulai dengan tombol <b>+ Row</b> atau <b>+ Column</b> untuk membuat struktur grid.
+    Setelah itu, langsung klik cell untuk mengisi data.
+  </p>
+</section>
 
-    <button onclick="closeOnboarding()">Mulai</button>
+<p class="hint">👉 Klik cell untuk mulai mengedit</p>
+
+<main class="workspace">
+  <div class="table-container">
+
+    <table id="gridTable">
+      <tbody>
+        <tr>
+          <td contenteditable="true">No</td>
+          <td contenteditable="true">Nama Item</td>
+          <td contenteditable="true">Harga</td>
+        </tr>
+
+        <tr>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">Contoh A</td>
+          <td contenteditable="true">10000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- FIX: empty state di luar table -->
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <h3>Grid masih kosong</h3>
+      <p>Tambahkan row atau column untuk mulai</p>
+    </div>
+
   </div>
+</main>
+
+<div class="zoom-control">
+  <button>-</button>
+  <span>100%</span>
+  <button>+</button>
 </div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
