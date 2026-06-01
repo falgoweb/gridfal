@@ -1,5 +1,139 @@
-console.log("GRIDFAL READY ✔");
+function autoNumber() {
+  const table = document.getElementById("gridTable");
 
+  if (!table) return;
+
+  let startNumber = null;
+  let anchorColumn = null;
+
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+
+    for (let j = 0; j < cells.length; j++) {
+      const val = parseInt(cells[j].textContent);
+
+      if (!isNaN(val)) {
+        startNumber = val;
+        anchorColumn = j;
+        break;
+      }
+    }
+
+    if (startNumber !== null) break;
+  }
+
+  if (startNumber === null || anchorColumn === null) return;
+
+  let current = startNumber;
+
+  for (let i = 1; i < table.rows.length; i++) {
+    const cell = table.rows[i].cells[anchorColumn];
+
+    if (cell) {
+      cell.textContent = current;
+      cell.contentEditable = "false";
+      current++;
+    }
+  }
+}
+function autoNumber() {
+  const table = document.getElementById("gridTable");
+
+  let startRow = null;
+  let colIndex = null;
+  let startValue = null;
+
+  for (let i = 0; i < table.rows.length; i++) {
+    for (let j = 0; j < table.rows[i].cells.length; j++) {
+      const val = parseInt(table.rows[i].cells[j].textContent);
+
+      if (!isNaN(val)) {
+        startRow = i;
+        colIndex = j;
+        startValue = val;
+        break;
+      }
+    }
+    if (startValue !== null) break;
+  }
+
+  if (startValue === null) return;
+
+  let current = startValue;
+
+  for (let i = startRow; i < table.rows.length; i++) {
+    const cell = table.rows[i].cells[colIndex];
+
+    if (cell) {
+      cell.textContent = current;
+      current++;
+    }
+  }
+}
+function autoNumber() {
+  const table = document.getElementById("gridTable");
+
+  if (!table) return;
+
+  let startNumber = null;
+
+  // 🔍 cari angka pertama di seluruh tabel
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+
+    for (let j = 0; j < cells.length; j++) {
+      const val = parseInt(cells[j].textContent);
+
+      if (!isNaN(val)) {
+        startNumber = val;
+        break;
+      }
+    }
+
+    if (startNumber !== null) break;
+  }
+
+  // ❌ kalau tidak ada angka → stop
+  if (startNumber === null) return;
+
+  // 🔢 update SEMUA kolom yang berisi angka awal itu
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+
+    for (let j = 0; j < cells.length; j++) {
+      const val = parseInt(cells[j].textContent);
+
+      if (!isNaN(val)) {
+        let current = startNumber;
+
+        for (let k = i; k < table.rows.length; k++) {
+          const target = table.rows[k].cells[j];
+          if (target) {
+            target.textContent = current;
+            target.contentEditable = "false";
+            current++;
+          }
+        }
+saveTable();
+        return; // cukup 1 series saja
+      }
+    }
+  }
+}
+console.log("GRIDFAL READY ✔");
+function saveTable() {
+  const table = document.getElementById("gridTable");
+  localStorage.setItem("gridfalData", table.innerHTML);
+}
+
+function loadTable() {
+  const table = document.getElementById("gridTable");
+  const saved = localStorage.getItem("gridfalData");
+
+  if (saved) {
+    table.innerHTML = saved;
+  }
+}
 // anti double load (INI FIX ERROR kamu sebelumnya)
 if (window.__GRIDFAL_LOADED__) {
   console.log("⚠ Script sudah pernah jalan, stop duplicate");
@@ -24,7 +158,7 @@ if (window.__GRIDFAL_LOADED__) {
   };
 
   document.addEventListener("DOMContentLoaded", function () {
-
+loadTable();
     const table = document.getElementById("gridTable");
     const addRowBtn = document.getElementById("addRowBtn");
     const addColumnBtn = document.getElementById("addColumnBtn");
@@ -37,7 +171,7 @@ if (window.__GRIDFAL_LOADED__) {
     // ROW
     addRowBtn.onclick = function () {
       saveState(table);
-
+autoNumber();
       const cols = table.rows[0].cells.length;
       const row = table.insertRow();
 
@@ -45,8 +179,9 @@ if (window.__GRIDFAL_LOADED__) {
         const cell = row.insertCell();
         cell.contentEditable = "true";
       }
-
+autoNumber();
       console.log("✔ ROW OK");
+      saveTable();
     };
 
     // COLUMN
@@ -59,9 +194,94 @@ if (window.__GRIDFAL_LOADED__) {
         const cell = rows[i].insertCell();
         cell.contentEditable = "true";
       }
-
+autoNumber();
       console.log("✔ COLUMN OK");
+      saveTable();
     };
 
   });
 }
+window.deleteRow = function () {
+  const table = document.getElementById("gridTable");
+autoNumber();
+  if (!table) return;
+
+  if (table.rows.length <= 1) {
+    alert("Minimal harus ada 1 row!");
+    return;
+  }
+
+  window.undoStack.push(table.innerHTML);
+
+  table.deleteRow(table.rows.length - 1);
+saveTable();
+  console.log("🗑 Row dihapus");
+};
+window.deleteColumn = function () {
+  const table = document.getElementById("gridTable");
+autoNumber();
+  if (!table || table.rows.length === 0) return;
+
+  const colCount = table.rows[0].cells.length;
+
+  if (colCount <= 1) {
+    alert("Minimal harus ada 1 column!");
+    return;
+  }
+
+  window.undoStack.push(table.innerHTML);
+
+  for (let i = 0; i < table.rows.length; i++) {
+    table.rows[i].deleteCell(colCount - 1);
+  }
+saveTable();
+  console.log("🗑 Column dihapus");
+};
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("autoNumberBtn");
+
+  if (!btn) {
+    console.error("Tombol Auto Number tidak ditemukan");
+    return;
+  }
+
+  btn.addEventListener("click", function () {
+    autoNumber();
+  });
+
+  console.log("✔ Auto Number button aktif");
+});
+// Dark Mode & Light Mode Toggle
+const themeToggle = document.getElementById("theme-toggle"); // sesuaikan dengan id tombol lu
+
+// Load theme yang terakhir dipilih
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+} else {
+    document.body.classList.remove("dark-mode");
+}
+
+// Klik tombol
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+
+  if (document.body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+}
+
+// Load tema saat halaman dibuka
+document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+});
+document.addEventListener("input", function (e) {
+  if (e.target.tagName === "TD") {
+    saveTable();
+  }
+});
