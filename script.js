@@ -174,7 +174,7 @@ loadTable();
 autoNumber();
       const cols = table.rows[0].cells.length;
       const row = table.insertRow();
-
+saveGrid();
       for (let i = 0; i < cols; i++) {
         const cell = row.insertCell();
         cell.contentEditable = "true";
@@ -183,7 +183,7 @@ autoNumber();
       console.log("✔ ROW OK");
       saveTable();
     };
-
+checkEmptyState();
     // COLUMN
     addColumnBtn.onclick = function () {
       saveState(table);
@@ -205,12 +205,12 @@ window.deleteRow = function () {
   const table = document.getElementById("gridTable");
 autoNumber();
   if (!table) return;
-
+saveGrid();
   if (table.rows.length <= 1) {
     alert("Minimal harus ada 1 row!");
     return;
   }
-
+checkEmptyState();
   window.undoStack.push(table.innerHTML);
 
   table.deleteRow(table.rows.length - 1);
@@ -284,4 +284,145 @@ document.addEventListener("input", function (e) {
   if (e.target.tagName === "TD") {
     saveTable();
   }
+});
+window.addEventListener("DOMContentLoaded", () => {
+  const table = document.getElementById("gridTable");
+
+  const sampleData = [
+    ["No", "Nama Item", "Nama Item"],
+    ["1", "Contoh", "Contoh"],
+    ["2", "Contoh", "Contoh"]
+  ];
+
+  const tbody = table.querySelector("tbody");
+  tbody.innerHTML = "";
+
+  sampleData.forEach(row => {
+    const tr = document.createElement("tr");
+
+    row.forEach(cell => {
+      const td = document.createElement("td");
+      td.contentEditable = "true";
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+});
+function checkEmptyState(){
+  const table = document.getElementById("gridTable");
+  const emptyState = document.getElementById("emptyState");
+
+  const rows = table.querySelectorAll("tbody tr");
+
+  if(rows.length === 0){
+    emptyState.style.display = "block";
+  } else {
+    emptyState.style.display = "none";
+  }
+}
+function resetGrid(){
+  const tbody = document.querySelector("#gridTable tbody");
+
+  tbody.innerHTML = `
+    <tr>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+    </tr>
+    <tr>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+    </tr>
+  `;
+
+  if(typeof checkEmptyState === "function"){
+    checkEmptyState();
+  }
+}
+function checkEmptyState(){
+  const table = document.getElementById("gridTable");
+  const emptyState = document.getElementById("emptyState");
+  const rows = table.querySelectorAll("tbody tr");
+checkEmptyState();
+  if(rows.length === 0){
+    emptyState.style.display = "block";
+  } else {
+    emptyState.style.display = "none";
+  }
+}
+function closeOnboarding(){
+  document.getElementById("onboarding").style.display = "none";
+  localStorage.setItem("gridfal_seen", "true");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const seen = localStorage.getItem("gridfal_seen");
+
+  if(seen){
+    document.getElementById("onboarding").style.display = "none";
+  }
+});
+function checkEmptyState(){
+  const table = document.getElementById("gridTable");
+  const emptyState = document.getElementById("emptyState");
+
+  if(!table || !emptyState) return;
+
+  const rows = table.querySelectorAll("tbody tr");
+
+  emptyState.style.display = rows.length === 0 ? "block" : "none";
+}
+function setSavedStatus(text){
+  const el = document.getElementById("saveStatus");
+  if(el) el.textContent = text;
+}
+function saveGrid(){
+  const table = document.getElementById("gridTable");
+  const rows = table.querySelectorAll("tbody tr");
+
+  const data = [];
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    const rowData = [];
+
+    cells.forEach(cell => {
+      rowData.push(cell.textContent);
+    });
+
+    data.push(rowData);
+  });
+
+  localStorage.setItem("gridfal_data", JSON.stringify(data));
+}
+function loadGrid(){
+  const table = document.getElementById("gridTable");
+  const tbody = table.querySelector("tbody");
+
+  const saved = localStorage.getItem("gridfal_data");
+
+  if(!saved) return;
+
+  const data = JSON.parse(saved);
+
+  tbody.innerHTML = "";
+
+  data.forEach(row => {
+    const tr = document.createElement("tr");
+
+    row.forEach(cell => {
+      const td = document.createElement("td");
+      td.contentEditable = "true";
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+}
+window.addEventListener("DOMContentLoaded", () => {
+  loadGrid();
 });
