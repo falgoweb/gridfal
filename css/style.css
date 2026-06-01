@@ -1,8 +1,11 @@
+/* =========================
+   BASE RESET
+========================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
 }
 
 body{
@@ -10,13 +13,16 @@ body{
   color:#000;
 }
 
-/* TOPBAR */
+/* =========================
+   TOPBAR
+========================= */
 .topbar{
   background:#111827;
   padding:16px;
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
+  align-items:center;
 }
 
 .logo{
@@ -24,7 +30,6 @@ body{
   font-size:24px;
 }
 
-/* BUTTON */
 .actions{
   display:flex;
   gap:10px;
@@ -37,6 +42,9 @@ body{
   padding:6px;
 }
 
+/* =========================
+   BUTTON
+========================= */
 button{
   padding:10px 14px;
   border:none;
@@ -44,6 +52,8 @@ button{
   background:#2563eb;
   color:white;
   cursor:pointer;
+
+  transition:all 0.15s ease;
 }
 
 button:hover{
@@ -51,47 +61,60 @@ button:hover{
   transform:translateY(-2px);
 }
 
+button:active{
+  transform:scale(0.97);
+}
+
+/* primary buttons */
 #addRowBtn,
 #addColumnBtn,
 #autoNumberBtn{
   background:#16a34a;
 }
 
-/* TABLE */
+/* =========================
+   TABLE
+========================= */
 .table-container{
   padding:16px;
   overflow:auto;
+  transition:all 0.2s ease;
 }
 
 table{
   border-collapse:collapse;
 }
 
-td{
+td, th{
   border:1px solid #333;
   min-width:100px;
-  padding:6px;
+  padding:8px;
+  transition:all 0.15s ease;
 }
 
 td:focus{
   outline:2px solid #3b82f6;
+  outline-offset:-2px;
 }
 
-/* EMPTY STATE */
+/* =========================
+   EMPTY STATE
+========================= */
 .empty-state{
   text-align:center;
   padding:30px;
   color:#64748b;
 }
 
-/* SAVE STATUS */
+/* =========================
+   TEXT UI
+========================= */
 .save-status{
   font-size:12px;
   color:#94a3b8;
   padding:6px;
 }
 
-/* INTRO */
 .intro{
   padding:16px;
 }
@@ -101,67 +124,78 @@ td:focus{
   font-size:13px;
   color:#64748b;
 }
-.hint-main{
-  margin-top:10px;
-  font-size:13px;
-  color:#475569;
-  line-height:1.5;
-}.dark-mode{
-  background:#0f172a;
-  color:#e2e8f0;
-}
 
-.dark-mode td{
-  background:#0f172a !important;
-  color:#f1f5f9 !important;
-  border:1px solid #1f2937;
-}
-
+/* =========================
+   DARK MODE (EXCEL STYLE)
+========================= */
 body.dark-mode{
   background:#0f172a;
   color:#e2e8f0;
 }
 
-/* container tetap dark */
+/* container */
 body.dark-mode .table-container{
   background:#1e293b;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
 
-/* =========================
-   EXCEL WHITE TABLE MODE
-========================= */
-
-/* tabel tetap putih seperti Excel */
+/* TABLE = white Excel canvas */
 body.dark-mode table{
   background:#ffffff !important;
   border-collapse:collapse !important;
-  border:2px solid #000 !important; /* 🔥 border luar hitam */
+  border:2px solid #000 !important;
 }
 
-/* cell Excel style */
+/* CELL GRID */
 body.dark-mode td,
 body.dark-mode th{
   background:#ffffff !important;
   color:#111827 !important;
-
-  border:1px solid #000 !important; /* 🔥 grid hitam tegas */
+  border:1px solid #000 !important;
   min-width:100px;
-  padding:6px;
+  padding:8px;
 }
 
-/* hover ringan (kayak Excel selection feel) */
-body.dark-mode td:hover{
-  background:#f3f4f6 !important;
+/* hover row */
+body.dark-mode tr:hover td{
+  background:#f5f7fa !important;
 }
 
-/* fokus cell */
+/* focus cell */
 body.dark-mode td:focus{
-  outline:2px solid #2563eb;
+  outline:2px solid #2563eb !important;
   outline-offset:-2px;
+  position:relative;
+  z-index:2;
 }
 
-/* header kalau ada */
-body.dark-mode th{
-  background:#f1f5f9 !important;
-  font-weight:bold;
+/* =========================
+   POLISH EFFECTS
+========================= */
+
+/* smooth interaction */
+button, td{
+  transition:all 0.15s ease;
+}
+
+/* hover feel */
+body.dark-mode td:hover{
+  background:#f5f7fa !important;
+  cursor:text;
+}
+
+/* click feedback */
+body.dark-mode td:active{
+  transform:scale(0.99);
+}
+
+/* table depth */
+body.dark-mode .table-container{
+  transition:0.2s ease;
+}
+
+/* button active feel */
+button:active{
+  transform:scale(0.96);
 }
