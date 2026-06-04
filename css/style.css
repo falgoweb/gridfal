@@ -76,20 +76,25 @@ button:active{
    TABLE
 ========================= */
 .table-container{
-  padding:16px;
+  transform-origin:  top left;
+  padding-top:16px;
   overflow:auto;
   transition:all 0.2s ease;
+  
 }
 
 table{
   border-collapse:collapse;
+  table-layout: auto;
 }
 
 td, th{
   border:1px solid #333;
   min-width:100px;
   padding:8px;
-  transition:all 0.15s ease;
+
+  white-space: normal;
+  word-break: break-word;
 }
 
 td:focus{
@@ -101,7 +106,9 @@ td:focus{
    EMPTY STATE
 ========================= */
 .empty-state{
-  text-align:center;
+  td[contenteditable="true"],
+  td[contenteditable="true"]{
+  text-align:left;
   padding:30px;
   color:#64748b;
 }
@@ -198,4 +205,58 @@ body.dark-mode .table-container{
 /* button active feel */
 button:active{
   transform:scale(0.96);
+}
+/* =========================
+   COLUMN RESIZE
+========================= */
+
+td,
+th{
+  position: relative;
+}
+
+.resizer{
+  position:absolute;
+  top:0;
+  right:-3px;
+  width:6px;
+  height:100%;
+
+  cursor:col-resize;
+  z-index:9999;
+
+  background:transparent;
+
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+}
+.resizer::after{
+  content:"";
+  position:absolute;
+  inset:0;
+}
+.zoom-control{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.zoom-control button{
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+#zoomLevel{
+  display:inline-block;
+  min-width:70px;
+  text-align:center;
+
+  color: red;
+  font-size:18px;
+  font-weight:700;
 }
