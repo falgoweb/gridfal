@@ -116,9 +116,10 @@ td:focus{
 /* =========================
    TEXT UI
 ========================= */
+}
 .save-status{
   font-size:12px;
-  color:#94a3b8;
+  color:white;
   padding:6px;
 }
 
@@ -135,77 +136,60 @@ td:focus{
 /* =========================
    DARK MODE (EXCEL STYLE)
 ========================= */
-body.dark-mode{
-  background:#0f172a;
-  color:#e2e8f0;
+}
+body {
+  background: #f5f5f5;
+  color: #222;
 }
 
-/* container */
-body.dark-mode .table-container{
-  background:#1e293b;
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+/* DARK MODE - HANYA UI */
+body.dark-mode {
+  background: #1e1e1e;
+  color: #ffffff;
 }
 
-/* TABLE = white Excel canvas */
-body.dark-mode table{
-  background:#ffffff !important;
-  border-collapse:collapse !important;
-  border:2px solid #000 !important;
+/* Toolbar */
+body.dark-mode .toolbar {
+  background: #2d2d2d;
 }
 
-/* CELL GRID */
-body.dark-mode td,
-body.dark-mode th{
-  background:#ffffff !important;
-  color:#111827 !important;
-  border:1px solid #000 !important;
-  min-width:100px;
-  padding:8px;
+/* Sidebar */
+body.dark-mode .sidebar {
+  background: #252525;
 }
 
-/* hover row */
-body.dark-mode tr:hover td{
-  background:#f5f7fa !important;
+/* Tombol */
+body.dark-mode button {
+  background: #333;
+  color: #fff;
 }
 
-/* focus cell */
-body.dark-mode td:focus{
-  outline:2px solid #2563eb !important;
-  outline-offset:-2px;
-  position:relative;
-  z-index:2;
+/* Modal */
+body.dark-mode .modal {
+  background: #2a2a2a;
+  color: #fff;
+}
+/* Tabel selalu putih */
+table,
+.sheet-table,
+.grid-container {
+  background: #ffffff !important;
 }
 
-/* =========================
-   POLISH EFFECTS
-========================= */
+table td,
+table th,
+.sheet-table td,
+.sheet-table th {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
 
 /* smooth interaction */
+
 button, td{
   transition:all 0.15s ease;
 }
 
-/* hover feel */
-body.dark-mode td:hover{
-  background:#f5f7fa !important;
-  cursor:text;
-}
-
-/* click feedback */
-body.dark-mode td:active{
-  transform:scale(0.99);
-}
-
-/* table depth */
-body.dark-mode .table-container{
-  transition:0.2s ease;
-}
-
-/* button active feel */
-button:active{
-  transform:scale(0.96);
-}
 /* =========================
    COLUMN RESIZE
 ========================= */
@@ -256,7 +240,19 @@ th{
   min-width:70px;
   text-align:center;
 
-  color: red;
+  color: white;
   font-size:18px;
   font-weight:700;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
