@@ -1,262 +1,400 @@
-/* =========================
-   BASE RESET
-========================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
+console.log("JS Loaded");
+console.log("GRIDFAL READY ✔");
+
+window.undoStack = [];
+
+/* =======================
+   UNDO SYSTEM
+======================= */
+function saveState(){
+  const table = document.getElementById("gridTable");
+  if(!table) return;
+
+  window.undoStack.push(table.innerHTML);
+
+  if(window.undoStack.length > 30){
+    window.undoStack.shift();
+  }
 }
 
-body{
-  background:#fff;
-  color:#000;
+function undoAction(){
+  const table = document.getElementById("gridTable");
+  if(!table) return;
+
+  if(window.undoStack.length === 0) return;
+
+  table.innerHTML = window.undoStack.pop();
+
+  checkEmptyState();
+  initColumnResize();
 }
 
-/* =========================
-   TOPBAR
-========================= */
-.topbar{
-  background:#111827;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  align-items:center;
+/* =======================
+   SAVE STATUS
+======================= */
+function setSavedStatus(text){
+  const el = document.getElementById("saveStatus");
+  if(el) el.textContent = text;
 }
 
-.logo{
-  color:#60a5fa;
-  font-size:24px;
+/* =======================
+   SAVE GRID (LOCALSTORAGE)
+======================= */
+function saveGrid(){
+  const rows = document.querySelectorAll("#gridTable tbody tr");
+  const data = [];
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    const rowData = [];
+
+    cells.forEach(cell => {
+      rowData.push(cell.textContent);
+    });
+
+    data.push(rowData);
+  });
+
+  localStorage.setItem("gridfal_data", JSON.stringify(data));
+  setSavedStatus("Tersimpan ✔");
 }
 
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+/* =======================
+   LOAD GRID
+======================= */
+function loadGrid(){
+  const table = document.querySelector("#gridTable tbody");
+  const saved = localStorage.getItem("gridfal_data");
+
+  if(!saved) return;
+
+  const data = JSON.parse(saved);
+  table.innerHTML = "";
+
+  data.forEach(row => {
+    const tr = document.createElement("tr");
+
+    row.forEach(cell => {
+      const td = document.createElement("td");
+      td.contentEditable = "true";
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+
+    table.appendChild(tr);
+  });
 }
 
-.group{
-  display:flex;
-  gap:8px;
-  padding:6px;
+/* =======================
+   EMPTY STATE
+======================= */
+function checkEmptyState(){
+  const rows = document.querySelectorAll("#gridTable tbody tr");
+  const empty = document.getElementById("emptyState");
+
+  if(!empty) return;
+
+  empty.style.display = rows.length === 0 ? "block" : "none";
 }
 
-/* =========================
-   BUTTON
-========================= */
-button{
-  padding:10px 14px;
-  border:none;
-  border-radius:10px;
-  background:#2563eb;
-  color:white;
-  cursor:pointer;
+/* =======================
+   ADD ROW
+======================= */
+function addRow(){
+  const table = document.querySelector("#gridTable tbody");
+  if(!table || table.rows.length === 0) return;
 
-  transition:all 0.15s ease;
+  saveState();
+
+  const cols = table.rows[0].cells.length;
+  const tr = document.createElement("tr");
+
+  for(let i=0;i<cols;i++){
+    const td = document.createElement("td");
+    td.contentEditable = "true";
+    tr.appendChild(td);
+  }
+
+  table.appendChild(tr);
+
+  // 🔥 AUTO NUMBER JALAN DI SINI
+  autoNumber();
+
+  saveGrid();
+  checkEmptyState();
 }
 
-button:hover{
-  background:#1d4ed8;
-  transform:translateY(-2px);
+/* =======================
+   ADD COLUMN
+======================= */
+function addColumn(){
+  const rows = document.querySelectorAll("#gridTable tbody tr");
+  if(rows.length === 0) return;
+
+  saveState();
+
+  rows.forEach(row => {
+    const td = document.createElement("td");
+    td.contentEditable = "true";
+    row.appendChild(td);
+  });
+
+  saveGrid();
+  initColumnResize();
 }
 
-button:active{
-  transform:scale(0.97);
+/* =======================
+   DELETE ROW (FIXED)
+======================= */
+function deleteRow(){
+  const table = document.querySelector("#gridTable tbody");
+  if(!table) return;
+
+  if(table.rows.length <= 1){
+    alert("Minimal harus ada 1 row!");
+    return;
+  }
+
+  saveState();
+
+  table.deleteRow(table.rows.length - 1);
+
+  saveGrid();
+  checkEmptyState();
 }
 
-/* primary buttons */
-#addRowBtn,
-#addColumnBtn,
-#autoNumberBtn{
-  background:#16a34a;
+/* =======================
+   DELETE COLUMN (FIXED)
+======================= */
+function deleteColumn(){
+  const rows = document.querySelectorAll("#gridTable tbody tr");
+  if(rows.length === 0) return;
+
+  const colCount = rows[0].cells.length;
+
+  if(colCount <= 1){
+    alert("Minimal harus ada 1 column!");
+    return;
+  }
+
+  saveState();
+
+  rows.forEach(row => {
+    row.deleteCell(colCount - 1);
+  });
+
+  saveGrid();
 }
 
-/* =========================
-   TABLE
-========================= */
-.table-container{
-  transform-origin:  top left;
-  padding-top:16px;
-  overflow:auto;
-  transition:all 0.2s ease;
+/* =======================
+   RESET GRID
+======================= */
+function resetGrid(){
+  const tbody = document.querySelector("#gridTable tbody");
+
+  saveState();
+
+  tbody.innerHTML = `
+    <tr>
+      <td contenteditable="true">No</td>
+      <td contenteditable="true">isi</td>
+      <td contenteditable="true">isi</td>
+    </tr>
+
+    <tr>
+     <td contenteditable="true">1</td>
+     <td contenteditable="true">isi</td>
+     <td contenteditable="true">isi</td>
+   </tr>
+   `;
+zoomLevel = 150;
+applyZoom();
+  saveGrid();
+  checkEmptyState();
+}
+
+/* =======================
+   INIT
+======================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const addRowBtn = document.getElementById("addRowBtn");
+  const addColumnBtn = document.getElementById("addColumnBtn");
+  const autoNumberBtn = document.getElementById("autoNumberBtn");
+
+  if(addRowBtn){
+    addRowBtn.onclick = addRow;
+  }
+
+  if(addColumnBtn){
+    addColumnBtn.onclick = addColumn;
+  }
+
+  if(autoNumberBtn){
+    autoNumberBtn.onclick = autoNumber;
+  }
+
+  loadGrid();
+  checkEmptyState();
+  initColumnResize();
+
+});
+
+/* =======================
+   AUTO SAVE INPUT
+======================= */
+document.addEventListener("input", function(e){
+  if(e.target.tagName === "TD"){
+    saveGrid();
+  }
+});
+function autoNumber(){
+  const table = document.querySelector("#gridTable");
+  if(!table) return;
+
+  let current = 1;
+
+  for(let i = 1; i < table.rows.length; i++){
+    const firstCell = table.rows[i].cells[0];
+
+    if(firstCell){
+      firstCell.textContent = current;
+      firstCell.contentEditable = "false";
+      current++;
+    }
+  }
+}
+function applyTheme(theme){
+  if(theme === "dark"){
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+}
+
+/* AUTO LOAD THEME */
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  applyTheme(savedTheme);
+});
+/* =======================
+   COLUMN RESIZE
+======================= */
+
+function initColumnResize(){
+console.log("Resize aktif");
+  const firstRow = document.querySelector("#gridTable tr");
+  if(!firstRow) return;
+
+  const cells = firstRow.querySelectorAll("td, th");
+
+  cells.forEach((cell, index) => {
+
+    if(cell.querySelector(".resizer")) return;
+
+    const resizer = document.createElement("div");
+    resizer.className = "resizer";
+
+    let startX;
+    let startWidth;
+
+    function startResize(e){
+
+      startX = e.touches
+        ? e.touches[0].clientX
+        : e.clientX;
+
+      startWidth = cell.offsetWidth;
+
+      document.addEventListener("mousemove", resize);
+      document.addEventListener("mouseup", stopResize);
+
+      document.addEventListener("touchmove", resize);
+      document.addEventListener("touchend", stopResize);
+    }
+
+    function resize(e){
+e.preventDefault();
+      const currentX = e.touches
+        ? e.touches[0].clientX
+        : e.clientX;
+
+      const width = startWidth + (currentX - startX);
+console.log(width);
+      if(width < 50) return;
+
+      document.querySelectorAll("#gridTable tr").forEach(row => {
+
+        if(row.cells[index]){
+          row.cells[index].style.width = width + "px";
+        }
+
+      });
+    }
+
+    function stopResize(){
+
+      document.removeEventListener("mousemove", resize);
+      document.removeEventListener("mouseup", stopResize);
+
+      document.removeEventListener("touchmove", resize);
+      document.removeEventListener("touchend", stopResize);
+
+      saveGrid();
+    }
+
+    resizer.addEventListener("mousedown", startResize);
+    resizer.addEventListener("touchstart", function(e){
+  e.preventDefault();
+  startResize(e);
+}, { passive: false });
+
+    cell.appendChild(resizer);
+
+  });
+
+}
+/* =======================
+   ZOOM
+======================= */
+const tableContainer = document.querySelector(".table-container");
+let zoomLevel = 150;
+
+function zoomIn() {
+  if (zoomLevel < 200) {
+    zoomLevel += 10;
+    applyZoom();
+  }
   
 }
 
-table{
-  border-collapse:collapse;
-  table-layout: auto;
+function zoomOut() {
+  if (zoomLevel > 150) {
+    zoomLevel -= 10;
+    applyZoom();
+  }
+  
 }
 
-td, th{
-  border:1px solid #333;
-  min-width:100px;
-  padding:8px;
+function applyZoom() {
+  tableContainer.style.transform = `scale(${zoomLevel / 150})`;
+  tableContainer.style.transformOrigin = "top left";
+  document.getElementById("zoomLevel").textContent = 
+   zoomLevel + "%";
 
-  white-space: normal;
-  word-break: break-word;
 }
+applyZoom();
+document.getElementById("zoomBtnIn").addEventListener("click", zoomIn);
+document.getElementById("zoomBtnOut").addEventListener("click", zoomOut);
 
-td:focus{
-  outline:2px solid #3b82f6;
-  outline-offset:-2px;
-}
+const themeToggle = document.getElementById("themeToggle");
 
-/* =========================
-   EMPTY STATE
-========================= */
-.empty-state{
-  td[contenteditable="true"],
-  td[contenteditable="true"]{
-  text-align:left;
-  padding:30px;
-  color:#64748b;
-}
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
 
-/* =========================
-   TEXT UI
-========================= */
-.save-status{
-  font-size:12px;
-  color:#94a3b8;
-  padding:6px;
-}
-
-.intro{
-  padding:16px;
-}
-
-.hint{
-  padding:0 16px;
-  font-size:13px;
-  color:#64748b;
-}
-
-/* =========================
-   DARK MODE (EXCEL STYLE)
-========================= */
-body.dark-mode{
-  background:#0f172a;
-  color:#e2e8f0;
-}
-
-/* container */
-body.dark-mode .table-container{
-  background:#1e293b;
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
-}
-
-/* TABLE = white Excel canvas */
-body.dark-mode table{
-  background:#ffffff !important;
-  border-collapse:collapse !important;
-  border:2px solid #000 !important;
-}
-
-/* CELL GRID */
-body.dark-mode td,
-body.dark-mode th{
-  background:#ffffff !important;
-  color:#111827 !important;
-  border:1px solid #000 !important;
-  min-width:100px;
-  padding:8px;
-}
-
-/* hover row */
-body.dark-mode tr:hover td{
-  background:#f5f7fa !important;
-}
-
-/* focus cell */
-body.dark-mode td:focus{
-  outline:2px solid #2563eb !important;
-  outline-offset:-2px;
-  position:relative;
-  z-index:2;
-}
-
-/* =========================
-   POLISH EFFECTS
-========================= */
-
-/* smooth interaction */
-button, td{
-  transition:all 0.15s ease;
-}
-
-/* hover feel */
-body.dark-mode td:hover{
-  background:#f5f7fa !important;
-  cursor:text;
-}
-
-/* click feedback */
-body.dark-mode td:active{
-  transform:scale(0.99);
-}
-
-/* table depth */
-body.dark-mode .table-container{
-  transition:0.2s ease;
-}
-
-/* button active feel */
-button:active{
-  transform:scale(0.96);
-}
-/* =========================
-   COLUMN RESIZE
-========================= */
-
-td,
-th{
-  position: relative;
-}
-
-.resizer{
-  position:absolute;
-  top:0;
-  right:-3px;
-  width:6px;
-  height:100%;
-
-  cursor:col-resize;
-  z-index:9999;
-
-  background:transparent;
-
-  user-select:none;
-  -webkit-user-select:none;
-  touch-action:none;
-}
-.resizer::after{
-  content:"";
-  position:absolute;
-  inset:0;
-}
-.zoom-control{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:12px;
-}
-
-.zoom-control button{
-  width:44px;
-  height:44px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-}
-
-#zoomLevel{
-  display:inline-block;
-  min-width:70px;
-  text-align:center;
-
-  color: red;
-  font-size:18px;
-  font-weight:700;
-}
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "☀️";
+  } else {
+    themeToggle.textContent = "🌙";
+  }
+});
