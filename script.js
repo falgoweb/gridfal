@@ -144,26 +144,6 @@ function addColumn(){
 }
 
 /* =======================
-   DELETE ROW (FIXED)
-======================= */
-function deleteRow(){
-  const table = document.querySelector("#gridTable tbody");
-  if(!table) return;
-
-  if(table.rows.length <= 1){
-    alert("Minimal harus ada 1 row!");
-    return;
-  }
-
-  saveState();
-
-  table.deleteRow(table.rows.length - 1);
-
-  saveGrid();
-  checkEmptyState();
-}
-
-/* =======================
    DELETE COLUMN (FIXED)
 ======================= */
 function deleteColumn(){
@@ -397,4 +377,172 @@ themeToggle.addEventListener("click", () => {
   } else {
     themeToggle.textContent = "🌙";
   }
+});
+
+const templateBtn = document.getElementById("templateBtn");
+
+templateBtn.addEventListener("click", () => {
+
+  const pilihan = prompt(
+`Pilih Template
+
+  1. Daftar Hadir
+  2. Jadwal Pelajaran
+  3. Inventaris Barang
+  4. Laporan Keuangan
+
+ (Mahasiswa)
+  5. Jadwal Kulah
+  6. Daftar Tugas 
+  7. Daftar Nilai
+  8. KRS
+  9. Absensi Mahasiswa
+  10. Praktikum
+  11. Skripsi/Penelitian
+
+ (Kantor)
+  12. Data Karyawan
+  13. Absensi Karyawan
+  14. Inventaris Kantor
+  15. Jadwal Rapat
+  16. Daftar Proyek
+  
+ (Toko)
+  17. Data Produk
+  18. Stok Barang
+  19. Barang Masuk
+  20. Barang Keluar
+  21. Penjualan Harian
+  22. Pembelian Barang`
+  
+  );
+  if (!pilihan) return;
+
+  const table = document.getElementById("gridTable");
+  const headerRow = table.rows[0];
+
+  let headers = [];
+
+  switch (pilihan) {
+
+    case "1":
+      headers = ["No", "Nama", "Tanggal", "Keterangan"];
+      break;
+
+    case "2":
+      headers = ["No", "Hari", "Mata Pelajaran", "Jam"];
+      break;
+
+    case "3":
+      headers = ["No", "Nama Barang", "Jumlah", "Jenis Penggunaan", "Tahun", "Kondisi"];
+      break;
+
+    case "4":
+      headers = ["No", "Tanggal", "Pemasukan", "Pengeluaran", "Saldo"];
+      break;
+
+    case "5":
+      headers = ["No", "Mata Kuliah", "Hari", "Jam", "Ruangan"];
+      break; 
+
+    case "6":
+      headers = ["No", "Mata Kuliah", "Tugas", "Deadline", "Status"];
+      break;
+
+    case "7":
+      headers = ["No", "Mata Kuliah", "UTS", "UAS", "Nilai Akhir"];
+      break;
+
+    case "8":
+      headers = ["No", "Kode MK", "Mata Kuliah", "SKS", "Dosen"];
+      break;
+
+    case "9":
+      headers = ["No", "Mata Kuliah", "Tanggal", "Kehadiran"];
+      break;
+  
+    case "10":
+      headers = ["No", "Praktikum", "Tanggal", "Deadline", "Status"];
+      break;
+
+    case "11":
+      headers = ["No", "Kegiatan", "Target", "Deadline", "Status"];
+      break;
+
+    case "12":
+      headers = ["No", "Nama", "Jabatan", "Divisi", "Telepon"];
+      break;
+  
+    case "13":
+      headers = ["No", "Nama", "Tanggal", "Jam Masuk", "Keterangan"];
+      break;
+  
+    case "14":
+      headers = ["No", "Nama Barang", "Jumlah", "Kondisi", "Lokasi"];
+      break;
+  
+    case "15":
+      headers = ["No", "Agenda", "Tanggal", "Waktu", "PIC"];
+      break;
+  
+    case "16":
+      headers = ["No", "Nama Proyek", "Deadline", "PIC", "Status"];
+      break;
+
+    case "17":
+      headers = ["No", "Kode Produk", "Nama Produk", "Kategori", "Harga"];
+      break;
+  
+    case "18":
+      headers = ["No", "Nama Barang", "Stok", "Satuan", "Keterangan"];
+      break;
+  
+    case "19":
+      headers = ["No", "Tanggal", "Nama Barang", "Jumlah", "Supplier"];
+      break;
+
+    case "20":
+      headers = ["No", "Tanggal", "Nama Barang", "Jumlah", "Tujuan"];
+      break;
+
+    case "21":
+      headers = ["No", "Tanggal", "Produk", "Jumlah", "Total"];
+      break;
+
+    case "22":
+      headers = ["No", "Tanggal", "Nama Barang", "Jumlah", "Biaya"];
+      break;
+  
+    default:
+      alert("Template tidak ditemukan");
+      return;
+  }
+
+  headerRow.innerHTML = "";
+
+  headers.forEach(text => {
+    const td = document.createElement("td");
+    td.contentEditable = true;
+    td.textContent = text;
+    headerRow.appendChild(td);
+  });
+
+  const totalCols = headers.length;
+
+  for (let r = 1; r < table.rows.length; r++) {
+
+    const row = table.rows[r];
+
+    while (row.cells.length < totalCols) {
+      const td = document.createElement("td");
+      td.contentEditable = true;
+      td.textContent = "";
+      row.appendChild(td);
+    }
+
+    while (row.cells.length > totalCols) {
+      row.deleteCell(-1);
+    }
+  }
+
 });
