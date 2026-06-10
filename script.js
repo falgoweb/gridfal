@@ -747,21 +747,16 @@ doc.autoTable({
   theme: "grid",
 
   styles: {
-    halign: "center",
-    valign: "middle",
-    fontSize: 10
-  },
-
-  headStyles: {
-    halign: "center",
-    valign: "middle",
-    fillColor: [255,255,255],
-    textColor: [0,0,0]
-  },
-
-  bodyStyles: {
+    fontSize: 10,
     halign: "center",
     valign: "middle"
+  },
+
+  columnStyles: {
+    0: { halign: "center" },
+    1: { halign: "center" },
+    2: { halign: "center" },
+    3: { halign: "center" }
   }
 });
 
