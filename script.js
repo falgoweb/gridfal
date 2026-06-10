@@ -763,6 +763,7 @@ async function exportPDF(){
 
   didParseCell: function(data) {
     data.cell.styles.lineWidth = 0.4;
+    data.cell.styles.textColor = [0, 0, 0];
   },
 
   columnStyles: {
