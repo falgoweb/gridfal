@@ -721,40 +721,42 @@ function exportExcel() {
   XLSX.writeFile(wb, "GridFal.xlsx");
 
 }
-async function exportPDF() {
+
+async function exportPDF(){
 
   const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-  const element =
-    document.getElementById("gridTable");
+  doc.setFontSize(18);
+  doc.text("GRIDFAL EXPORT", 14, 15);
 
-  const canvas = await html2canvas(element,{
-  scale:2,
-  backgroundColor:"#ffffff"
-});
-
-  const imgData =
-    canvas.toDataURL("image/png");
-
-  const pdf =
-    new jsPDF("p", "mm", "a4");
-
-  const pdfWidth =
-    pdf.internal.pageSize.getWidth();
-
-  const pdfHeight =
-    (canvas.height * pdfWidth)
-    / canvas.width;
-
-  pdf.addImage(
-    imgData,
-    "PNG",
-    0,
-    0,
-    pdfWidth,
-    pdfHeight
+  doc.setFontSize(10);
+  doc.text(
+    new Date().toLocaleDateString("id-ID"),
+    14,
+    22
   );
 
-  pdf.save("GridFal.pdf");
+  doc.autoTable({
+    html: "#gridTable",
+    startY: 30,
 
-}
+    theme: "grid",
+
+    styles: {
+      fontSize: 10,
+      cellPadding: 3,
+      lineColor: [0,0,0],
+      lineWidth: 0.2,
+      textColor: [0,0,0]
+    },
+
+    headStyles: {
+      fillColor: [240,240,240],
+      textColor: [0,0,0],
+      fontStyle: "bold"
+    }
+  });
+
+  doc.save("GridFal.pdf");
+     }
