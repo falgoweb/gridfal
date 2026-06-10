@@ -739,13 +739,12 @@ async function exportPDF() {
   const { jsPDF } = window.jspdf;
 
   const element =
-    document.querySelector(".table-container");
+    document.getElementById("gridTable");
 
-  const canvas =
-    await html2canvas(element, {
-      scale: 2,
-      useCORS: true
-    });
+  const canvas = await html2canvas(element,{
+  scale:2,
+  backgroundColor:"#ffffff"
+});
 
   const imgData =
     canvas.toDataURL("image/png");
