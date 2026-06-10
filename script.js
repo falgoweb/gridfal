@@ -721,54 +721,14 @@ function exportExcel() {
   XLSX.writeFile(wb, "GridFal.xlsx");
 
 }
-async function exportPDF() {
+const table = document.getElementById("gridTable");
 
-  const { jsPDF } = window.jspdf;
+const oldBg = table.style.background;
+table.style.background = "#FFFFFF";
 
-  const doc = new jsPDF();
-
-  doc.autoTable({
-    html:"#gridTable"
-  });
-
-  doc.save("GridFal.pdf");
-
-}
-async function exportPDF() {
-
-  const { jsPDF } = window.jspdf;
-
-  const element =
-    document.getElementById("gridTable");
-
-  const canvas = await html2canvas(element,{
-  scale:2,
-  backgroundColor:"#ffffff"
-     useaCORS:  true
+const canvas = await html2canvas(table, {
+  scale: 2,
+  backgroundColor: "#FFFFFF"
 });
 
-  const imgData =
-    canvas.toDataURL("image/png");
-
-  const pdf =
-    new jsPDF("p", "mm", "a4");
-
-  const pdfWidth =
-    pdf.internal.pageSize.getWidth();
-
-  const pdfHeight =
-    (canvas.height * pdfWidth)
-    / canvas.width;
-
-  pdf.addImage(
-    imgData,
-    "PNG",
-    0,
-    0,
-    pdfWidth,
-    pdfHeight
-  );
-
-  pdf.save("GridFal.pdf");
-
-}
+table.style.background = oldBg;
