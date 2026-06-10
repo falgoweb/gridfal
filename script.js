@@ -751,7 +751,7 @@ async function exportPDF(){
     cellPadding: 4,
     halign: "center",
     valign: "middle",
-    lineColor: [0, 0, 0],
+    textColor: [0, 0, 0],
     fontStyle: "bold"
   },
 
