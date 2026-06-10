@@ -734,3 +734,41 @@ async function exportPDF() {
   doc.save("GridFal.pdf");
 
 }
+async function exportPDF() {
+
+  const { jsPDF } = window.jspdf;
+
+  const element =
+    document.querySelector(".table-container");
+
+  const canvas =
+    await html2canvas(element, {
+      scale: 2,
+      useCORS: true
+    });
+
+  const imgData =
+    canvas.toDataURL("image/png");
+
+  const pdf =
+    new jsPDF("p", "mm", "a4");
+
+  const pdfWidth =
+    pdf.internal.pageSize.getWidth();
+
+  const pdfHeight =
+    (canvas.height * pdfWidth)
+    / canvas.width;
+
+  pdf.addImage(
+    imgData,
+    "PNG",
+    0,
+    0,
+    pdfWidth,
+    pdfHeight
+  );
+
+  pdf.save("GridFal.pdf");
+
+}
