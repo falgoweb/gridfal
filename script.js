@@ -741,26 +741,27 @@ async function exportPDF(){
     22
   );
 
-  doc.autoTable({
+doc.autoTable({
   html: "#gridTable",
   startY: 30,
-
   theme: "grid",
 
   styles: {
-    fontSize: 10,
-    cellPadding: 3,
-    lineColor: [0,0,0],
-    lineWidth: 0.2,
-    textColor: [0,0,0],
     halign: "center",
-    valign: "middle"
+    valign: "middle",
+    fontSize: 10
   },
 
   headStyles: {
+    halign: "center",
+    valign: "middle",
     fillColor: [255,255,255],
-    textColor: [0,0,0],
-    fontStyle: "bold"
+    textColor: [0,0,0]
+  },
+
+  bodyStyles: {
+    halign: "center",
+    valign: "middle"
   }
 });
 
