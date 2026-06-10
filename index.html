@@ -24,11 +24,19 @@
       <button onclick="deleteColumn()">Hapus Column</button>
       <button onclick="undoAction()">Undo</button>
     </div>
+<button onclick="redoAction()">↪ Redo</button>
+<input
+  type="text"
+  id="searchInput"
+  placeholder="Cari..."
+>
+
+<button onclick="searchCell()">🔍 Cari</button>
 <button id="templateBtn">Template</button>
     <div id="saveStatus" class="save-status">Belum disimpan</div>
 
     <div class="group">
-      <button id="exportPdfBtn">Export PDF</button>
+      <button onclick="exportPDF()">Export PDF</button>
       <button onclick="exportExcel()">Export Excel</button>
     </div>
   </div>
@@ -82,6 +90,8 @@
 </main>
   
 <script src="script.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </body>
 </html>
