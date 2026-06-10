@@ -752,7 +752,7 @@ doc.autoTable({
     halign: "center",
     valign: "middle",
     lineColor: [0,0,0],
-    lineWidth: 0.8
+    lineWidth: 1
   },
 
   headStyles: {
