@@ -151,7 +151,7 @@ function addRow(){
   }
 
   table.appendChild(tr);
-
+  
   // 🔥 AUTO NUMBER JALAN DI SINI
   autoNumber();
 
@@ -462,7 +462,7 @@ templateBtn.addEventListener("click", () => {
   21. Penjualan Harian
   22. Pembelian Barang`
   
-  );
+);
   if (!pilihan) return;
 
   const table = document.getElementById("gridTable");
@@ -566,7 +566,7 @@ templateBtn.addEventListener("click", () => {
   }
 
   headerRow.innerHTML = "";
-
+  
   headers.forEach(text => {
     const td = document.createElement("td");
     td.contentEditable = true;
@@ -652,7 +652,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resizeAllColumns();
     }
   });
-
+  
   // =========================
   // INIT
   // =========================
@@ -741,7 +741,7 @@ async function exportPDF(){
     22
   );
 
-doc.autoTable({
+  doc.autoTable({
   html: "#gridTable",
   startY: 30,
   theme: "grid",
@@ -751,8 +751,7 @@ doc.autoTable({
     cellPadding: 4,
     halign: "center",
     valign: "middle",
-    lineColor: [0,0,0],
-    lineWidth: 1
+    lineColor: [0, 0, 0]
   },
 
   headStyles: {
@@ -764,7 +763,7 @@ doc.autoTable({
   didParseCell: function(data) {
     data.cell.styles.lineWidth = 1;
   },
-   
+
   columnStyles: {
     0: { halign: "center" },
     1: { halign: "center" },
