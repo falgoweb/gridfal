@@ -751,18 +751,18 @@ async function exportPDF(){
     cellPadding: 4,
     halign: "center",
     valign: "middle",
-    textColor: [1, 1, 1],
+    textColor: [0, 0, 0],
     fontStyle: "bold"
   },
 
   headStyles: {
     fillColor: [255,255,255],
-    textColor: [1,1,1],
+    textColor: [0,0,0],
     fontStyle: "bold"
   },
 
   didParseCell: function(data) {
-    data.cell.styles.lineWidth = 0.2;
+    data.cell.styles.lineWidth = 0.4;
   },
 
   columnStyles: {
