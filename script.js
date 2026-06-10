@@ -748,9 +748,18 @@ doc.autoTable({
 
   styles: {
     fontSize: 12,
+    cellPadding: 4,
     halign: "center",
-    valign: "middle"
+    valign: "middle",
+    lineColor: [0,0,0],
+    lineWidth: 0.8
   },
+
+  headStyles: {
+    fillColor: [255,255,255],
+    textColor: [0,0,0],
+    fontStyle: "bold"
+  }
 
   columnStyles: {
     0: { halign: "center" },
