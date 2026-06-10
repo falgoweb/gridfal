@@ -747,11 +747,11 @@ async function exportPDF(){
   theme: "grid",
 
   styles: {
-    fontSize: 13,
+    fontSize: 14,
     cellPadding: 4,
     halign: "center",
     valign: "middle",
-    lineColor: [0, 0, 0]
+    lineColor: [0, 0, 0],
     fontStyle: "bold"
   },
 
