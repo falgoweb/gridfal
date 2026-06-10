@@ -752,6 +752,7 @@ async function exportPDF(){
     halign: "center",
     valign: "middle",
     lineColor: [0, 0, 0]
+    fontStyle: "bold"
   },
 
   headStyles: {
