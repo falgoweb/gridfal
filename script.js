@@ -265,11 +265,14 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =======================
    AUTO SAVE INPUT
 ======================= */
+
 document.addEventListener("input", function(e){
 
   if(e.target.closest("#gridTable td")){
     saveGrid();
   }
+
+});
 function autoNumber(){
   const table = document.querySelector("#gridTable");
   if(!table) return;
@@ -721,7 +724,6 @@ function exportExcel() {
   XLSX.writeFile(wb, "GridFal.xlsx");
 
 }
-
 async function exportPDF(){
 
   const { jsPDF } = window.jspdf;
@@ -759,4 +761,4 @@ async function exportPDF(){
   });
 
   doc.save("GridFal.pdf");
-     }
+}
