@@ -742,25 +742,27 @@ async function exportPDF(){
   );
 
   doc.autoTable({
-    html: "#gridTable",
-    startY: 30,
+  html: "#gridTable",
+  startY: 30,
 
-    theme: "grid",
+  theme: "grid",
 
-    styles: {
-      fontSize: 10,
-      cellPadding: 3,
-      lineColor: [0,0,0],
-      lineWidth: 0.2,
-      textColor: [0,0,0]
-    },
+  styles: {
+    fontSize: 10,
+    cellPadding: 3,
+    lineColor: [0,0,0],
+    lineWidth: 0.2,
+    textColor: [0,0,0],
+    halign: "center",
+    valign: "middle"
+  },
 
-    headStyles: {
-      fillColor: [240,240,240],
-      textColor: [0,0,0],
-      fontStyle: "bold"
-    }
-  });
+  headStyles: {
+    fillColor: [255,255,255],
+    textColor: [0,0,0],
+    fontStyle: "bold"
+  }
+});
 
   doc.save("GridFal.pdf");
 }
