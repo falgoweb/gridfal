@@ -173,7 +173,9 @@ function addColumn(){
     td.contentEditable = "true";
     row.appendChild(td);
   });
-
+td.addEventListener("focus", () => {
+  td.textContent = td.textContent; // trigger selection reset
+});
   saveGrid();
   initColumnResize();
 }
