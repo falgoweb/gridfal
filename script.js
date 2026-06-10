@@ -759,8 +759,12 @@ doc.autoTable({
     fillColor: [255,255,255],
     textColor: [0,0,0],
     fontStyle: "bold"
-  }
+  },
 
+  didParseCell: function(data) {
+    data.cell.styles.lineWidth = 1;
+  },
+   
   columnStyles: {
     0: { halign: "center" },
     1: { halign: "center" },
