@@ -747,7 +747,7 @@ async function exportPDF(){
   theme: "grid",
 
   styles: {
-    fontSize: 12,
+    fontSize: 13,
     cellPadding: 4,
     halign: "center",
     valign: "middle",
