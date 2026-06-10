@@ -266,10 +266,10 @@ document.addEventListener("DOMContentLoaded", () => {
    AUTO SAVE INPUT
 ======================= */
 document.addEventListener("input", function(e){
-  if(e.target.tagName === "TD"){
+
+  if(e.target.closest("#gridTable td")){
     saveGrid();
   }
-});
 function autoNumber(){
   const table = document.querySelector("#gridTable");
   if(!table) return;
