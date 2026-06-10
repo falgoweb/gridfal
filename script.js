@@ -747,22 +747,22 @@ async function exportPDF(){
   theme: "grid",
 
   styles: {
-    fontSize: 14,
+    fontSize: 13,
     cellPadding: 4,
     halign: "center",
     valign: "middle",
-    textColor: [0, 0, 0],
+    textColor: [1, 1, 1],
     fontStyle: "bold"
   },
 
   headStyles: {
     fillColor: [255,255,255],
-    textColor: [0,0,0],
+    textColor: [1,1,1],
     fontStyle: "bold"
   },
 
   didParseCell: function(data) {
-    data.cell.styles.lineWidth = 0.3;
+    data.cell.styles.lineWidth = 0.2;
   },
 
   columnStyles: {
