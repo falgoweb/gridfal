@@ -747,12 +747,13 @@ async function exportPDF(){
   theme: "grid",
 
   styles: {
-    fontSize: 13,
+    fontSize: 14,
     cellPadding: 4,
     halign: "center",
     valign: "middle",
     textColor: [0, 0, 0],
     fontStyle: "bold"
+     lineColor: [0, 0, 0],
   },
 
   headStyles: {
@@ -762,7 +763,7 @@ async function exportPDF(){
   },
 
   didParseCell: function(data) {
-    data.cell.styles.lineWidth = 0.4;
+    data.cell.styles.lineWidth = 0,3;
     data.cell.styles.textColor = [0, 0, 0];
   },
 
@@ -770,9 +771,9 @@ async function exportPDF(){
     0: { halign: "center" },
     1: { halign: "center" },
     2: { halign: "center" },
-    3: { halign: "center" }
-  }
+    3: { halign: "center" },
+  },
 });
 
   doc.save("GridFal.pdf");
-}
+},
