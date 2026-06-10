@@ -196,7 +196,8 @@ button, td{
 
 td,
 th{
-  position: relative;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .resizer{
@@ -255,5 +256,56 @@ th{
   border: none;
   border-radius: 6px;
   cursor: pointer;
-   }
-   
+}
+
+table {
+  border-collapse: collapse;
+  width: max-content;
+}
+
+td {
+  border: 1px solid #000;
+  padding: 6px;
+  min-width: 60px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* handle drag */
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+}
+.table-container{
+  transform-origin: top left;
+  padding-top:16px;
+  overflow:auto;
+  transition:all 0.2s ease;
+
+  /* penting */
+  max-height: 70vh;
+}
+
+#gridTable tr:first-child td{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: var(--bg-color, #fff);
+}
+#searchInput{
+  width:120px;
+  padding:6px;
+  border:1px solid #666;
+  border-radius:6px;
+}
+
+.search-hit{
+  outline:3px solid #facc15;
+}
