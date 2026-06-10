@@ -747,7 +747,7 @@ doc.autoTable({
   theme: "grid",
 
   styles: {
-    fontSize: 10,
+    fontSize: 12,
     halign: "center",
     valign: "middle"
   },
