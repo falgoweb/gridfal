@@ -761,7 +761,7 @@ async function exportPDF(){
   },
 
   didParseCell: function(data) {
-    data.cell.styles.lineWidth = 1;
+    data.cell.styles.lineWidth = 0,3;
   },
 
   columnStyles: {
