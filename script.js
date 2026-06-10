@@ -12,6 +12,9 @@ function saveState(){
 
   window.undoStack.push(table.innerHTML);
 
+  // setiap ada aksi baru, redo dibersihkan
+  window.redoStack = [];
+
   if(window.undoStack.length > 30){
     window.undoStack.shift();
   }
@@ -23,10 +26,42 @@ function undoAction(){
 
   if(window.undoStack.length === 0) return;
 
+  // simpan kondisi sekarang ke redo
+  window.redoStack.push(table.innerHTML);
+
   table.innerHTML = window.undoStack.pop();
 
   checkEmptyState();
   initColumnResize();
+}
+
+function redoAction(){
+  const table = document.getElementById("gridTable");
+  if(!table) return;
+
+  if(window.redoStack.length === 0) return;
+
+  // simpan kondisi sekarang ke undo
+  window.undoStack.push(table.innerHTML);
+
+  table.innerHTML = window.redoStack.pop();
+
+  checkEmptyState();
+  initColumnResize();
+}
+
+const table = document.getElementById("gridTable");
+
+if (table) {
+
+  table.addEventListener("focusin", function(e) {
+
+    if (e.target.tagName === "TD") {
+      saveState();
+    }
+
+  });
+
 }
 
 /* =======================
@@ -34,7 +69,7 @@ function undoAction(){
 ======================= */
 function setSavedStatus(text){
   const el = document.getElementById("saveStatus");
-  if(el) el.textContent = text;
+  if(el) el.innerHTML = text;
 }
 
 /* =======================
@@ -49,7 +84,7 @@ function saveGrid(){
     const rowData = [];
 
     cells.forEach(cell => {
-      rowData.push(cell.textContent);
+      rowData.push(cell.innerHTML);
     });
 
     data.push(rowData);
@@ -77,7 +112,7 @@ function loadGrid(){
     row.forEach(cell => {
       const td = document.createElement("td");
       td.contentEditable = "true";
-      td.textContent = cell;
+      td.innerHTML = cell;
       tr.appendChild(td);
     });
 
@@ -165,7 +200,14 @@ function deleteColumn(){
 
   saveGrid();
 }
+function deleteRow() {
+  const table = document.getElementById("gridTable");
 
+  // Jangan hapus header
+  if (table.rows.length > 1) {
+    table.deleteRow(table.rows.length - 1);
+  }
+}
 /* =======================
    RESET GRID
 ======================= */
@@ -544,5 +586,151 @@ templateBtn.addEventListener("click", () => {
       row.deleteCell(-1);
     }
   }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const table = document.getElementById("gridTable");
+
+  if (!table) return;
+
+  // =========================
+  // HITUNG WIDTH
+  // =========================
+  function getTextWidth(cell) {
+    const temp = document.createElement("span");
+    temp.style.visibility = "hidden";
+    temp.style.whiteSpace = "pre";
+    temp.style.position = "absolute";
+    temp.style.font = window.getComputedStyle(cell).font;
+
+    temp.innerText = cell.innerText || " ";
+
+    document.body.appendChild(temp);
+    const width = temp.offsetWidth + 30;
+    document.body.removeChild(temp);
+
+    return width;
+  }
+
+  // =========================
+  // RESIZE SEMUA KOLOM SEKALIGUS (SAFE MODE)
+  // =========================
+  function resizeAllColumns() {
+    const rows = table.querySelectorAll("tr");
+    if (!rows.length) return;
+
+    const colCount = rows[0].children.length;
+
+    for (let i = 0; i < colCount; i++) {
+      let maxWidth = 60;
+
+      rows.forEach(row => {
+        const cell = row.children[i];
+        if (cell) {
+          const w = getTextWidth(cell);
+          if (w > maxWidth) maxWidth = w;
+        }
+      });
+
+      rows.forEach(row => {
+        if (row.children[i]) {
+          row.children[i].style.width = maxWidth + "px";
+        }
+      });
+    }
+  }
+
+  // =========================
+  // INPUT LISTENER (LIVE RESIZE)
+  // =========================
+  table.addEventListener("input", function (e) {
+    if (e.target && e.target.tagName === "TD") {
+      resizeAllColumns();
+    }
+  });
+
+  // =========================
+  // INIT
+  // =========================
+  resizeAllColumns();
+
+  // =========================
+  // DETECT TEMPLATE / COL CHANGE
+  // =========================
+  const observer = new MutationObserver(() => {
+    setTimeout(() => {
+      resizeAllColumns();
+    }, 50);
+  });
+
+  observer.observe(table, {
+    childList: true,
+    subtree: true
+  });
 
 });
+function searchCell(){
+
+  const keyword =
+    document.getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  if(!keyword) return;
+
+  // hapus highlight lama
+  document.querySelectorAll(".search-hit")
+    .forEach(cell=>{
+      cell.classList.remove("search-hit");
+    });
+
+  const cells =
+    document.querySelectorAll("#gridTable td");
+
+  for(const cell of cells){
+
+    const text =
+      cell.innerText.toLowerCase();
+
+    if(text.includes(keyword)){
+
+      cell.classList.add("search-hit");
+
+      cell.scrollIntoView({
+        behavior:"smooth",
+        block:"center",
+        inline:"center"
+      });
+
+      cell.focus();
+
+      return;
+    }
+  }
+
+  alert("Data tidak ditemukan");
+}
+function exportExcel() {
+
+  const table = document.getElementById("gridTable");
+
+  const wb = XLSX.utils.table_to_book(table, {
+    sheet: "GridFal"
+  });
+
+  XLSX.writeFile(wb, "GridFal.xlsx");
+
+}
+async function exportPDF() {
+
+  const { jsPDF } = window.jspdf;
+
+  const doc = new jsPDF();
+
+  doc.autoTable({
+    html:"#gridTable"
+  });
+
+  doc.save("GridFal.pdf");
+
+}
