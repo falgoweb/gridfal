@@ -309,3 +309,13 @@ td {
 .search-hit{
   outline:3px solid #facc15;
    }
+#gridTable{
+  background:#fff;
+}
+
+#gridTable td,
+#gridTable th{
+  background:#fff;
+  color:#000;
+  border:1px solid #000;
+}
