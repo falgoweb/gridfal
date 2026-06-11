@@ -752,7 +752,7 @@ async function exportPDF(){
     halign: "center",
     valign: "middle",
     textColor: [0, 0, 0],
-    fontStyle: "bold"
+    fontStyle: "bold".
      lineColor: [0, 0, 0],
   },
 
@@ -763,7 +763,7 @@ async function exportPDF(){
   },
 
   didParseCell: function(data) {
-    data.cell.styles.lineWidth = 0,3;
+    data.cell.styles.lineWidth = 0.3;
     data.cell.styles.textColor = [0, 0, 0];
   },
 
