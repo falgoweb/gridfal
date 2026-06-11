@@ -747,6 +747,7 @@ async function exportPDF(){
   theme: "grid",
 
   styles: {
+  overflow: "ellipsize"
   fontSize: 14,
   cellPadding: 2,
   halign: "center",
