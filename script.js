@@ -733,21 +733,23 @@ function exportPDF() {
 
   const title = document.getElementById("tableTitle").value || "Tabel GridFal";
 
-  // JUDUL DI TENGAH
+  const pageWidth = doc.internal.pageSize.getWidth();
+
+  // JUDUL (CENTER)
   doc.setFontSize(14);
   doc.setFont("helvetica", "bold");
 
-  const pageWidth = doc.internal.pageSize.getWidth();
   const textWidth = doc.getTextWidth(title);
   const x = (pageWidth - textWidth) / 2;
 
-  doc.text(title, x, 15);
+  doc.text(title, x, 15); // posisi FIX di atas
 
-  // TABLE
+  // TABLE DI BAWAH JUDUL
   doc.autoTable({
     html: "#gridTable",
-    startY: 20,
+    startY: 25, // penting: HARUS lebih besar dari posisi judul
     theme: "grid",
+
     styles: {
       fontSize: 11,
       cellPadding: 2,
