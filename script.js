@@ -778,8 +778,7 @@ async function exportPDF() {
   });
 
   // Total data
-  const totalRows =
-    document.querySelectorAll("#gridTable tbody tr").length;
+  const totalRows = doc.lastAutoTable.body.length;
 
   // Footer export
   doc.setFontSize(10);
@@ -789,7 +788,7 @@ async function exportPDF() {
 doc.text(
   `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
   14,
-  finalY + 8
+  finalY + 7
 );
 
   // Simpan PDF
