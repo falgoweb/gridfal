@@ -744,7 +744,7 @@ async function exportPDF(){
   doc.autoTable({
   html: "#gridTable",
   startY: 30,
-  theme: "grid",
+  theme: "grid"
 
   styles: {
     fontSize: 14,
