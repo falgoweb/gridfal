@@ -748,7 +748,8 @@ doc.autoTable({
 
  headStyles: {
   fontStyle: "bold",
-  textColor: [0, 0, 0]
+  fontSize: 14,
+  textColor: [0, 0, 0],
 },
   styles: {
     fontSize: 12,
