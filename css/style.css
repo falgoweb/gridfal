@@ -319,3 +319,17 @@ td {
   color:#000;
   border:1px solid #000;
 }
+
+.table-title{
+  margin:16px;
+  padding:10px;
+  text-align:center;
+  font-size:28px;
+  font-weight:700;
+
+  border-radius:8px;
+}
+
+.table-title:focus{
+  outline:2px solid #3b82f6;
+   }
