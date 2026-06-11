@@ -736,10 +736,10 @@ async function exportPDF(){
 
   doc.setFontSize(12);
   doc.text(
-    new Date().toLocaleDateString("id-ID"),
-    14,
-    22
-  );
+  footerText,
+  14,
+  doc.lastAutoTable.finalY + 15
+);
 
 doc.autoTable({
   html: "#gridTable",
@@ -747,11 +747,10 @@ doc.autoTable({
   theme: "grid",
 
  headStyles: {
-  fontStyle: "bold",
-  fontSize: 12,
-  fillColor: [243, 244, 246], // abu muda
+  fillColor: [230, 230, 230],
   textColor: [0, 0, 0],
-  halign: "center"
+  fontStyle: "bold"
+ }
   
 },
  alternateRowStyles: {
