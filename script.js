@@ -726,66 +726,70 @@ function exportExcel() {
   XLSX.writeFile(wb, "GridFal.xlsx");
 
 }
-async function exportPDF(){
+async function exportPDF() {
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
+  // Judul
   doc.setFontSize(18);
   doc.text("GRIDFAL EXPORT", 14, 15);
 
+  // Tanggal
   doc.setFontSize(12);
   doc.text(
-  footerText,
-  14,
-  doc.lastAutoTable.finalY + 15
-);
+    new Date().toLocaleDateString("id-ID"),
+    14,
+    22
+  );
 
-doc.autoTable({
-  html: "#gridTable",
-  startY: 30,
-  theme: "grid",
+  // Tabel
+  doc.autoTable({
+    html: "#gridTable",
+    startY: 30,
+    theme: "grid",
 
- headStyles: {
-  fillColor: [230, 230, 230],
-  textColor: [0, 0, 0],
-  fontStyle: "bold"
- }
-  
-},
- alternateRowStyles: {
-  fillColor: [248, 249, 250],
-  
-},
-  styles: {
-    fontSize: 12,
-    cellPadding: 2,
-    halign: "center",
-    valign: "middle",
-    textColor: [0, 0, 0],
-    lineColor: [0, 0, 0],
+    headStyles: {
+      fillColor: [230, 230, 230],
+      textColor: [0, 0, 0],
+      fontStyle: "bold"
+    },
 
-    // 🔥 INI TEMPATNYA
-    lineWidth: 0.4,
-  },
+    alternateRowStyles: {
+      fillColor: [248, 249, 250]
+    },
 
-  columnStyles: {
-    0: { halign: "center" },
-    1: { halign: "center" },
-    2: { halign: "center" },
-    3: { halign: "center" }
-  }
-});
- 
-const totalRows = document.querySelectorAll("#gridTable tr").length - 1;
+    styles: {
+      fontSize: 12,
+      cellPadding: 2,
+      halign: "center",
+      valign: "middle",
+      textColor: [0, 0, 0],
+      lineColor: [0, 0, 0],
+      lineWidth: 0.4
+    },
 
-const finalY = doc.lastAutoTable
-  ? doc.lastAutoTable.finalY
-  : 100;
+    columnStyles: {
+      0: { halign: "center" },
+      1: { halign: "center" },
+      2: { halign: "center" },
+      3: { halign: "center" }
+    }
+  });
 
-doc.setFontSize(10);
-doc.text(
-  `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
-  14,
-  finalY + 15
-);
+  // Total data
+  const totalRows =
+    document.querySelectorAll("#gridTable tbody tr").length;
+
+  // Footer export
+  doc.setFontSize(10);
+
+  doc.text(
+    `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
+    14,
+    120
+  );
+
+  // Simpan PDF
+  doc.save("GridFal.pdf");
+                  }
