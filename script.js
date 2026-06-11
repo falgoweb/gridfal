@@ -778,19 +778,11 @@ async function exportPDF() {
   });
 
   // Total data
-  const totalRows = doc.lastAutoTable.body.length - 1;
-
-  // Footer export
-  doc.setFontSize(10);
-
-  const finalY = doc.lastAutoTable.finalY;
+  const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
+const totalRowsPDF = doc.lastAutoTable.body.length;
 
 doc.text(
-  `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
+  `DOM=${totalRowsDOM} | PDF=${totalRowsPDF}`,
   14,
-  finalY + 8
+  doc.lastAutoTable.finalY + 8
 );
-
-  // Simpan PDF
-  doc.save("GridFal.pdf");
-                  }
