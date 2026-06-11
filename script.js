@@ -1,4 +1,4 @@
-console.log("JS Loaded");
+ console.log("JS Loaded");
 console.log("GRIDFAL READY ✔");
 
 window.undoStack = [];
@@ -151,7 +151,7 @@ function addRow(){
   }
 
   table.appendChild(tr);
-  
+
   // 🔥 AUTO NUMBER JALAN DI SINI
   autoNumber();
 
@@ -462,7 +462,7 @@ templateBtn.addEventListener("click", () => {
   21. Penjualan Harian
   22. Pembelian Barang`
   
-);
+  );
   if (!pilihan) return;
 
   const table = document.getElementById("gridTable");
@@ -566,7 +566,7 @@ templateBtn.addEventListener("click", () => {
   }
 
   headerRow.innerHTML = "";
-  
+
   headers.forEach(text => {
     const td = document.createElement("td");
     td.contentEditable = true;
@@ -652,7 +652,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resizeAllColumns();
     }
   });
-  
+
   // =========================
   // INIT
   // =========================
@@ -740,29 +740,16 @@ async function exportPDF(){
     14,
     22
   );
- 
- doc.autoTable({
+
+doc.autoTable({
   html: "#gridTable",
   startY: 30,
   theme: "grid",
 
   styles: {
-    fontSize: 14,
-    cellPadding: 4,
+    fontSize: 10,
     halign: "center",
-    valign: "middle",
-    lineColor: [0, 0, 0],
-    fontStyle: "bold"
-  },
-
-  headStyles: {
-    fillColor: [255,255,255],
-    textColor: [0,0,0],
-    fontStyle: "bold"
-  },
-
-  didParseCell: function(data) {
-    data.cell.styles.lineWidth = 0.3;
+    valign: "middle"
   },
 
   columnStyles: {
