@@ -756,7 +756,7 @@ async function exportPDF() {
     },
 
     alternateRowStyles: {
-      fillColor: [248, 249, 250]
+      fillColor: [248, 249, 250],
     },
 
     styles: {
@@ -766,7 +766,7 @@ async function exportPDF() {
       valign: "middle",
       textColor: [0, 0, 0],
       lineColor: [0, 0, 0],
-      lineWidth: 0.4
+      lineWidth: 0.4,
     },
 
     columnStyles: {
