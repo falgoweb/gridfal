@@ -96,3 +96,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </body>
 </html>
+
+<div id="exportPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:white; padding:15px; border:1px solid #000; z-index:9999;">
+
+  <h3>Export Setting</h3>
+
+  <label>Judul Kolom (Header)</label>
+  <select id="headerBold">
+    <option value="bold">Tebal</option>
+    <option value="normal">Normal</option>
+  </select>
+
+  <br><br>
+
+  <label>Isi Cell</label>
+  <select id="cellBold">
+    <option value="normal">Normal</option>
+    <option value="bold">Tebal</option>
+  </select>
+
+  <br><br>
+
+  <label>Align Isi Cell</label>
+  <select id="cellAlign">
+    <option value="center">Tengah</option>
+    <option value="left">Kiri</option>
+    <option value="right">Kanan</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="confirmExport()">OK Export</button>
+</div>
