@@ -734,7 +734,7 @@ async function exportPDF(){
   doc.setFontSize(18);
   doc.text("GRIDFAL EXPORT", 14, 15);
 
-  doc.setFontSize(10);
+  doc.setFontSize(12);
   doc.text(
     new Date().toLocaleDateString("id-ID"),
     14,
@@ -747,9 +747,15 @@ doc.autoTable({
   theme: "grid",
 
   styles: {
-    fontSize: 10,
+    fontSize: 11,
+    cellPadding: 2,
     halign: "center",
-    valign: "middle"
+    valign: "middle",
+    textColor: [0, 0, 0],
+    lineColor: [0, 0, 0],
+
+    // 🔥 INI TEMPATNYA
+    lineWidth: 0.5
   },
 
   columnStyles: {
