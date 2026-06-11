@@ -740,5 +740,39 @@ async function exportPDF(){
     14,
     22
   );
-
  
+ doc.autoTable({
+  html: "#gridTable",
+  startY: 30,
+  theme: "grid",
+
+  styles: {
+    fontSize: 14,
+    cellPadding: 4,
+    halign: "center",
+    valign: "middle",
+    lineColor: [0, 0, 0],
+    fontStyle: "bold"
+  },
+
+  headStyles: {
+    fillColor: [255,255,255],
+    textColor: [0,0,0],
+    fontStyle: "bold"
+  },
+
+  didParseCell: function(data) {
+    data.cell.styles.lineWidth = 0.3;
+  },
+
+  columnStyles: {
+    0: { halign: "center" },
+    1: { halign: "center" },
+    2: { halign: "center" },
+    3: { halign: "center" }
+  }
+});
+
+  doc.save("GridFal.pdf");
+}
+
