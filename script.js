@@ -735,19 +735,22 @@ function exportPDF() {
 
   const pageWidth = doc.internal.pageSize.getWidth();
 
-  // JUDUL (CENTER)
+  // ===== JUDUL =====
   doc.setFontSize(14);
   doc.setFont("helvetica", "bold");
 
   const textWidth = doc.getTextWidth(title);
   const x = (pageWidth - textWidth) / 2;
 
-  doc.text(title, x, 15); // posisi FIX di atas
+  doc.text(title, x, 15);
 
-  // TABLE DI BAWAH JUDUL
+  // ===== AMBIL POSISI TERAKHIR (INI KUNCI) =====
+  const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 20;
+
+  // ===== TABLE =====
   doc.autoTable({
     html: "#gridTable",
-    startY: 25, // penting: HARUS lebih besar dari posisi judul
+    startY: finalY + 5, // penting banget
     theme: "grid",
 
     styles: {
