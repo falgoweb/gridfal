@@ -788,3 +788,28 @@ function confirmExport() {
 
   exportPDF(headerBold, cellBold, cellAlign);
    }
+function exportPDF(headerBold, cellBold, cellAlign) {
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF("landscape");
+
+  doc.autoTable({
+    html: "#gridTable",
+
+    headStyles: {
+      fontStyle: headerBold
+    },
+
+    styles: {
+      fontStyle: cellBold,
+      halign: cellAlign,
+      fontSize: 11,
+      cellPadding: 2,
+      textColor: [0, 0, 0],
+      lineColor: [0, 0, 0],
+      lineWidth: 0.3
+    }
+  });
+
+  doc.save("GridFal.pdf");
+   }
