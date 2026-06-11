@@ -715,3 +715,63 @@ function searchCell(){
 
   alert("Data tidak ditemukan");
 }
+function exportExcel() {
+
+  const table = document.getElementById("gridTable");
+
+  const wb = XLSX.utils.table_to_book(table, {
+    sheet: "GridFal"
+  });
+
+  XLSX.writeFile(wb, "GridFal.xlsx");
+
+}
+async function exportPDF(){
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text("GRIDFAL EXPORT", 14, 15);
+
+  doc.setFontSize(10);
+  doc.text(
+    new Date().toLocaleDateString("id-ID"),
+    14,
+    22
+  );
+ 
+ doc.autoTable({
+  html: "#gridTable",
+  startY: 30,
+  theme: "grid",
+
+  styles: {
+    fontSize: 14,
+    cellPadding: 4,
+    halign: "center",
+    valign: "middle",
+    lineColor: [0, 0, 0],
+    fontStyle: "bold"
+  },
+
+  headStyles: {
+    fillColor: [255,255,255],
+    textColor: [0,0,0],
+    fontStyle: "bold"
+  },
+
+  didParseCell: function(data) {
+    data.cell.styles.lineWidth = 0.3;
+  },
+
+  columnStyles: {
+    0: { halign: "center" },
+    1: { halign: "center" },
+    2: { halign: "center" },
+    3: { halign: "center" }
+  }
+});
+
+  doc.save("GridFal.pdf");
+}
