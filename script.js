@@ -779,7 +779,7 @@ async function exportPDF() {
 
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
-const totalRowsPDF = doc.lastAutoTable.body.length - 1;
+const totalRowsPDF = doc.lastAutoTable.body.length;
 
 doc.text(
   `DOM=${totalRowsDOM} | PDF=${totalRowsPDF}`,
