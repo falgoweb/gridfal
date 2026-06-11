@@ -729,7 +729,7 @@ function exportExcel() {
 async function exportPDF(){
 
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  const doc = new jsPDF("landscape");
 
   doc.setFontSize(18);
   doc.text("GRIDFAL EXPORT", 14, 15);
@@ -747,8 +747,7 @@ async function exportPDF(){
   theme: "grid",
 
   styles: {
-  overflow: "ellipsize"
-  fontSize: 14,
+  fontSize: 12,
   cellPadding: 2,
   halign: "center",
   valign: "middle",
@@ -769,7 +768,7 @@ async function exportPDF(){
   },
 
   columnStyles: {
-    0: { halign: "center" },
+    0: { halign: "60" },
     1: { halign: "center" },
     2: { halign: "center" },
     3: { halign: "center" }
