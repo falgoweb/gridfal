@@ -731,26 +731,9 @@ function exportPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF("landscape");
 
-  const title = document.getElementById("tableTitle").value || "Tabel GridFal";
-
-  const pageWidth = doc.internal.pageSize.getWidth();
-
-  // ===== JUDUL =====
-  doc.setFontSize(14);
-  doc.setFont("helvetica", "bold");
-
-  const textWidth = doc.getTextWidth(title);
-  const x = (pageWidth - textWidth) / 2;
-
-  doc.text(title, x, 15);
-
-  // ===== AMBIL POSISI TERAKHIR (INI KUNCI) =====
-  const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 20;
-
-  // ===== TABLE =====
   doc.autoTable({
     html: "#gridTable",
-    startY: finalY + 5, // penting banget
+    startY: 20,
     theme: "grid",
 
     styles: {
@@ -759,11 +742,11 @@ function exportPDF() {
       halign: "center",
       valign: "middle",
       textColor: [0, 0, 0],
+      fontStyle: "normal",
       lineColor: [0, 0, 0],
-      lineWidth: 0.5,
-      fontStyle: "normal"
+      lineWidth: 0.5
     }
   });
 
-  doc.save(title + ".pdf");
+  doc.save("GridFal.pdf");
 }
