@@ -746,6 +746,11 @@ doc.autoTable({
   startY: 30,
   theme: "grid",
 
+ headStyles: {
+    fontStyle: "bold",
+    textColor: [0, 0, 0],
+  },
+
   styles: {
     fontSize: 12,
     cellPadding: 2,
