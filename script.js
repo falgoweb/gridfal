@@ -786,3 +786,5 @@ doc.text(
   14,
   doc.lastAutoTable.finalY + 8
 );
+ doc.save("GridFal.pdf");
+}
