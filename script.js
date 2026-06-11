@@ -748,7 +748,7 @@ async function exportPDF(){
 
   styles: {
   fontSize: 14,
-  cellPadding: 4,
+  cellPadding: 2,
   halign: "center",
   valign: "middle",
   textColor: [0, 0, 0],
