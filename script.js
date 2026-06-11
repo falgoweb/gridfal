@@ -779,12 +779,15 @@ async function exportPDF() {
 
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
-const totalRowsPDF = doc.lastAutoTable.body.length;
+const totalRowsPDF = doc.lastAutoTable.body.length - 1;
+
+ const finalY = doc.lastAutoTable.finalY;
 
 doc.text(
-  `DOM=${totalRowsDOM} | PDF=${totalRowsPDF}`,
+  `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRowsPDF}`,
   14,
-  doc.lastAutoTable.finalY + 8
+  finalY + 8
 );
+
  doc.save("GridFal.pdf");
 }
