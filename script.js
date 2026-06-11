@@ -729,7 +729,7 @@ function exportExcel() {
 async function exportPDF(){
 
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF("landscape");
+  const doc = new jsPDF();
 
   doc.setFontSize(18);
   doc.text("GRIDFAL EXPORT", 14, 15);
