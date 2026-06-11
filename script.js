@@ -748,8 +748,15 @@ doc.autoTable({
 
  headStyles: {
   fontStyle: "bold",
-  fontSize: 14,
+  fontSize: 12,
+  fillColor: [243, 244, 246], // abu muda
   textColor: [0, 0, 0],
+  halign: "center"
+  
+},
+ alternateRowStyles: {
+  fillColor: [248, 249, 250],
+  
 },
   styles: {
     fontSize: 12,
@@ -770,7 +777,18 @@ doc.autoTable({
     3: { halign: "center" }
   }
 });
+ 
+const totalRows =
+  document.querySelectorAll("#gridTable tbody tr").length;
 
+doc.setFontSize(10);
+
+doc.text(
+  `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
+  14,
+  doc.lastAutoTable.finalY + 10
+);
+ 
   doc.save("GridFal.pdf");
 }
 
