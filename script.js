@@ -748,7 +748,6 @@ doc.autoTable({
 
  headStyles: {
   fontStyle: "bold",
-  fontSize: 14,        // lebih besar dari isi
   textColor: [0, 0, 0]
 },
   styles: {
