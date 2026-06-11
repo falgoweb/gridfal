@@ -747,7 +747,7 @@ doc.autoTable({
   theme: "grid",
 
   styles: {
-    fontSize: 11,
+    fontSize: 12,
     cellPadding: 2,
     halign: "center",
     valign: "middle",
@@ -755,7 +755,7 @@ doc.autoTable({
     lineColor: [0, 0, 0],
 
     // 🔥 INI TEMPATNYA
-    lineWidth: 0.25
+    lineWidth: 0.35
   },
 
   columnStyles: {
