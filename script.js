@@ -747,10 +747,10 @@ doc.autoTable({
   theme: "grid",
 
  headStyles: {
-    fontStyle: "bold",
-    textColor: [0, 0, 0],
-  },
-
+  fontStyle: "bold",
+  fontSize: 14,        // lebih besar dari isi
+  textColor: [0, 0, 0]
+},
   styles: {
     fontSize: 12,
     cellPadding: 2,
