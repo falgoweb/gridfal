@@ -777,17 +777,15 @@ doc.autoTable({
   }
 });
  
-const totalRows =
-  document.querySelectorAll("#gridTable tbody tr").length;
+const totalRows = document.querySelectorAll("#gridTable tr").length - 1;
+
+const finalY = doc.lastAutoTable
+  ? doc.lastAutoTable.finalY
+  : 100;
 
 doc.setFontSize(10);
-
 doc.text(
   `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
   14,
-  doc.lastAutoTable.finalY + 10
+  finalY + 15
 );
- 
-  doc.save("GridFal.pdf");
-}
-
