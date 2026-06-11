@@ -778,7 +778,7 @@ async function exportPDF() {
   });
 
   // Total data
-  const totalRows = doc.lastAutoTable.body.length;
+  const totalRows = doc.lastAutoTable.body.length - 1;
 
   // Footer export
   doc.setFontSize(10);
@@ -788,7 +788,7 @@ async function exportPDF() {
 doc.text(
   `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
   14,
-  finalY + 7
+  finalY + 8
 );
 
   // Simpan PDF
