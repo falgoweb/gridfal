@@ -773,3 +773,18 @@ doc.autoTable({
 
   doc.save("GridFal.pdf");
 }
+
+function openExportPopup() {
+  document.getElementById("exportPopup").style.display = "block";
+}
+
+function confirmExport() {
+
+  document.getElementById("exportPopup").style.display = "none";
+
+  const headerBold = document.getElementById("headerBold").value;
+  const cellBold = document.getElementById("cellBold").value;
+  const cellAlign = document.getElementById("cellAlign").value;
+
+  exportPDF(headerBold, cellBold, cellAlign);
+   }
