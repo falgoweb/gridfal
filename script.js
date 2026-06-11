@@ -784,11 +784,13 @@ async function exportPDF() {
   // Footer export
   doc.setFontSize(10);
 
-  doc.text(
-    `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
-    14,
-    120
-  );
+  const finalY = doc.lastAutoTable.finalY;
+
+doc.text(
+  `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRows}`,
+  14,
+  finalY + 8
+);
 
   // Simpan PDF
   doc.save("GridFal.pdf");
