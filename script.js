@@ -755,7 +755,7 @@ doc.autoTable({
     lineColor: [0, 0, 0],
 
     // 🔥 INI TEMPATNYA
-    lineWidth: 0.5
+    lineWidth: 0.25
   },
 
   columnStyles: {
