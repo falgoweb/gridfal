@@ -768,7 +768,7 @@ async function exportPDF(){
   },
 
   columnStyles: {
-    0: { halign: "60" },
+    0: { halign: "center" },
     1: { halign: "center" },
     2: { halign: "center" },
     3: { halign: "center" }
