@@ -732,8 +732,7 @@ async function exportPDF() {
   const doc = new jsPDF();
 
   // Judul
-  const title =
-  document.getElementById("tableTitle").innerText ||
+  const title = document.getElementById("tableTitle").innerText ||
   "Tabel Baru";
 
 doc.setFontSize(18);
