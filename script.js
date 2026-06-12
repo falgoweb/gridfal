@@ -792,9 +792,5 @@ doc.text(
   14, finalY + 8
 );
 
- const title =
-  document.getElementById("tableTitle").innerText ||
-  "Tabel Baru";
-
 doc.save(`${title}.pdf`);
 }
