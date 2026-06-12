@@ -752,15 +752,50 @@ function searchCell(){
 
   alert("Data tidak ditemukan");
 }
-function exportExcel() {
+function exportExcel(){
 
-  const table = document.getElementById("gridTable");
+  const title =
+    document.getElementById("tableTitle").innerText ||
+    "Tabel Baru";
 
-  const wb = XLSX.utils.table_to_book(table, {
-    sheet: "GridFal"
-  });
+  const rows = [];
 
-  XLSX.writeFile(wb, "GridFal.xlsx");
+  // baris judul
+  rows.push([title]);
+
+  // baris kosong
+  rows.push([]);
+
+  // ambil data tabel
+  document
+    .querySelectorAll("#gridTable tr")
+    .forEach(tr => {
+
+      const row = [];
+
+      tr.querySelectorAll("td, th")
+        .forEach(cell => {
+          row.push(cell.innerText);
+        });
+
+      rows.push(row);
+
+    });
+
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+
+  const wb = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    ws,
+    title
+  );
+
+  XLSX.writeFile(
+    wb,
+    `${title}.xlsx`
+  );
 
 }
 async function exportPDF() {
