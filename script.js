@@ -732,8 +732,12 @@ async function exportPDF() {
   const doc = new jsPDF();
 
   // Judul
-  doc.setFontSize(18);
-  doc.text("GRIDFAL EXPORT", 14, 15);
+  const title =
+  document.getElementById("tableTitle").innerText ||
+  "Tabel Baru";
+
+doc.setFontSize(18);
+doc.text(title, 14, 15);
 
   // Tanggal
   doc.setFontSize(12);
