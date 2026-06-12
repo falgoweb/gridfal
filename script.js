@@ -866,7 +866,7 @@ doc.text(
     html: "#gridTable",
     startY: 42,
     theme: "grid",
-    tableWidth: "auto",
+    tableWidth: "wrap",
     headStyles: {
       fillColor: [230, 230, 230],
       textColor: [0, 0, 0],
@@ -879,7 +879,7 @@ doc.text(
 
     styles: {
       fontSize: 12,
-      cellPadding: 0,
+      cellPadding: 0.5,
       halign: "center",
       valign: "middle",
       textColor: [0, 0, 0],
@@ -888,10 +888,10 @@ doc.text(
     },
 
     columnStyles: {
-      0: { cellWidth : 12 },
-      1: { cellWidth : 20 },
-      2: { cellWidth : 25 },
-      3: { cellWidth : 20 }
+      0: { halign: "center" },
+      1: { halign: "center" },
+      2: { halign: "center" },
+      3: { halign: "center" }
     }
   });
 
