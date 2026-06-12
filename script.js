@@ -750,13 +750,13 @@ doc.text(
   doc.text(
     new Date().toLocaleDateString("id-ID"),
     14,
-    30
+    35
   );
 
   // Tabel
   doc.autoTable({
     html: "#gridTable",
-    startY: 40,
+    startY: 42,
     theme: "grid",
 
     headStyles: {
