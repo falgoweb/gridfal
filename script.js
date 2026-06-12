@@ -866,7 +866,7 @@ doc.text(
     html: "#gridTable",
     startY: 42,
     theme: "grid",
-    tableWidth: "wrap",
+    tableWidth: "auto",
     headStyles: {
       fillColor: [230, 230, 230],
       textColor: [0, 0, 0],
