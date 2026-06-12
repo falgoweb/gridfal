@@ -736,8 +736,15 @@ async function exportPDF() {
   "Tabel Baru";
 
 doc.setFontSize(18);
-doc.text(title, 14, 15);
 
+const pageWidth = doc.internal.pageSize.getWidth();
+
+doc.text(
+  title,
+  pageWidth / 2,
+  15,
+  { align: "center" }
+);
   // Tanggal
   doc.setFontSize(12);
   doc.text(
