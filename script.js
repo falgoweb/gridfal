@@ -783,7 +783,13 @@ function exportExcel(){
     });
 
   const ws = XLSX.utils.aoa_to_sheet(rows);
+const colCount =
+  document.querySelector("#gridTable tr").cells.length;
 
+ws["!merges"] = [{
+  s: { r: 0, c: 0 },
+  e: { r: 0, c: colCount - 1 }
+}];
   const wb = XLSX.utils.book_new();
 
   XLSX.utils.book_append_sheet(
