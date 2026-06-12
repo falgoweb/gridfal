@@ -743,20 +743,20 @@ const textWidth = doc.getTextWidth(title);
 doc.text(
   title,
   (pageWidth - textWidth) / 2,
-  15
+  18
 );
   // Tanggal
   doc.setFontSize(12);
   doc.text(
     new Date().toLocaleDateString("id-ID"),
     14,
-    22
+    28
   );
 
   // Tabel
   doc.autoTable({
     html: "#gridTable",
-    startY: 30,
+    startY: 38,
     theme: "grid",
 
     headStyles: {
