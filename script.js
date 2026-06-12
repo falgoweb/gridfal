@@ -93,7 +93,17 @@ function saveGrid(){
   localStorage.setItem("gridfal_data", JSON.stringify(data));
   setSavedStatus("Tersimpan ✔");
 }
+function saveTitle(){
 
+  const title =
+    document.getElementById("tableTitle").innerText;
+
+  localStorage.setItem(
+    "gridfal_title",
+    title
+  );
+
+}
 /* =======================
    LOAD GRID
 ======================= */
@@ -119,7 +129,19 @@ function loadGrid(){
     table.appendChild(tr);
   });
 }
+function loadTitle(){
 
+  const savedTitle =
+    localStorage.getItem("gridfal_title");
+
+  if(savedTitle){
+
+    document.getElementById("tableTitle")
+      .innerText = savedTitle;
+
+  }
+
+}
 /* =======================
    EMPTY STATE
 ======================= */
@@ -303,6 +325,9 @@ function applyTheme(theme){
 document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme") || "light";
   applyTheme(savedTheme);
+ document
+  .getElementById("tableTitle")
+  .addEventListener("input", saveTitle);
 });
 /* =======================
    COLUMN RESIZE
