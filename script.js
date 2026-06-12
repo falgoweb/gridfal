@@ -854,12 +854,14 @@ doc.text(
   18
 );
   // Tanggal
-  doc.setFontSize(12);
-  doc.text(
-    new Date().toLocaleDateString("id-ID"),
-    14,
-    35
-  );
+  const tableStartY = 42;
+
+doc.setFontSize(12);
+doc.text(
+  new Date().toLocaleDateString("id-ID"),
+  14,
+  tableStartY - 4
+);
 
   // Tabel
   doc.autoTable({
@@ -901,9 +903,19 @@ const totalRowsPDF = doc.lastAutoTable.body.length - 1;
 
  const finalY = doc.lastAutoTable.finalY;
 
+doc.setFontSize(8);
+doc.setTextColor(80);
+
 doc.text(
-  `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRowsPDF}`,
-  14, finalY + 8
+  `Generated on : ${new Date().toLocaleString("id-ID")}`,
+  14,
+  finalY + 6
+);
+
+doc.text(
+  `Total Records : ${totalRowsPDF}`,
+  14,
+  finalY + 11
 );
 
 doc.save(`${title}.pdf`);
