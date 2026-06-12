@@ -856,7 +856,8 @@ doc.text(
   // Tanggal
   const tableStartY = 42;
 
-doc.setFontSize(12);
+doc.setFontSize(10);
+ doc.setTextColor(130);
 doc.text(
   new Date().toLocaleDateString("id-ID"),
   14,
