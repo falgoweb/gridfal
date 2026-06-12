@@ -783,6 +783,26 @@ function exportExcel(){
     });
 
   const ws = XLSX.utils.aoa_to_sheet(rows);
+ // AUTO WIDTH COLUMN
+const colWidths = [];
+
+rows.forEach(row => {
+  row.forEach((cell, i) => {
+
+    const len = cell
+      ? cell.toString().length
+      : 10;
+
+    if (!colWidths[i] || len > colWidths[i]) {
+      colWidths[i] = len;
+    }
+
+  });
+});
+
+ws["!cols"] = colWidths.map(w => ({
+  wch: w + 5
+}));
 const colCount =
   document.querySelector("#gridTable tr").cells.length;
 
