@@ -738,12 +738,12 @@ async function exportPDF() {
 doc.setFontSize(18);
 
 const pageWidth = doc.internal.pageSize.getWidth();
+const textWidth = doc.getTextWidth(title);
 
 doc.text(
   title,
-  pageWidth / 2,
-  15,
-  { align: "center" }
+  (pageWidth - textWidth) / 2,
+  15
 );
   // Tanggal
   doc.setFontSize(12);
