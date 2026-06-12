@@ -878,9 +878,9 @@ doc.text(
     },
 
     styles: {
-      fontSize: 10,
+      fontSize: 12,
       cellPadding: 2,
-      halign: "center",
+      halign: "25",
       valign: "middle",
       textColor: [0, 0, 0],
       lineColor: [0, 0, 0],
