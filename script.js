@@ -888,10 +888,10 @@ doc.text(
     },
 
     columnStyles: {
-      0: { halign: "center" },
-      1: { halign: "center" },
-      2: { halign: "center" },
-      3: { halign: "center" }
+      0: { cellWidth : 12 },
+      1: { cellWidth : 20 },
+      2: { cellWidth : 25 },
+      3: { cellWidth : 20 }
     }
   });
 
