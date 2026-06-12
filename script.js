@@ -864,9 +864,9 @@ doc.text(
   // Tabel
   doc.autoTable({
     html: "#gridTable",
-    startY: 35,
+    startY: 42,
     theme: "grid",
-    tableWidth: "42",
+    tableWidth: "auto",
     headStyles: {
       fillColor: [230, 230, 230],
       textColor: [0, 0, 0],
