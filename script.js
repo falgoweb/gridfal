@@ -793,5 +793,9 @@ doc.text(
   finalY + 8
 );
 
- doc.save("GridFal.pdf");
+ const title =
+  document.getElementById("tableTitle").innerText ||
+  "Tabel Baru";
+
+doc.save(`${title}.pdf`);
 }
