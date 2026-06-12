@@ -291,6 +291,17 @@ document.addEventListener("DOMContentLoaded", () => {
    AUTO SAVE INPUT
 ======================= */
 
+function saveTitle(){
+
+  const title =
+    document.getElementById("tableTitle").innerText;
+
+  localStorage.setItem(
+    "gridfal_title",
+    title
+  );
+
+}
 document.addEventListener("input", function(e){
 
   if(e.target.closest("#gridTable td")){
