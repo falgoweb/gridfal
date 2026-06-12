@@ -789,8 +789,7 @@ const totalRowsPDF = doc.lastAutoTable.body.length - 1;
 
 doc.text(
   `Generated on ${new Date().toLocaleString("id-ID")} | Total Records: ${totalRowsPDF}`,
-  14,
-  finalY + 8
+  14, finalY + 8
 );
 
  doc.save("GridFal.pdf");
