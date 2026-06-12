@@ -826,8 +826,18 @@ ws["!merges"] = [{
 }
 async function exportPDF() {
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  const totalCols =
+document.querySelector("#gridTable tr").cells.length;
+
+const orientation =
+totalCols > 5
+  ? "landscape"
+  : "portrait";
+
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF({
+  orientation: orientation
+});
 
   // Judul
   const title = document.getElementById("tableTitle").innerText ||
