@@ -879,7 +879,7 @@ doc.text(
 
     styles: {
       fontSize: 12,
-      cellPadding: 2,
+      cellPadding: 0.5,
       halign: "center",
       valign: "middle",
       textColor: [0, 0, 0],
