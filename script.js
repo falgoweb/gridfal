@@ -281,6 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadGrid();
+  loadTitle();
   checkEmptyState();
   initColumnResize();
 
