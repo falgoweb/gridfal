@@ -944,3 +944,15 @@ doc.text(
 
 doc.save(`${title}.pdf`);
    }
+
+window.addEventListener("load", () => {
+  const el = document.getElementById("tableTitle");
+
+  if (!el || el.innerText.trim() === "") {
+    el.innerText = "Judul Tabel";
+  }
+});
+document.activeElement.blur();
+
+const el = document.getElementById("tableTitle");
+const title = (el.innerText || "").trim() || "Judul Tabel";
