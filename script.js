@@ -894,42 +894,54 @@ doc.text(
 
   // Tabel
  doc.autoTable({
-  html: "#gridTable",
-  startY: 42,
-  theme: "grid",
-
-  headStyles: {
-    fillColor: [255, 255, 255], // putih (biar fokus ke teks)
-    textColor: [0, 0, 0],       // 🔥 HITAM PEKAT
-    fontStyle: "bold",
-    fontSize: 14,
-    halign: "center",
-    valign: "middle"
-  },
-
-  styles: {
-    fontSize: 11,
-    cellPadding: 0.6,
-    halign: "center",
-    valign: "middle",
-    textColor: [0, 0, 0]
-  },
-
-  didParseCell: function (data) {
-    // 🔥 KHUSUS HEADER NO
-    if (data.section === "head" && data.column.index === 0) {
-      data.cell.styles.fontSize = 15;
-      data.cell.styles.fontStyle = "bold";
-      data.cell.styles.textColor = [0, 0, 0]; // pastikan hitam
-    }
-
-    // 🔥 BODY KOLOM NO
-    if (data.section === "body" && data.column.index === 0) {
-      data.cell.styles.fontStyle = "bold";
-      data.cell.styles.fontSize = 12;
-    }
+    html: "#gridTable",
+    startY: 42,
+    theme: "grid",
+    tableWidth: "auto",
+    headStyles: {
+      fillColor: [240, 240, 240],   
+      textColor: [0, 0, 0], 
+      fontStyle: "bold",
+      fontSize: 15,
+      halign: "center",
+      valign: "middle",
+      lineWidth: 0.8,
+     didParseCell: function (data) {
+  // HEADER "NO"
+  if (data.section === "head" && data.column.index === 0) {
+    data.cell.styles.fontSize = 16;   // 🔥 lebih besar dari header lain
+    data.cell.styles.fontStyle = "bold";
   }
-});
+
+  // ISI KOLOM "NO"
+  if (data.section === "body" && data.column.index === 0) {
+    data.cell.styles.fontStyle = "bold";
+    data.cell.styles.fontSize = 12;
+  }
+     }
+    },
+
+    alternateRowStyles: {
+      fillColor: [248, 249, 250],
+    },
+
+    styles: {
+      fontSize: 12,
+      cellPadding: 0.5,
+      halign: "center",
+      valign: "middle",
+      textColor: [0, 0, 0],
+      lineColor: [0, 0, 0],
+      lineWidth: 0.4,
+    },
+
+    columnStyles: {
+      0: { halign: "center" },
+      1: { halign: "center" },
+      2: { halign: "center" },
+      3: { halign: "center" }
+    }
+  });
 
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
