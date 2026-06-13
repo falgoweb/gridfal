@@ -902,10 +902,10 @@ doc.text(
       fillColor: [240, 240, 240],   
       textColor: [0, 0, 0], 
       fontStyle: "bold",
-      fontSize: 15,
+      fontSize: 20,
       halign: "center",
       valign: "middle",
-      lineWidth: 0.8,
+      lineWidth: 0.9,
     },
 
     alternateRowStyles: {
