@@ -195,9 +195,7 @@ function addColumn(){
     td.contentEditable = "true";
     row.appendChild(td);
   });
-td.addEventListener("focus", () => {
-  td.textContent = td.textContent; // trigger selection reset
-});
+
   saveGrid();
   initColumnResize();
 }
@@ -879,10 +877,10 @@ const doc = new jsPDF({
 });
 
   // Judul
-  const title = document.getElementById("tableTitle").innerText ||
-  "Tabel Baru";
+const title = document.getElementById("tableTitle").innerText || "Tabel Baru";
 
 doc.setFontSize(18);
+doc.setTextColor(0);
 
 const pageWidth = doc.internal.pageSize.getWidth();
 const textWidth = doc.getTextWidth(title);
@@ -891,6 +889,13 @@ doc.text(
   title,
   (pageWidth - textWidth) / 2,
   18
+);
+
+doc.setFontSize(9);
+doc.text(
+  `Tanggal Export: ${new Date().toLocaleDateString("id-ID")}`,
+  14,
+  30
 );
   // Tanggal
   const tableStartY = 42;
@@ -905,37 +910,40 @@ doc.text(
 
   // Tabel
   doc.autoTable({
-    html: "#gridTable",
-    startY: 42,
-    theme: "grid",
-    tableWidth: "auto",
-    headStyles: {
-      fillColor: [230, 230, 230],
-      textColor: [0, 0, 0],
-      fontStyle: "bold"
-    },
+  html: "#gridTable",
+  startY: 42,
+  theme: "grid",
 
-    alternateRowStyles: {
-      fillColor: [248, 249, 250],
-    },
+  styles: {
+    fontSize: 10,
+    cellPadding: 4,
+    halign: "center",
+    valign: "middle",
 
-    styles: {
-      fontSize: 12,
-      cellPadding: 0.5,
-      halign: "center",
-      valign: "middle",
-      textColor: [0, 0, 0],
-      lineColor: [0, 0, 0],
-      lineWidth: 0.4,
-    },
+    textColor: [0, 0, 0],
 
-    columnStyles: {
-      0: { halign: "center" },
-      1: { halign: "center" },
-      2: { halign: "center" },
-      3: { halign: "center" }
-    }
-  });
+    lineColor: [0, 0, 0],
+    lineWidth: 0.5
+  },
+
+  headStyles: {
+    fillColor: [255, 255, 255],
+    textColor: [0, 0, 0],
+    fontStyle: "bold",
+    lineColor: [0, 0, 0]
+  },
+
+  bodyStyles: {
+    fillColor: [255, 255, 255]
+  },
+
+  margin: {
+    top: 30,
+    left: 10,
+    right: 10,
+    bottom: 15
+  }
+});
 
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
