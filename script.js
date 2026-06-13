@@ -346,7 +346,17 @@ function createProject(name){
     title: name,
     data: []
   };
+function showProjects(){
 
+  const projects = getProjects();
+
+  alert(
+    projects
+      .map(project => project.title)
+      .join("\n")
+  );
+
+}
   projects.push(project);
 
   localStorage.setItem(
