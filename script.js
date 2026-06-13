@@ -868,19 +868,18 @@ const doc = new jsPDF({
 });
 
   // Judul
-  const title = document.getElementById("tableTitle").innerText ||
-  "Tabel Baru";
+  const el = document.getElementById("tableTitle");
+
+const title = el
+  ? (el.value || el.innerText || "Tabel Baru")
+  : "Tabel Baru";
 
 doc.setFontSize(18);
 
 const pageWidth = doc.internal.pageSize.getWidth();
 const textWidth = doc.getTextWidth(title);
 
-doc.text(
-  title,
-  (pageWidth - textWidth) / 2,
-  18
-);
+doc.text(title, (pageWidth - textWidth) / 2, 18);
   // Tanggal
   const tableStartY = 42;
 
