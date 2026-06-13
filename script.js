@@ -948,4 +948,4 @@ doc.text(
 );
 
 doc.save(`${title}.pdf`);
-}
+   }
