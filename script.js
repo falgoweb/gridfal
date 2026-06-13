@@ -885,11 +885,7 @@ doc.setTextColor(0);
 const pageWidth = doc.internal.pageSize.getWidth();
 const textWidth = doc.getTextWidth(title);
 
-doc.text(
-  title,
-  (pageWidth - textWidth) / 2,
-  18
-);
+doc.text(title, centerX, 15);
 
 doc.setFontSize(9);
 doc.text(
@@ -902,21 +898,16 @@ doc.text(
 
 doc.setFontSize(9);
  doc.setTextColor(100);
-doc.text(
-  new Date().toLocaleDateString("id-ID"),
-  14,
-  tableStartY - 4
-);
 
   // Tabel
   doc.autoTable({
   html: "#gridTable",
-  startY: 42,
+  startY: 28,
   theme: "grid",
 
   styles: {
     fontSize: 10,
-    cellPadding: 4,
+    cellPadding: 5,
     halign: "center",
     valign: "middle",
 
