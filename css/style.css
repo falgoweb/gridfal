@@ -106,11 +106,9 @@ td:focus{
    EMPTY STATE
 ========================= */
 .empty-state{
-  td[contenteditable="true"],
-  td[contenteditable="true"]{
-  text-align:left;
   padding:30px;
   color:#64748b;
+  text-align:center;
 }
 
 /* =========================
@@ -136,10 +134,9 @@ td:focus{
 /* =========================
    DARK MODE (EXCEL STYLE)
 ========================= */
-}
-body {
-  background: #f5f5f5;
-  color: #222;
+body{
+  background:#f5f5f5;
+  color:#222;
 }
 
 /* DARK MODE - HANYA UI */
