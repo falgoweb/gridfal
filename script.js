@@ -915,7 +915,7 @@ doc.text(
   fontSize: 13,
   halign: "center",
   valign: "middle",
-  lineWidth: 0.8
+  lineWidth: 1,
 },
    
     styles: {
@@ -925,7 +925,7 @@ doc.text(
       valign: "middle",
       textColor: [0, 0, 0],
       lineColor: [0, 0, 0],
-      lineWidth: 0.4,
+      lineWidth: 1,
     },
 
     columnStyles: {
