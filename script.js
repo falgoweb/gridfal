@@ -861,6 +861,8 @@ ws["!merges"] = [{
   );
 
 }
+
+console.log("PDF START");
 async function exportPDF() {
 
   const totalCols =
@@ -885,7 +887,11 @@ doc.setTextColor(0);
 const pageWidth = doc.internal.pageSize.getWidth();
 const textWidth = doc.getTextWidth(title);
 
-doc.text(title, centerX, 15);
+doc.text(
+  title,
+  (pageWidth - textWidth) / 2,
+  15
+);
 
 doc.setFontSize(9);
 doc.text(
@@ -914,31 +920,24 @@ doc.setFontSize(9);
     textColor: [0, 0, 0],
 
     lineColor: [0, 0, 0],
-    lineWidth: 0.5
+    lineWidth: 0.5,
   },
 
   headStyles: {
     fillColor: [255, 255, 255],
     textColor: [0, 0, 0],
     fontStyle: "bold",
-    lineColor: [0, 0, 0]
+    lineColor: [0, 0, 0],
   },
-
-  bodyStyles: {
-    fillColor: [255, 255, 255]
-  },
-
-  margin: {
-    top: 30,
-    left: 10,
-    right: 10,
-    bottom: 15
+  
+  bodyStyles:{
+    fillColor:[255,255,255]
   }
 });
 
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
-const totalRowsPDF = doc.lastAutoTable.body.length - 1;
+  const totalRowsPDF = doc.lastAutoTable.body.length - 1;
 
  const finalY = doc.lastAutoTable.finalY;
 
