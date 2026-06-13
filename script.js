@@ -868,11 +868,11 @@ const doc = new jsPDF({
 });
 
   // Judul
-  const el = document.getElementById("tableTitle");
+document.activeElement.blur();
 
-const title = el
-  ? (el.value || el.innerText || "Tabel Baru")
-  : "Tabel Baru";
+const el = document.getElementById("tableTitle");
+
+const title = (el?.innerText || el?.textContent || "").trim() || "Tabel Baru";
 
 doc.setFontSize(18);
 
@@ -880,16 +880,6 @@ const pageWidth = doc.internal.pageSize.getWidth();
 const textWidth = doc.getTextWidth(title);
 
 doc.text(title, (pageWidth - textWidth) / 2, 18);
-  // Tanggal
-  const tableStartY = 42;
-
-doc.setFontSize(9);
- doc.setTextColor(100);
-doc.text(
-  new Date().toLocaleDateString("id-ID"),
-  14,
-  tableStartY - 4
-);
 
   // Tabel
  doc.autoTable({
