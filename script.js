@@ -868,19 +868,21 @@ const doc = new jsPDF({
 });
 
   // Judul
-document.activeElement.blur();
+const titleEl = document.getElementById("tableTitle");
 
-const el = document.getElementById("tableTitle");
+titleEl.addEventListener("focus", () => {
+  if (titleEl.classList.contains("empty")) {
+    titleEl.innerText = "";
+    titleEl.classList.remove("empty");
+  }
+});
 
-const title = (el?.innerText || el?.textContent || "").trim() || "Tabel Baru";
-
-doc.setFontSize(18);
-
-const pageWidth = doc.internal.pageSize.getWidth();
-const textWidth = doc.getTextWidth(title);
-
-doc.text(title, (pageWidth - textWidth) / 2, 18);
-
+titleEl.addEventListener("blur", () => {
+  if (titleEl.innerText.trim() === "") {
+    titleEl.innerText = "Judul Tabel";
+    titleEl.classList.add("empty");
+  }
+});
   // Tabel
  doc.autoTable({
     html: "#gridTable",
@@ -918,23 +920,7 @@ doc.text(title, (pageWidth - textWidth) / 2, 18);
       3: { halign: "center" }
     }
   });
-function handleExportPDF() {
-  exportPDF();
-  closeMenu();
-}
 
-function handleExportExcel() {
-  exportExcel();
-  closeMenu();
-}
-
-function toggleMenu() {
-  document.getElementById("dropdownMenu").classList.toggle("hidden");
-}
-
-function closeMenu() {
-  document.getElementById("dropdownMenu").classList.add("hidden");
-}
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
 const totalRowsPDF = doc.lastAutoTable.body.length - 1;
