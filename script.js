@@ -902,10 +902,23 @@ doc.text(
       fillColor: [240, 240, 240],   
       textColor: [0, 0, 0], 
       fontStyle: "bold",
-      fontSize: 20,
+      fontSize: 15,
       halign: "center",
       valign: "middle",
-      lineWidth: 0.9,
+      lineWidth: 0.8,
+     didParseCell: function (data) {
+  // HEADER "NO"
+  if (data.section === "head" && data.column.index === 0) {
+    data.cell.styles.fontSize = 16;   // 🔥 lebih besar dari header lain
+    data.cell.styles.fontStyle = "bold";
+  }
+
+  // ISI KOLOM "NO"
+  if (data.section === "body" && data.column.index === 0) {
+    data.cell.styles.fontStyle = "bold";
+    data.cell.styles.fontSize = 12;
+  }
+     }
     },
 
     alternateRowStyles: {
