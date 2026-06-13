@@ -84,7 +84,7 @@ function saveTitle() {
 }
 
 document.addEventListener("input", function (e) {
-  if (e.target.closest("#gridTable td")) {
+  if (e.target && e.target.closest("#gridTable td")) {
     saveGrid();
   }
 });
@@ -158,11 +158,6 @@ function quickCreateProject() {
   alert("Project dibuat: " + title);
 }
 
-/* =======================
-   SHOW + SWITCH PROJECT
-   (FIX: hanya 1 versi)
-======================= */
-
 function showProjects() {
   const projects = getProjects();
 
@@ -175,7 +170,7 @@ function showProjects() {
     .map(p => `${p.title} | ID: ${p.id}`)
     .join("\n");
 
-  const id = prompt("Ketik ID project untuk dipilih:\n\n" + list);
+  const id = prompt("Ketik ID project:\n\n" + list);
   if (!id) return;
 
   const exists = projects.find(p => p.id === id);
@@ -187,6 +182,9 @@ function showProjects() {
 
   localStorage.setItem("gridfal_active_project", id);
   alert("Active project: " + exists.title);
+
+  // 🔥 langsung load setelah switch
+  loadGridFromProject();
 }
 
 function debugProjects() {
@@ -194,7 +192,7 @@ function debugProjects() {
 }
 
 /* =======================
-   SAVE SYSTEM (PROJECT-BASED ONLY)
+   SAVE SYSTEM
 ======================= */
 
 function saveToActiveProject(data) {
@@ -216,6 +214,9 @@ function saveToActiveProject(data) {
 function saveGrid() {
   const table = document.querySelector("#gridTable");
   if (!table) return;
+
+  const active = getActiveProject();
+  if (!active) return;
 
   const data = [];
 
@@ -253,6 +254,25 @@ function loadGridFromProject() {
     }
   }
 }
+
+/* =======================
+   INIT (FIX UTAMA)
+======================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.getElementById("gridTable");
+
+  if (!table) return;
+
+  const projects = getProjects();
+  const active = localStorage.getItem("gridfal_active_project");
+
+  if (!active && projects.length > 0) {
+    localStorage.setItem("gridfal_active_project", projects[0].id);
+  }
+
+  loadGridFromProject();
+});
 
 /* =======================
    EMPTY STATE
