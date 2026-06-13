@@ -73,207 +73,75 @@ function setSavedStatus(text){
 }
 
 /* =======================
-   AUTO SAVE INPUT
+   SAVE GRID (LOCALSTORAGE)
 ======================= */
-
-function saveTitle() {
-  const el = document.getElementById("tableTitle");
-  if (!el) return;
-
-  localStorage.setItem("gridfal_title", el.innerText);
-}
-
-document.addEventListener("input", function (e) {
-  if (e.target && e.target.closest("#gridTable td")) {
-    saveGrid();
-  }
-});
-
-/* =======================
-   AUTO NUMBER
-======================= */
-
-function autoNumber() {
-  const table = document.querySelector("#gridTable");
-  if (!table) return;
-
-  let current = 1;
-
-  for (let i = 1; i < table.rows.length; i++) {
-    const firstCell = table.rows[i].cells[0];
-
-    if (firstCell) {
-      firstCell.textContent = current;
-      firstCell.contentEditable = "false";
-      current++;
-    }
-  }
-}
-
-/* =======================
-   THEME
-======================= */
-
-function applyTheme(theme) {
-  document.body.classList.toggle("dark-mode", theme === "dark");
-}
-
-/* =======================
-   PROJECT SYSTEM
-======================= */
-
-function getProjects() {
-  return JSON.parse(localStorage.getItem("gridfal_projects")) || [];
-}
-
-function createProject(title) {
-  const projects = getProjects();
-
-  const newProject = {
-    id: Date.now().toString(),
-    title,
-    data: {
-      grid: []
-    }
-  };
-
-  projects.push(newProject);
-
-  localStorage.setItem("gridfal_projects", JSON.stringify(projects));
-  localStorage.setItem("gridfal_active_project", newProject.id);
-}
-
-function getActiveProject() {
-  const id = localStorage.getItem("gridfal_active_project");
-  if (!id) return null;
-
-  return getProjects().find(p => p.id === id) || null;
-}
-
-function quickCreateProject() {
-  const title = prompt("Nama project:");
-  if (!title) return;
-
-  createProject(title);
-  alert("Project dibuat: " + title);
-}
-
-function showProjects() {
-  const projects = getProjects();
-
-  if (projects.length === 0) {
-    alert("Belum ada project");
-    return;
-  }
-
-  const list = projects
-    .map(p => `${p.title} | ID: ${p.id}`)
-    .join("\n");
-
-  const id = prompt("Ketik ID project:\n\n" + list);
-  if (!id) return;
-
-  const exists = projects.find(p => p.id === id);
-
-  if (!exists) {
-    alert("Project tidak ditemukan");
-    return;
-  }
-
-  localStorage.setItem("gridfal_active_project", id);
-  alert("Active project: " + exists.title);
-
-  // 🔥 langsung load setelah switch
-  loadGridFromProject();
-}
-
-function debugProjects() {
-  console.log(getProjects());
-}
-
-/* =======================
-   SAVE SYSTEM
-======================= */
-
-function saveToActiveProject(data) {
-  const projects = getProjects();
-  const activeId = localStorage.getItem("gridfal_active_project");
-
-  const index = projects.findIndex(p => p.id === activeId);
-  if (index === -1) return;
-
-  projects[index].data = data;
-
-  localStorage.setItem("gridfal_projects", JSON.stringify(projects));
-}
-
-/* =======================
-   SAVE GRID
-======================= */
-
-function saveGrid() {
-  const table = document.querySelector("#gridTable");
-  if (!table) return;
-
-  const active = getActiveProject();
-  if (!active) return;
-
+function saveGrid(){
+  const rows = document.querySelectorAll("#gridTable tbody tr");
   const data = [];
 
-  for (let i = 0; i < table.rows.length; i++) {
-    const row = [];
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    const rowData = [];
 
-    for (let j = 0; j < table.rows[i].cells.length; j++) {
-      row.push(table.rows[i].cells[j].innerText);
-    }
+    cells.forEach(cell => {
+      rowData.push(cell.innerHTML);
+    });
 
-    data.push(row);
-  }
+    data.push(rowData);
+  });
 
-  saveToActiveProject({ grid: data });
+  localStorage.setItem("gridfal_data", JSON.stringify(data));
+  setSavedStatus("Tersimpan ✔");
 }
+function saveTitle(){
 
+  const title =
+    document.getElementById("tableTitle").innerText;
+
+  localStorage.setItem(
+    "gridfal_title",
+    title
+  );
+
+}
 /* =======================
    LOAD GRID
 ======================= */
+function loadGrid(){
+  const table = document.querySelector("#gridTable tbody");
+  const saved = localStorage.getItem("gridfal_data");
 
-function loadGridFromProject() {
-  const project = getActiveProject();
-  if (!project || !project.data || !project.data.grid) return;
+  if(!saved) return;
 
-  const table = document.querySelector("#gridTable");
-  if (!table) return;
+  const data = JSON.parse(saved);
+  table.innerHTML = "";
 
-  const grid = project.data.grid;
+  data.forEach(row => {
+    const tr = document.createElement("tr");
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (table.rows[i] && table.rows[i].cells[j]) {
-        table.rows[i].cells[j].innerText = grid[i][j];
-      }
-    }
-  }
+    row.forEach(cell => {
+      const td = document.createElement("td");
+      td.contentEditable = "true";
+      td.innerHTML = cell;
+      tr.appendChild(td);
+    });
+
+    table.appendChild(tr);
+  });
 }
+function loadTitle(){
 
-/* =======================
-   INIT (FIX UTAMA)
-======================= */
+  const savedTitle =
+    localStorage.getItem("gridfal_title");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const table = document.getElementById("gridTable");
+  if(savedTitle){
 
-  if (!table) return;
+    document.getElementById("tableTitle")
+      .innerText = savedTitle;
 
-  const projects = getProjects();
-  const active = localStorage.getItem("gridfal_active_project");
-
-  if (!active && projects.length > 0) {
-    localStorage.setItem("gridfal_active_project", projects[0].id);
   }
 
-  loadGridFromProject();
-});
-
+}
 /* =======================
    EMPTY STATE
 ======================= */
@@ -423,7 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
    AUTO SAVE INPUT
 ======================= */
 
-function saveTitle() {
+function saveTitle(){
+
   const title =
     document.getElementById("tableTitle").innerText;
 
@@ -431,54 +300,54 @@ function saveTitle() {
     "gridfal_title",
     title
   );
-}
 
-document.addEventListener("input", function (e) {
-  if (e.target.closest("#gridTable td")) {
+}
+document.addEventListener("input", function(e){
+
+  if(e.target.closest("#gridTable td")){
     saveGrid();
   }
-});
 
-function autoNumber() {
+});
+function autoNumber(){
   const table = document.querySelector("#gridTable");
-  if (!table) return;
+  if(!table) return;
 
   let current = 1;
 
-  for (let i = 1; i < table.rows.length; i++) {
+  for(let i = 1; i < table.rows.length; i++){
     const firstCell = table.rows[i].cells[0];
 
-    if (firstCell) {
+    if(firstCell){
       firstCell.textContent = current;
       firstCell.contentEditable = "false";
       current++;
     }
   }
 }
-
-function applyTheme(theme) {
-  if (theme === "dark") {
+function applyTheme(theme){
+  if(theme === "dark"){
     document.body.classList.add("dark-mode");
   } else {
     document.body.classList.remove("dark-mode");
   }
 }
-
-function getProjects() {
+function getProjects(){
   return JSON.parse(
     localStorage.getItem("gridfal_projects")
   ) || [];
 }
-function createProject(title) {
+function createProject(name){
+
   const projects = getProjects();
 
-  const newProject = {
+  const project = {
     id: Date.now().toString(),
-    title,
-    data: {}
+    title: name,
+    data: []
   };
 
-  projects.push(newProject);
+  projects.push(project);
 
   localStorage.setItem(
     "gridfal_projects",
@@ -487,48 +356,18 @@ function createProject(title) {
 
   localStorage.setItem(
     "gridfal_active_project",
-    newProject.id
+    project.id
   );
-}
-function debugProjects() {
-  console.log(getProjects());
-}
-function getActiveProject() {
-  const id = localStorage.getItem("gridfal_active_project");
-  return getProjects().find(p => p.id === id);
-}
-function quickCreateProject() {
-  const title = prompt("Nama project:");
 
-  if (!title) return;
-
-  createProject(title);
-  alert("Project dibuat: " + title);
 }
-function showProjects() {
-  const projects = getProjects();
-
-  if (projects.length === 0) {
-    alert("Belum ada project");
-    return;
-   }
 
 /* AUTO LOAD THEME */
 document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme =
-    localStorage.getItem("theme") || "light";
-
+  const savedTheme = localStorage.getItem("theme") || "light";
   applyTheme(savedTheme);
-
-  const tableTitle =
-    document.getElementById("tableTitle");
-
-  if (tableTitle) {
-    tableTitle.addEventListener(
-      "input",
-      saveTitle
-    );
-  }
+ document
+  .getElementById("tableTitle")
+  .addEventListener("input", saveTitle);
 });
 /* =======================
    COLUMN RESIZE
