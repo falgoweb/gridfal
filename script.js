@@ -899,13 +899,13 @@ doc.text(
     theme: "grid",
     tableWidth: "auto",
     headStyles: {
-      fillColor: [40, 40, 40],   // 🔥 gelap biar kontras jelas
-      textColor: [255, 255, 255], // putih biar kebaca
+      fillColor: [240, 240, 240],   
+      textColor: [0, 0, 0], 
       fontStyle: "bold",
       fontSize: 13,
       halign: "center",
       valign: "middle",
-      lineWidth: 0.8
+      lineWidth: 0.8,
     },
 
     alternateRowStyles: {
