@@ -363,11 +363,22 @@ function createProject(name){
 
 /* AUTO LOAD THEME */
 document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
+
+  const savedTheme =
+    localStorage.getItem("theme") || "light";
+
   applyTheme(savedTheme);
- document
-  .getElementById("tableTitle")
-  .addEventListener("input", saveTitle);
+
+  const tableTitle =
+    document.getElementById("tableTitle");
+
+  if(tableTitle){
+    tableTitle.addEventListener(
+      "input",
+      saveTitle
+    );
+  }
+
 });
 /* =======================
    COLUMN RESIZE
@@ -868,35 +879,40 @@ const doc = new jsPDF({
 });
 
   // Judul
-const titleEl = document.getElementById("tableTitle");
+  const title = document.getElementById("tableTitle").innerText ||
+  "Tabel Baru";
 
-titleEl.addEventListener("focus", () => {
-  if (titleEl.classList.contains("empty")) {
-    titleEl.innerText = "";
-    titleEl.classList.remove("empty");
-  }
-});
+doc.setFontSize(18);
 
-titleEl.addEventListener("blur", () => {
-  if (titleEl.innerText.trim() === "") {
-    titleEl.innerText = "Judul Tabel";
-    titleEl.classList.add("empty");
-  }
-});
+const pageWidth = doc.internal.pageSize.getWidth();
+const textWidth = doc.getTextWidth(title);
+
+doc.text(
+  title,
+  (pageWidth - textWidth) / 2,
+  18
+);
+  // Tanggal
+  const tableStartY = 42;
+
+doc.setFontSize(9);
+ doc.setTextColor(100);
+doc.text(
+  new Date().toLocaleDateString("id-ID"),
+  14,
+  tableStartY - 4
+);
+
   // Tabel
- doc.autoTable({
+  doc.autoTable({
     html: "#gridTable",
     startY: 42,
     theme: "grid",
     tableWidth: "auto",
     headStyles: {
-      fillColor: [240, 240, 240],   
-      textColor: [0, 0, 0], 
-      fontStyle: "bold",
-      fontSize: 20,
-      halign: "center",
-      valign: "middle",
-      lineWidth: 0.8,
+      fillColor: [230, 230, 230],
+      textColor: [0, 0, 0],
+      fontStyle: "bold"
     },
 
     alternateRowStyles: {
@@ -943,16 +959,4 @@ doc.text(
 );
 
 doc.save(`${title}.pdf`);
-   }
-
-window.addEventListener("load", () => {
-  const el = document.getElementById("tableTitle");
-
-  if (!el || el.innerText.trim() === "") {
-    el.innerText = "Judul Tabel";
-  }
-});
-document.activeElement.blur();
-
-const el = document.getElementById("tableTitle");
-const title = (el.innerText || "").trim() || "Judul Tabel";
+}
