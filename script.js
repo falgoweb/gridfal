@@ -332,6 +332,34 @@ function applyTheme(theme){
     document.body.classList.remove("dark-mode");
   }
 }
+function getProjects(){
+  return JSON.parse(
+    localStorage.getItem("gridfal_projects")
+  ) || [];
+}
+function createProject(name){
+
+  const projects = getProjects();
+
+  const project = {
+    id: Date.now().toString(),
+    title: name,
+    data: []
+  };
+
+  projects.push(project);
+
+  localStorage.setItem(
+    "gridfal_projects",
+    JSON.stringify(projects)
+  );
+
+  localStorage.setItem(
+    "gridfal_active_project",
+    project.id
+  );
+
+}
 
 /* AUTO LOAD THEME */
 document.addEventListener("DOMContentLoaded", () => {
