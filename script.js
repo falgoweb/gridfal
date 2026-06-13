@@ -291,8 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
    AUTO SAVE INPUT
 ======================= */
 
-function saveTitle(){
-
+function saveTitle() {
   const title =
     document.getElementById("tableTitle").innerText;
 
@@ -300,58 +299,54 @@ function saveTitle(){
     "gridfal_title",
     title
   );
-
 }
-document.addEventListener("input", function(e){
 
-  if(e.target.closest("#gridTable td")){
+document.addEventListener("input", function (e) {
+  if (e.target.closest("#gridTable td")) {
     saveGrid();
   }
-
 });
-function autoNumber(){
+
+function autoNumber() {
   const table = document.querySelector("#gridTable");
-  if(!table) return;
+  if (!table) return;
 
   let current = 1;
 
-  for(let i = 1; i < table.rows.length; i++){
+  for (let i = 1; i < table.rows.length; i++) {
     const firstCell = table.rows[i].cells[0];
 
-    if(firstCell){
+    if (firstCell) {
       firstCell.textContent = current;
       firstCell.contentEditable = "false";
       current++;
     }
   }
 }
-function applyTheme(theme){
-  if(theme === "dark"){
+
+function applyTheme(theme) {
+  if (theme === "dark") {
     document.body.classList.add("dark-mode");
   } else {
     document.body.classList.remove("dark-mode");
   }
 }
-function getProjects(){
+
+function getProjects() {
   return JSON.parse(
     localStorage.getItem("gridfal_projects")
   ) || [];
 }
-function showProjects(){
-  alert("Tombol Projects Berhasil Diklik");
-}
-function showProjects(){
-
+function createProject(title) {
   const projects = getProjects();
 
-  alert(
-    projects
-      .map(project => project.title)
-      .join("\n")
-  );
+  const newProject = {
+    id: Date.now().toString(),
+    title,
+    data: {}
+  };
 
-}
-  projects.push(project);
+  projects.push(newProject);
 
   localStorage.setItem(
     "gridfal_projects",
@@ -360,14 +355,115 @@ function showProjects(){
 
   localStorage.setItem(
     "gridfal_active_project",
-    project.id
+    newProject.id
   );
+}
+function debugProjects() {
+  console.log(getProjects());
+}
+function getActiveProject() {
+  const id = localStorage.getItem("gridfal_active_project");
+  return getProjects().find(p => p.id === id);
+}
+function quickCreateProject() {
+  const title = prompt("Nama project:");
 
+  if (!title) return;
+
+  createProject(title);
+  alert("Project dibuat: " + title);
+}
+function showProjects() {
+  const projects = getProjects();
+
+  if (projects.length === 0) {
+    alert("Belum ada project");
+    return;
+  }
+
+  const activeId = localStorage.getItem("gridfal_active_project");
+
+  const list = projects
+    .map(p =>
+      (p.id === activeId ? "⭐ " : "") +
+      `${p.title} | ${p.id}`
+    )
+    .join("\n");
+
+  alert("PROJECT LIST:\n\n" + list);
+}
+function showProjects() {
+  const projects = getProjects();
+
+  const list = projects
+    .map(p => `${p.title} | ID: ${p.id}`)
+    .join("\n");
+
+  const id = prompt("Ketik ID project untuk dipilih:\n\n" + list);
+
+  if (!id) return;
+
+  const exists = projects.find(p => p.id === id);
+
+  if (!exists) {
+    alert("Project tidak ditemukan");
+    return;
+  }
+
+  localStorage.setItem("gridfal_active_project", id);
+
+  alert("Active project: " + exists.title);
+}
+function saveToActiveProject(data) {
+  const projects = getProjects();
+  const activeId = localStorage.getItem("gridfal_active_project");
+
+  const index = projects.findIndex(p => p.id === activeId);
+  if (index === -1) return;
+
+  projects[index].data = data;
+
+  localStorage.setItem(
+    "gridfal_projects",
+    JSON.stringify(projects)
+  );
+}
+function saveGrid() {
+  const table = document.querySelector("#gridTable");
+  if (!table) return;
+
+  const data = [];
+
+  for (let i = 0; i < table.rows.length; i++) {
+    const row = [];
+    for (let j = 0; j < table.rows[i].cells.length; j++) {
+      row.push(table.rows[i].cells[j].innerText);
+    }
+    data.push(row);
+  }
+
+  saveToActiveProject({ grid: data });
+}
+function loadGridFromProject() {
+  const project = getActiveProject();
+  if (!project || !project.data || !project.data.grid) return;
+
+  const table = document.querySelector("#gridTable");
+  if (!table) return;
+
+  const grid = project.data.grid;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (table.rows[i] && table.rows[i].cells[j]) {
+        table.rows[i].cells[j].innerText = grid[i][j];
+      }
+    }
+  }
 }
 
 /* AUTO LOAD THEME */
 document.addEventListener("DOMContentLoaded", () => {
-
   const savedTheme =
     localStorage.getItem("theme") || "light";
 
@@ -376,13 +472,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const tableTitle =
     document.getElementById("tableTitle");
 
-  if(tableTitle){
+  if (tableTitle) {
     tableTitle.addEventListener(
       "input",
       saveTitle
     );
   }
-
 });
 /* =======================
    COLUMN RESIZE
