@@ -11,7 +11,14 @@
 
 <header class="topbar">
   <h1 class="logo">GridFal 2.0</h1>
+<div class="menu-container">
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
+  <div id="dropdownMenu" class="dropdown hidden">
+    <button onclick="handleExportPDF()">Export PDF</button>
+    <button onclick="handleExportExcel()">Export Excel</button>
+  </div>
+</div>
   <div class="actions">
     <div class="group">
       <button id="addRowBtn">+ Row</button>
