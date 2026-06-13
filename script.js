@@ -363,11 +363,22 @@ function createProject(name){
 
 /* AUTO LOAD THEME */
 document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
+
+  const savedTheme =
+    localStorage.getItem("theme") || "light";
+
   applyTheme(savedTheme);
- document
-  .getElementById("tableTitle")
-  .addEventListener("input", saveTitle);
+
+  const tableTitle =
+    document.getElementById("tableTitle");
+
+  if(tableTitle){
+    tableTitle.addEventListener(
+      "input",
+      saveTitle
+    );
+  }
+
 });
 /* =======================
    COLUMN RESIZE
