@@ -899,25 +899,19 @@ doc.text(
     theme: "grid",
     tableWidth: "auto",
     headStyles: {
-      fillColor: [230, 230, 230],
-      textColor: [0, 0, 0],
-      fontStyle: "bold"
+      fillColor: [40, 40, 40],   // 🔥 gelap biar kontras jelas
+      textColor: [255, 255, 255], // putih biar kebaca
+      fontStyle: "bold",
+      fontSize: 13,
+      halign: "center",
+      valign: "middle",
+      lineWidth: 0.8
     },
 
     alternateRowStyles: {
       fillColor: [248, 249, 250],
     },
 
-    headStyles: {
-  fillColor: [30, 30, 30],   // 🔥 gelap biar kontras jelas
-  textColor: [255, 255, 255], // putih biar kebaca
-  fontStyle: "bold",
-  fontSize: 15,
-  halign: "center",
-  valign: "middle",
-  lineWidth: 0.4,
-},
-   
     styles: {
       fontSize: 12,
       cellPadding: 0.5,
