@@ -929,7 +929,23 @@ doc.text(
       3: { halign: "center" }
     }
   });
+function handleExportPDF() {
+  exportPDF();
+  closeMenu();
+}
 
+function handleExportExcel() {
+  exportExcel();
+  closeMenu();
+}
+
+function toggleMenu() {
+  document.getElementById("dropdownMenu").classList.toggle("hidden");
+}
+
+function closeMenu() {
+  document.getElementById("dropdownMenu").classList.add("hidden");
+}
   // Total data
   const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
 const totalRowsPDF = doc.lastAutoTable.body.length - 1;
