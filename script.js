@@ -337,15 +337,9 @@ function getProjects(){
     localStorage.getItem("gridfal_projects")
   ) || [];
 }
-function createProject(name){
-
-  const projects = getProjects();
-
-  const project = {
-    id: Date.now().toString(),
-    title: name,
-    data: []
-  };
+function showProjects(){
+  alert("Tombol Projects Berhasil Diklik");
+}
 function showProjects(){
 
   const projects = getProjects();
