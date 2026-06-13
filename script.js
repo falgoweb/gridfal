@@ -902,7 +902,7 @@ doc.text(
       fillColor: [240, 240, 240],   
       textColor: [0, 0, 0], 
       fontStyle: "bold",
-      fontSize: 13,
+      fontSize: 15,
       halign: "center",
       valign: "middle",
       lineWidth: 0.8,
