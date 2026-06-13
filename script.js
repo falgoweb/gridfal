@@ -909,13 +909,13 @@ doc.text(
     },
 
     headStyles: {
-  fillColor: [40, 40, 40],   // 🔥 gelap biar kontras jelas
+  fillColor: [30, 30, 30],   // 🔥 gelap biar kontras jelas
   textColor: [255, 255, 255], // putih biar kebaca
   fontStyle: "bold",
-  fontSize: 13,
+  fontSize: 15,
   halign: "center",
   valign: "middle",
-  lineWidth: 1,
+  lineWidth: 0.4,
 },
    
     styles: {
@@ -925,7 +925,7 @@ doc.text(
       valign: "middle",
       textColor: [0, 0, 0],
       lineColor: [0, 0, 0],
-      lineWidth: 1,
+      lineWidth: 0.4,
     },
 
     columnStyles: {
