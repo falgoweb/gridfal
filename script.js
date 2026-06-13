@@ -881,7 +881,7 @@ const doc = new jsPDF({
   // Judul
 const title = document.getElementById("tableTitle").innerText || "Tabel Baru";
 
-doc.setFontSize(18);
+doc.setFontSize(22);
 doc.setTextColor(0);
 
 const pageWidth = doc.internal.pageSize.getWidth();
@@ -890,7 +890,7 @@ const textWidth = doc.getTextWidth(title);
 doc.text(
   title,
   (pageWidth - textWidth) / 2,
-  15
+  18
 );
 
 doc.setFontSize(9);
@@ -908,30 +908,34 @@ doc.setFontSize(9);
   // Tabel
   doc.autoTable({
   html: "#gridTable",
-  startY: 28,
+  startY: 35,
   theme: "grid",
+
+  headStyles: {
+    fillColor: [220,220,220],
+    textColor: [0,0,0],
+    fontStyle: "bold",
+    halign: "center",
+    lineColor: [0,0,0],
+    lineWidth: 0.5
+  },
+
+  alternateRowStyles: {
+    fillColor: [245,245,245]
+  },
+
+  bodyStyles: {
+    fillColor: [255,255,255],
+    textColor: [0,0,0]
+  },
 
   styles: {
     fontSize: 10,
-    cellPadding: 5,
+    cellPadding: 6,
     halign: "center",
     valign: "middle",
-
-    textColor: [0, 0, 0],
-
-    lineColor: [0, 0, 0],
-    lineWidth: 0.5,
-  },
-
-  headStyles: {
-    fillColor: [255, 255, 255],
-    textColor: [0, 0, 0],
-    fontStyle: "bold",
-    lineColor: [0, 0, 0],
-  },
-  
-  bodyStyles:{
-    fillColor:[255,255,255]
+    lineColor: [0,0,0],
+    lineWidth: 0.5
   }
 });
 
@@ -951,6 +955,8 @@ doc.text(
 );
 
 doc.text(
+  `Halaman 1`,
+   pageWidth - 30,
   `Total Records : ${totalRowsPDF}`,
   14,
   finalY + 11
