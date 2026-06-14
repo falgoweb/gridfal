@@ -949,6 +949,12 @@ doc.setFontSize(8);
 doc.setTextColor(80);
 
 doc.text(
+  `Generated on : ${new Date().toLocaleString("id-ID")}`,
+  14,
+  finalY + 6
+);
+
+doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
   finalY + 11
@@ -959,5 +965,5 @@ doc.text(
   pageWidth - 30,
   finalY + 11
 );
+
 doc.save(`${title}.pdf`);
-}
