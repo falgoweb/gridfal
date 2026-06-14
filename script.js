@@ -916,7 +916,7 @@ doc.setFontSize(9);
   fillColor: [255,255,255],
   textColor: [0,0,0],
   fontStyle: "bold",
-  fontSize: 15,
+  fontSize: 18,
   halign: "center",
   valign: "middle",
   lineColor: [0,0,0],
@@ -933,7 +933,7 @@ doc.setFontSize(9);
   },
 
   styles: {
-  fontSize: 10,
+  fontSize: 9,
   cellPadding: 6,
   halign: "center",
   valign: "middle",
