@@ -913,14 +913,15 @@ doc.setFontSize(9);
   theme: "striped",
 
   headStyles: {
-    fillColor: [255, 255, 255],
-    textColor: [0, 0, 0],
-    fontStyle: "bold",
-    fontSize: 20, 
-    cellPadding: 12,
-    halign: "center"
-    
-  },
+  fillColor: [255,255,255],
+  textColor: [0,0,0],
+  fontStyle: "bold",
+  fontSize: 15,
+  halign: "center",
+  valign: "middle",
+  lineColor: [0,0,0],
+  lineWidth: 0.4,
+},
 
   alternateRowStyles: {
     fillColor: [248, 248, 248],
@@ -932,13 +933,14 @@ doc.setFontSize(9);
   },
 
   styles: {
-    fontSize: 10,
-    cellPadding: 5,
-    halign: "center",
-    valign: "middle",
-    lineColor: [180,180,180],
-    lineWidth: 0.2,
-  }
+  fontSize: 10,
+  cellPadding: 6,
+  halign: "center",
+  valign: "middle",
+  textColor: [0,0,0],
+  lineColor: [180,180,180],
+  lineWidth: 0.2,
+},
 });
 
 // Total data
