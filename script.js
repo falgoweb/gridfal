@@ -920,7 +920,7 @@ doc.setFontSize(9);
   halign: "center",
   valign: "middle",
   lineColor: [0,0,0],
-  lineWidth: 0.4,
+  lineWidth: 1.2,
 },
 
   alternateRowStyles: {
