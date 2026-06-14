@@ -913,9 +913,10 @@ doc.setFontSize(9);
   theme: "striped",
 
   headStyles: {
-    fillColor: [45, 45, 45],
+    fillColor: [60, 60, 60],
     textColor: [255, 255, 255],
     fontStyle: "bold",
+    fontSize: 14,
     halign: "center"
   },
 
@@ -934,7 +935,7 @@ doc.setFontSize(9);
     halign: "center",
     valign: "middle",
     lineColor: [180,180,180],
-    lineWidth: 0.2
+    lineWidth: 0.2,
   }
 });
 
