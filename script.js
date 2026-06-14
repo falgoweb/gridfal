@@ -939,7 +939,7 @@ doc.setFontSize(9);
   valign: "middle",
   textColor: [0,0,0],
   lineColor: [80,80,80],
-  lineWidth: 0.8,
+  lineWidth: 0.4,
 },
 });
 
