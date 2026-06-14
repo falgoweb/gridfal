@@ -913,7 +913,7 @@ doc.setFontSize(9);
   theme: "striped",
 
   headStyles: {
-  fillColor: [255,255,255],
+  fillColor: [235,235,235],
   textColor: [0,0,0],
   fontStyle: "bold",
   fontSize: 21,
@@ -928,7 +928,7 @@ doc.setFontSize(9);
   },
 
   bodyStyles: {
-    fillColor: [255, 255, 255],
+    fillColor: [250, 250, 250],
     textColor: [0, 0, 0],
   },
 
