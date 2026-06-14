@@ -903,7 +903,7 @@ doc.text(
   const tableStartY = 42;
 
 doc.setFontSize(8);
- doc.setTextColor(100);
+ doc.setTextColor(140);
 
   // Tabel
   doc.autoTable({
@@ -951,7 +951,7 @@ doc.setTextColor(80);
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 10
+  finalY + 8
 );
 
 doc.save(`${title}.pdf`);
