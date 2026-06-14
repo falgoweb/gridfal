@@ -938,11 +938,9 @@ doc.setFontSize(9);
   }
 });
 
-  // Total data
-  const totalRowsDOM = document.querySelectorAll("#gridTable tbody tr").length;
-  const totalRowsPDF = doc.lastAutoTable.body.length - 1;
-
- const finalY = doc.lastAutoTable.finalY;
+// Total data
+const totalRowsPDF = doc.lastAutoTable.body.length - 1;
+const finalY = doc.lastAutoTable.finalY;
 
 doc.setFontSize(8);
 doc.setTextColor(80);
@@ -956,7 +954,8 @@ doc.text(
 doc.text(
   `Page 1`,
   pageWidth - 35,
-  finalY + 6
+  finalY + 18
 );
 
-doc.save(`${title}.pdf`);}
+doc.save(`${title}.pdf`);
+ }
