@@ -913,7 +913,7 @@ doc.setFontSize(9);
   theme: "striped",
 
   headStyles: {
-    fillColor: [60, 60, 60],
+    fillColor: [45, 45, 45],
     textColor: [255, 255, 255],
     fontStyle: "bold",
     halign: "center"
@@ -944,19 +944,19 @@ doc.setFontSize(9);
 
  const finalY = doc.lastAutoTable.finalY;
 
-doc.setFontSize(18);
+doc.setFontSize(8);
 doc.setTextColor(80);
 
 doc.text(
   `Generated on : ${new Date().toLocaleString("id-ID")}`,
   14,
-  finalY + 6
+  finalY + 12
 );
 
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 6
+  finalY + 18
 );
 
 doc.text(
