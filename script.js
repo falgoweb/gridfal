@@ -938,7 +938,7 @@ doc.setFontSize(9);
   halign: "center",
   valign: "middle",
   textColor: [0,0,0],
-  lineColor: [60,60,60],
+  lineColor: [80,80,80],
   lineWidth: 0.8,
 },
 });
