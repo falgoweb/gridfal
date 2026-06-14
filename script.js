@@ -953,7 +953,7 @@ doc.text(
 
 doc.text(
   `Page 1`,
-  pageWidth - 25,
+  pageWidth - 15,
   finalY + 8
 );
 
