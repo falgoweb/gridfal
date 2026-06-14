@@ -956,13 +956,13 @@ doc.text(
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 10
+  finalY + 6
 );
 
 doc.text(
   `Page 1`,
   pageWidth - 20,
-  finalY + 10
+  finalY + 6
 );
 
 doc.save(`${title}.pdf`);}
