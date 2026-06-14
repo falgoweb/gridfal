@@ -913,7 +913,7 @@ doc.setFontSize(9);
   theme: "grid",
 
   headStyles: {
-  fillColor: [255,255,255],
+  fillColor: [240,240,240],
   textColor: [0,0,0],
   fontStyle: "bold",
   fontSize: 12,
@@ -929,11 +929,11 @@ doc.setFontSize(9);
 
   bodyStyles: {
     fillColor: [255, 255, 255],
-    textColor: [0, 0, 0],
+    textColor: [0,0,0],
   },
 
   styles: {
-  fontSize: 10,
+  fontSize: 9,
   cellPadding: 5,
   halign: "center",
   valign: "middle",
