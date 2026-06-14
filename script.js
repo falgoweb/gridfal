@@ -923,7 +923,7 @@ doc.setFontSize(9);
   },
 
   alternateRowStyles: {
-    fillColor: [245, 245, 245],
+    fillColor: [248, 248, 248],
   },
 
   bodyStyles: {
