@@ -941,6 +941,19 @@ doc.setFontSize(9);
   lineColor: [80,80,80],
   lineWidth: 0.4,
 },
+   didParseCell: function(data) {
+
+  if(data.section === "head"){
+    data.cell.styles.lineColor = [0,0,0];
+    data.cell.styles.lineWidth = 1;
+  }
+
+  if(data.section === "body"){
+    data.cell.styles.lineColor = [80,80,80];
+    data.cell.styles.lineWidth = 0.4;
+  }
+
+   }
 });
 
 // Total data
