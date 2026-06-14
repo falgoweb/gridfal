@@ -316,6 +316,8 @@ td {
   background:#fff;
   color:#000;
   border:1px solid #000;
+   text-align:left;
+  vertical-align:middle;
 }
 
 .table-title{
