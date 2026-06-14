@@ -965,5 +965,4 @@ doc.text(
   finalY + 10
 );
 
-doc.save(`${title}.pdf`);
-}
+doc.save(`${title}.pdf`);}
