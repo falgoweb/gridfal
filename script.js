@@ -902,8 +902,8 @@ doc.text(
   // Tanggal
   const tableStartY = 42;
 
-doc.setFontSize(8);
- doc.setTextColor(160);
+doc.setFontSize(9);
+ doc.setTextColor(80);
 
   // Tabel
   doc.autoTable({
