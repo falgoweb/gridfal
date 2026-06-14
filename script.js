@@ -909,33 +909,32 @@ doc.setFontSize(9);
   doc.autoTable({
   html: "#gridTable",
   startY: 35,
-  theme: "grid",
+
+  theme: "striped",
 
   headStyles: {
-    fillColor: [220,220,220],
-    textColor: [0,0,0],
+    fillColor: [60, 60, 60],
+    textColor: [255, 255, 255],
     fontStyle: "bold",
-    halign: "center",
-    lineColor: [0,0,0],
-    lineWidth: 0.5
+    halign: "center"
   },
 
   alternateRowStyles: {
-    fillColor: [245,245,245]
+    fillColor: [240, 240, 240]
   },
 
   bodyStyles: {
-    fillColor: [255,255,255],
-    textColor: [0,0,0]
+    fillColor: [255, 255, 255],
+    textColor: [0, 0, 0]
   },
 
   styles: {
     fontSize: 10,
-    cellPadding: 6,
+    cellPadding: 5,
     halign: "center",
     valign: "middle",
-    lineColor: [0,0,0],
-    lineWidth: 0.5
+    lineColor: [180,180,180],
+    lineWidth: 0.2
   }
 });
 
@@ -945,7 +944,7 @@ doc.setFontSize(9);
 
  const finalY = doc.lastAutoTable.finalY;
 
-doc.setFontSize(8);
+doc.setFontSize(18);
 doc.setTextColor(80);
 
 doc.text(
@@ -957,13 +956,14 @@ doc.text(
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 11
+  finalY + 10
 );
 
 doc.text(
-  `Halaman 1`,
-  pageWidth - 30,
-  finalY + 11
+  `Page 1`,
+  pageWidth - 20,
+  finalY + 10
 );
 
 doc.save(`${title}.pdf`);
+}
