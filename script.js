@@ -917,7 +917,6 @@ doc.setFontSize(9);
     textColor: [265, 265, 265],
     fontStyle: "bold",
     fontSize: 40,
-    cellPadding: 7,
     halign: "center"
     
   },
@@ -961,4 +960,4 @@ doc.text(
 );
 
 doc.save(`${title}.pdf`);
- }
+}
