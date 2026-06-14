@@ -903,7 +903,7 @@ doc.text(
   const tableStartY = 42;
 
 doc.setFontSize(8);
- doc.setTextColor(140);
+ doc.setTextColor(160);
 
   // Tabel
   doc.autoTable({
@@ -913,10 +913,10 @@ doc.setFontSize(8);
   theme: "striped",
 
   headStyles: {
-    fillColor: [40, 40, 40],
-    textColor: [255, 255, 255],
+    fillColor: [255, 255, 255],
+    textColor: [0, 0, 0],
     fontStyle: "bold",
-    fontSize: 18, 
+    fontSize: 14, 
     cellPadding: 12,
     halign: "center"
     
