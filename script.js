@@ -917,17 +917,18 @@ doc.setFontSize(9);
     textColor: [265, 265, 265],
     fontStyle: "bold",
     fontSize: 40,
-    halign: "center"
     cellPadding: 7,
+    halign: "center"
+    
   },
 
   alternateRowStyles: {
-    fillColor: [240, 240, 240]
+    fillColor: [240, 240, 240],
   },
 
   bodyStyles: {
     fillColor: [255, 255, 255],
-    textColor: [0, 0, 0]
+    textColor: [0, 0, 0],
   },
 
   styles: {
