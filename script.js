@@ -917,7 +917,7 @@ doc.setFontSize(9);
     textColor: [255, 255, 255],
     fontStyle: "bold",
     fontSize: 13, 
-    cellPadding: 7,
+    cellPadding: 10,
     halign: "center"
     
   },
@@ -951,12 +951,6 @@ doc.setTextColor(80);
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 15
-);
-
-doc.text(
-  `Page 1`,
-  pageWidth - 15,
   finalY + 15
 );
 
