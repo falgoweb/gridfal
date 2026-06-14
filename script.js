@@ -928,7 +928,7 @@ doc.setFontSize(9);
   },
 
   bodyStyles: {
-    fillColor: [250, 250, 250],
+    fillColor: [255, 255, 255],
     textColor: [0, 0, 0],
   },
 
@@ -938,8 +938,8 @@ doc.setFontSize(9);
   halign: "center",
   valign: "middle",
   textColor: [0,0,0],
-  lineColor: [180,180,180],
-  lineWidth: 0.5,
+  lineColor: [0,0,0],
+  lineWidth: 0.8,
 },
 });
 
