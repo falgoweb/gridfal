@@ -191,10 +191,11 @@ function addColumn(){
   saveState();
 
   rows.forEach(row => {
-    const td = document.createElement("td");
-    td.contentEditable = "true";
-    row.appendChild(td);
-  });
+  const td = document.createElement("td");
+  td.contentEditable = "true";
+  td.innerHTML = "<br>";
+  row.appendChild(td);
+});
 
   saveGrid();
   initColumnResize();
