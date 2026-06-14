@@ -193,8 +193,9 @@ button, td{
 
 td,
 th{
-  text-align: center;
+  text-align: left;
   vertical-align: middle;
+  padding-left: 8px;
 }
 
 .resizer{
