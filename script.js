@@ -910,17 +910,17 @@ doc.setFontSize(9);
   html: "#gridTable",
   startY: 35,
 
-  theme: "striped",
+  theme: "grid",
 
   headStyles: {
-  fillColor: [235,235,235],
+  fillColor: [255,255,255],
   textColor: [0,0,0],
   fontStyle: "bold",
   fontSize: 21,
   halign: "center",
   valign: "middle",
   lineColor: [0,0,0],
-  lineWidth: 1.2,
+  lineWidth: 1,
 },
 
   alternateRowStyles: {
@@ -934,12 +934,12 @@ doc.setFontSize(9);
 
   styles: {
   fontSize: 10,
-  cellPadding: 6,
+  cellPadding: 5,
   halign: "center",
   valign: "middle",
   textColor: [0,0,0],
   lineColor: [180,180,180],
-  lineWidth: 0.2,
+  lineWidth: 0.5,
 },
 });
 
