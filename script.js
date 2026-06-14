@@ -914,9 +914,10 @@ doc.setFontSize(9);
 
   headStyles: {
     fillColor: [40, 40, 40],
-    textColor: [265, 265, 265],
+    textColor: [255, 255, 255],
     fontStyle: "bold",
-    fontSize: 40,
+    fontSize: 13, 
+    cellPadding: 7,
     halign: "center"
     
   },
