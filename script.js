@@ -893,7 +893,7 @@ doc.text(
   18
 );
 
-doc.setFontSize(9);
+doc.setFontSize(8);
 doc.text(
   `Tanggal Export: ${new Date().toLocaleDateString("id-ID")}`,
   14,
@@ -902,7 +902,7 @@ doc.text(
   // Tanggal
   const tableStartY = 42;
 
-doc.setFontSize(9);
+doc.setFontSize(8);
  doc.setTextColor(100);
 
   // Tabel
@@ -915,9 +915,9 @@ doc.setFontSize(9);
   headStyles: {
     fillColor: [40, 40, 40],
     textColor: [255, 255, 255],
-    fontStyle: "overbold",
-    fontSize: 16, 
-    cellPadding: 11,
+    fontStyle: "bold",
+    fontSize: 18, 
+    cellPadding: 12,
     halign: "center"
     
   },
@@ -951,7 +951,7 @@ doc.setTextColor(80);
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 15
+  finalY + 10
 );
 
 doc.save(`${title}.pdf`);
