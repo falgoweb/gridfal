@@ -916,7 +916,7 @@ doc.setFontSize(9);
     fillColor: [60, 60, 60],
     textColor: [255, 255, 255],
     fontStyle: "bold",
-    fontSize: 14,
+    fontSize: 18,
     halign: "center"
   },
 
