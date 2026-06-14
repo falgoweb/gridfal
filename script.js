@@ -193,7 +193,7 @@ function addColumn(){
   rows.forEach(row => {
   const td = document.createElement("td");
   td.contentEditable = "true";
-  td.innerHTML = "<br>";
+  td.innerHTML = "&nbsp;";
   row.appendChild(td);
 });
 
