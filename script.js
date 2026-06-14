@@ -913,11 +913,12 @@ doc.setFontSize(9);
   theme: "striped",
 
   headStyles: {
-    fillColor: [60, 60, 60],
+    fillColor: [40, 40, 40],
     textColor: [265, 265, 265],
     fontStyle: "bold",
     fontSize: 40,
     halign: "center"
+    cellPadding: 7,
   },
 
   alternateRowStyles: {
