@@ -948,13 +948,13 @@ doc.setTextColor(80);
 doc.text(
   `Total Records : ${totalRowsPDF}`,
   14,
-  finalY + 8
+  finalY + 15
 );
 
 doc.text(
   `Page 1`,
   pageWidth - 15,
-  finalY + 8
+  finalY + 15
 );
 
 doc.save(`${title}.pdf`);
