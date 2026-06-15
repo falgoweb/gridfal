@@ -492,15 +492,18 @@ applyZoom();
 document.getElementById("zoomBtnIn").addEventListener("click", zoomIn);
 document.getElementById("zoomBtnOut").addEventListener("click", zoomOut);
 
-const themeToggle = document.getElementById("themeToggle");
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("themeToggle");
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
 
-  if (document.body.classList.contains("dark-mode")) {
-    themeToggle.textContent = "☀️";
-  } else {
-    themeToggle.textContent = "🌙";
+      themeToggle.textContent =
+        document.body.classList.contains("dark-mode")
+          ? "☀️"
+          : "🌙";
+    });
   }
 });
 
