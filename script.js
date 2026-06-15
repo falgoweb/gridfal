@@ -539,91 +539,91 @@ templateBtn.addEventListener("click", () => {
   switch (pilihan) {
 
     case "1":
-      headers = ["No", "Nama", "Tanggal", "Keterangan"];
+      headers = ["NO", "NAMA", "TANGGAL", "KETERANGAN"];
       break;
 
     case "2":
-      headers = ["No", "Hari", "Mata Pelajaran", "Jam"];
+      headers = ["NO", "HARI", "MATA PELAJARAN", "JAM"];
       break;
 
     case "3":
-      headers = ["No", "Nama Barang", "Jumlah", "Jenis Penggunaan", "Tahun", "Kondisi"];
+      headers = ["NO", "NAMA BARANG", "JUMLAH", "JENIS PENGGUNAAN", "TAHUN", "KONDISI"];
       break;
 
     case "4":
-      headers = ["No", "Tanggal", "Pemasukan", "Pengeluaran", "Saldo"];
+      headers = ["NO", "TANGGAL", "PEMASUKAN", "PENGELUARAN", "SALDO"];
       break;
 
     case "5":
-      headers = ["No", "Mata Kuliah", "Hari", "Jam", "Ruangan"];
+      headers = ["NO", "MATA KULIAH", "HARI", "JAM", "RUANGAN"];
       break; 
 
     case "6":
-      headers = ["No", "Mata Kuliah", "Tugas", "Deadline", "Status"];
+      headers = ["NO", "MATA KULIAH", "TUGAS", "DEADLINE", "STATUS"];
       break;
 
     case "7":
-      headers = ["No", "Mata Kuliah", "UTS", "UAS", "Nilai Akhir"];
+      headers = ["NO", "MATA KULIAH", "UTS", "UAS", "NILAI AKHIR"];
       break;
 
     case "8":
-      headers = ["No", "Kode MK", "Mata Kuliah", "SKS", "Dosen"];
+      headers = ["NO", "KODE MK", "MATA KULIAH", "SKS", "DOSEN"];
       break;
 
     case "9":
-      headers = ["No", "Mata Kuliah", "Tanggal", "Kehadiran"];
+      headers = ["NO", "MATA KULIAH", "TANGGAL", "KEHADIRAN"];
       break;
   
     case "10":
-      headers = ["No", "Praktikum", "Tanggal", "Deadline", "Status"];
+      headers = ["NO", "PRAKTIKUM", "TANGGAL", "DEADLINE", "STATUS"];
       break;
 
     case "11":
-      headers = ["No", "Kegiatan", "Target", "Deadline", "Status"];
+      headers = ["NO", "Kegiatan", "Target", "DEADLINE", "STATUS"];
       break;
 
     case "12":
-      headers = ["No", "Nama", "Jabatan", "Divisi", "Telepon"];
+      headers = ["NO", "NAMA", "JABATAN", "DIVISI", "TELEPON"];
       break;
   
     case "13":
-      headers = ["No", "Nama", "Tanggal", "Jam Masuk", "Keterangan"];
+      headers = ["NO", "Nama", "Tanggal", "Jam Masuk", "Keterangan"];
       break;
   
     case "14":
-      headers = ["No", "Nama Barang", "Jumlah", "Kondisi", "Lokasi"];
+      headers = ["NO", "NAMA BARANG", "JUMLAH", "KONDISI", "LOKASI"];
       break;
   
     case "15":
-      headers = ["No", "Agenda", "Tanggal", "Waktu", "PIC"];
+      headers = ["NO", "AGENDA", "TANGGAL", "WAKTU", "PIC"];
       break;
   
     case "16":
-      headers = ["No", "Nama Proyek", "Deadline", "PIC", "Status"];
+      headers = ["NO", "NAMA PROYEK", "DEADLINE", "PIC", "STATUS"];
       break;
 
     case "17":
-      headers = ["No", "Kode Produk", "Nama Produk", "Kategori", "Harga"];
+      headers = ["NO", "KODE PRODUK", "NAMA PRODUK", "KATEGORI", "HARGA"];
       break;
   
     case "18":
-      headers = ["No", "Nama Barang", "Stok", "Satuan", "Keterangan"];
+      headers = ["NO", "NAMA BARANG", "STOK", "SATUAN", "KETERANGAN"];
       break;
   
     case "19":
-      headers = ["No", "Tanggal", "Nama Barang", "Jumlah", "Supplier"];
+      headers = ["NO", "TANGGAL", "NAMA BARANG", "JUMLAH", "SUPPLIER"];
       break;
 
     case "20":
-      headers = ["No", "Tanggal", "Nama Barang", "Jumlah", "Tujuan"];
+      headers = ["NO", "TANGGAL", "NAMA BARANG", "JUMLAH", "TUJUAN"];
       break;
 
     case "21":
-      headers = ["No", "Tanggal", "Produk", "Jumlah", "Total"];
+      headers = ["NO", "TANGGAL", "PRODUKSI", "JUMLAH", "TOTAL"];
       break;
 
     case "22":
-      headers = ["No", "Tanggal", "Nama Barang", "Jumlah", "Biaya"];
+      headers = ["NO", "TANGGAL", "NAMA BARANG", "JUMLAH", "BIAYA"];
       break;
   
     default:
