@@ -479,11 +479,14 @@ function zoomOut() {
 }
 
 function applyZoom() {
+  const tableContainer = document.querySelector(".table-container");
+  if (!tableContainer) return;
+
   tableContainer.style.transform = `scale(${zoomLevel / 150})`;
   tableContainer.style.transformOrigin = "top left";
-  document.getElementById("zoomLevel").textContent = 
-   zoomLevel + "%";
 
+  const zoomText = document.getElementById("zoomLevel");
+  if (zoomText) zoomText.textContent = zoomLevel + "%";
 }
 applyZoom();
 document.getElementById("zoomBtnIn").addEventListener("click", zoomIn);
@@ -960,3 +963,35 @@ doc.text(
 
 doc.save(`${title}.pdf`);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const zoomInBtn = document.getElementById("zoomBtnIn");
+  const zoomOutBtn = document.getElementById("zoomBtnOut");
+  const themeToggle = document.getElementById("themeToggle");
+  const templateBtn = document.getElementById("templateBtn");
+  const tableContainer = document.querySelector(".table-container");
+
+  if (zoomInBtn) zoomInBtn.addEventListener("click", zoomIn);
+  if (zoomOutBtn) zoomOutBtn.addEventListener("click", zoomOut);
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      themeToggle.textContent =
+        document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    });
+  }
+
+  if (templateBtn) {
+    templateBtn.addEventListener("click", () => {
+      const pilihan = prompt("Pilih Template ...");
+      if (!pilihan) return;
+    });
+  }
+
+  if (tableContainer) {
+    applyZoom();
+  }
+
+});
