@@ -492,21 +492,6 @@ applyZoom();
 document.getElementById("zoomBtnIn").addEventListener("click", zoomIn);
 document.getElementById("zoomBtnOut").addEventListener("click", zoomOut);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const themeToggle = document.getElementById("themeToggle");
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-
-      themeToggle.textContent =
-        document.body.classList.contains("dark-mode")
-          ? "☀️"
-          : "🌙";
-    });
-  }
-});
-
 const templateBtn = document.getElementById("templateBtn");
 
 templateBtn.addEventListener("click", () => {
