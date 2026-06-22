@@ -107,7 +107,6 @@ function saveTitle(){
 /* =======================
    LOAD GRID
 ======================= */
-
 function loadGrid(){
   const table = document.querySelector("#gridTable tbody");
   const saved = localStorage.getItem("gridfal_data");
@@ -120,18 +119,13 @@ function loadGrid(){
   data.forEach(row => {
     const tr = document.createElement("tr");
 
-   row.forEach((cell, index) => {
+    row.forEach(cell => {
+      const td = document.createElement("td");
+      td.contentEditable = "true";
+      td.innerHTML = cell;
+      tr.appendChild(td);
+    });
 
-  const el =
-    data.indexOf(row) === 0
-      ? document.createElement("th")
-      : document.createElement("td");
-
-  el.contentEditable = "true";
-  el.innerHTML = cell;
-
-  tr.appendChild(el);
-  });
     table.appendChild(tr);
   });
 }
@@ -196,16 +190,11 @@ function addColumn(){
 
   saveState();
 
-  rows.forEach((row, index) => {
-
-  const cell = document.createElement(
-    index === 0 ? "th" : "td"
-  );
-
-  cell.contentEditable = "true";
-  cell.innerHTML = "&nbsp;";
-  row.appendChild(cell);
-
+  rows.forEach(row => {
+  const td = document.createElement("td");
+  td.contentEditable = "true";
+  td.innerHTML = "&nbsp;";
+  row.appendChild(td);
 });
 
   saveGrid();
@@ -252,10 +241,10 @@ function resetGrid(){
 
   tbody.innerHTML = `
     <tr>
-     <th contenteditable="true">No</th>
-     <th contenteditable="true">isi</th>
-     <th contenteditable="true">isi</th>
-  </tr>
+      <td contenteditable="true">No</td>
+      <td contenteditable="true">isi</td>
+      <td contenteditable="true">isi</td>
+    </tr>
 
     <tr>
      <td contenteditable="true">1</td>
@@ -645,7 +634,7 @@ templateBtn.addEventListener("click", () => {
   headerRow.innerHTML = "";
 
   headers.forEach(text => {
-    const td = document.createElement("th");
+    const td = document.createElement("td");
     td.contentEditable = true;
     td.textContent = text;
     headerRow.appendChild(td);
