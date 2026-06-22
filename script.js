@@ -137,7 +137,7 @@ function loadGrid(){
 
   table.appendChild(tr);
 });
-}
+
 function loadTitle(){
 
   const savedTitle =
