@@ -871,7 +871,7 @@ const doc = new jsPDF({
 });
 
   // Judul
-const title = document.getElementById("tableTitle").innerText || "Tabel Baru";
+const title = document.getElementById("tableTitle").innerText || "Judu Tabel";
 
 doc.setFontSize(22);
 doc.setTextColor(0);
