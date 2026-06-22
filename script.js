@@ -199,12 +199,18 @@ function addColumn(){
 
   saveState();
 
-  rows.forEach(row => {
-  const td = document.createElement("td");
-  td.contentEditable = "true";
-  td.innerHTML = "&nbsp;";
-  row.appendChild(td);
-});
+  rows.forEach((row, index) => {
+
+    const cell = document.createElement(
+      index === 0 ? "th" : "td"
+    );
+
+    cell.contentEditable = "true";
+    cell.innerHTML = "&nbsp;";
+
+    row.appendChild(cell);
+
+  });
 
   saveGrid();
   initColumnResize();
