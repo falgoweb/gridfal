@@ -89,9 +89,10 @@ table{
 }
 
 th{
-  border:1px solid #333;
+  border:1px solid #bold;
   min-width:100px;
   padding:8px;
+  font-weight: bold;
 
   white-space: normal;
   word-break: break-word;
