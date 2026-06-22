@@ -80,7 +80,7 @@ function saveGrid(){
   const data = [];
 
   rows.forEach(row => {
-    const cells = row.querySelectorAll("td");
+    const cells = row.querySelectorAll("td, th");
     const rowData = [];
 
     cells.forEach(cell => {
