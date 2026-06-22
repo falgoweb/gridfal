@@ -120,24 +120,23 @@ function loadGrid(){
 
     const tr = document.createElement("tr");
 
-    data.forEach((row, rowIndex) => {
-  const tr = document.createElement("tr");
+    row.forEach(cell => {
 
-  row.forEach(cell => {
+      const el = rowIndex === 0
+        ? document.createElement("th")
+        : document.createElement("td");
 
-    const el = rowIndex === 0
-      ? document.createElement("th")
-      : document.createElement("td");
+      el.contentEditable = "true";
+      el.innerHTML = cell;
 
-    el.contentEditable = "true";
-    el.innerHTML = cell;
+      tr.appendChild(el);
 
-    tr.appendChild(el);
+    });
+
+    table.appendChild(tr);
+
   });
-
-  table.appendChild(tr);
-});
-
+}
 function loadTitle(){
 
   const savedTitle =
