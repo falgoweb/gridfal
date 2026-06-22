@@ -194,7 +194,7 @@ button, td{
 ========================= */
 
 
-th {
+th, td {
   text-align: center;
   vertical-align: middle;
   font-weight: bold;
