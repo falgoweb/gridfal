@@ -116,17 +116,26 @@ function loadGrid(){
   const data = JSON.parse(saved);
   table.innerHTML = "";
 
-  data.forEach(row => {
+  data.forEach((row, rowIndex) => {
+
     const tr = document.createElement("tr");
 
     row.forEach(cell => {
-      const td = document.createElement("td");
-      td.contentEditable = "true";
-      td.innerHTML = cell;
-      tr.appendChild(td);
+
+      const element =
+        rowIndex === 0
+          ? document.createElement("th")
+          : document.createElement("td");
+
+      element.contentEditable = "true";
+      element.innerHTML = cell;
+
+      tr.appendChild(element);
+
     });
 
     table.appendChild(tr);
+
   });
 }
 function loadTitle(){
