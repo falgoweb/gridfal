@@ -271,6 +271,7 @@ zoomLevel = 150;
 applyZoom();
   saveGrid();
   checkEmptyState();
+  initColumnResize();
 }
 
 /* =======================
