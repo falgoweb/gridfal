@@ -190,11 +190,16 @@ function addColumn(){
 
   saveState();
 
-  rows.forEach(row => {
-  const td = document.createElement("td");
-  td.contentEditable = "true";
-  td.innerHTML = "&nbsp;";
-  row.appendChild(td);
+  rows.forEach((row, index) => {
+
+  const cell = document.createElement(
+    index === 0 ? "th" : "td"
+  );
+
+  cell.contentEditable = "true";
+  cell.innerHTML = "&nbsp;";
+  row.appendChild(cell);
+
 });
 
   saveGrid();
@@ -634,7 +639,7 @@ templateBtn.addEventListener("click", () => {
   headerRow.innerHTML = "";
 
   headers.forEach(text => {
-    const td = document.createElement("td");
+    const td = document.createElement("th");
     td.contentEditable = true;
     td.textContent = text;
     headerRow.appendChild(td);
