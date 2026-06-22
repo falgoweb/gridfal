@@ -119,13 +119,18 @@ function loadGrid(){
   data.forEach(row => {
     const tr = document.createElement("tr");
 
-    row.forEach(cell => {
-      const td = document.createElement("td");
-      td.contentEditable = "true";
-      td.innerHTML = cell;
-      tr.appendChild(td);
-    });
+   row.forEach((cell, index) => {
 
+  const el =
+    data.indexOf(row) === 0
+      ? document.createElement("th")
+      : document.createElement("td");
+
+  el.contentEditable = "true";
+  el.innerHTML = cell;
+
+  tr.appendChild(el);
+  });
     table.appendChild(tr);
   });
 }
