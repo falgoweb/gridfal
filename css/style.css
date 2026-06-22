@@ -75,21 +75,26 @@ button:active{
 /* =========================
    TABLE
 ========================= */
-th{
-  border:1px solid #000;
-  min-width:100px;
-  padding:8px;
-  font-weight:bold;
-
-  white-space:normal;
-  word-break:break-word;
+.table-container{
+  transform-origin:  top left;
+  padding-top:16px;
+  overflow:auto;
+  transition:all 0.2s ease;
+  
 }
 
-td{
-  border:1px solid #000;
+table{
+  border-collapse:collapse;
+  table-layout: auto;
+}
+
+td, th{
+  border:1px solid #333;
   min-width:100px;
   padding:8px;
-  font-weight:normal;
+
+  white-space: normal;
+  word-break: break-word;
 }
 
 td:focus{
@@ -186,25 +191,13 @@ button, td{
    COLUMN RESIZE
 ========================= */
 
-
-th {
-  text-align: center;
+td,
+th{
+  text-align: left;
   vertical-align: middle;
-  font-weight: bold;
+  padding-left: 8px;
 }
 
-td {
-  font-weight: normal;
-}
-
-th, td {
-  padding: 12px;
-  border: 1px solid #000;
-}
-
-table {
-  border-collapse: collapse;
-}
 .resizer{
   position:absolute;
   top:0;
