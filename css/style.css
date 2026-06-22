@@ -198,6 +198,17 @@ th {
   font-weight: bold;
 }
 
+th, td {
+  padding: 12px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #000;
+}
 .resizer{
   position:absolute;
   top:0;
