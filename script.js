@@ -255,9 +255,9 @@ function resetGrid(){
 
   tbody.innerHTML = `
     <tr>
-      <td contenteditable="true">No</td>
-      <td contenteditable="true">isi</td>
-      <td contenteditable="true">isi</td>
+      <th contenteditable="true">No</th>
+      <th contenteditable="true">isi</th>
+      <th contenteditable="true">isi</th>
     </tr>
 
     <tr>
