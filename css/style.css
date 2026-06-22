@@ -192,10 +192,10 @@ button, td{
 ========================= */
 
 td,
-th{
-  text-align: left;
+th {
+  text-align: center;
   vertical-align: middle;
-  padding-left: 8px;
+  font-weight: bold;
 }
 
 .resizer{
