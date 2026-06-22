@@ -107,7 +107,7 @@ function saveTitle(){
 /* =======================
    LOAD GRID
 ======================= */
-console.log(document.querySelector("#gridTable").innerHTML);
+
 function loadGrid(){
   const table = document.querySelector("#gridTable tbody");
   const saved = localStorage.getItem("gridfal_data");
