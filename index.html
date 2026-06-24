@@ -11,59 +11,74 @@
 
 <header class="topbar">
   <h1 class="logo">GridFal 2.0</h1>
+  <button id="menuBtn">☰</button>
+<div id="menuPanel" style="display:none;">
 
+  <button id="templateBtn">Template</button>
+
+  <button onclick="exportExcel()">Export Excel</button>
+
+  <button onclick="exportPDF()">Export PDF</button>
+
+  <button id="zoomBtnIn">Zoom +</button>
+
+  <button id="zoomBtnOut">Zoom -</button>
+
+  <button id="themeToggle">🌙</button>
+
+  <button onclick="resetGrid()">🗑 Reset Grid</button>
+</div>
   <div class="actions">
     <div class="group">
-      <button id="addRowBtn">+ Row</button>
-      <button id="addColumnBtn">+ Column</button>
-      <button onclick="resetGrid()">Reset Grid</button>
+      <button id="addRowBtn">
+        ＋ Row
+      </button>
+      <button id="addColumnBtn">
+        ＋ Column
+      </button>
     </div>
 
-    <div class="group">
-      <button onclick="deleteRow()">Hapus Row</button>
-      <button onclick="deleteColumn()">Hapus Column</button>
-      <button onclick="undoAction()">Undo</button>
-    </div>
-<button onclick="redoAction()">↪ Redo</button>
-<input
-  type="text"
-  id="searchInput"
-  placeholder="Cari..."
->
-
-<button onclick="searchCell()">🔍 Cari</button>
-<button id="templateBtn">Template</button>
-    <div id="saveStatus" class="save-status">Belum disimpan</div>
-
-    <div class="group">
-      <button onclick="exportPDF()">Export PDF</button>
-      <button onclick="exportExcel()">Export Excel</button>
-    </div>
-  </div>
-<div class="zoom-control">
-  <button id="zoomBtnOut">−</button>
-  <span id="zoomLevel">150%</span>
-  <button id="zoomBtnIn">+</button>
-</span>
+<div class="group">
+  <button onclick="deleteRow()">Hapus Row</button>
+  <button onclick="deleteColumn()">Hapus Column</button>
+  <button onclick="undoAction()">↶ Undo</button>
   
-<button id="themeToggle">🌙</button>
+  <button onclick="redoAction()">↷ Redo</button>
+  </div>
+<div class="search-box">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Cari..."
+  >
+
+  <span class="search-icon"
+        onclick="searchCell()">🔍</span>
+
 </div>
+
+    <div id="saveStatus" class="save-status">Belum disimpan</div>
+  
 </header>
 
-<section class="intro">
-  <h2>GridFal 2.0</h2>
-  <p class="desc">Tool untuk membuat grid/tabel dengan cepat.</p>
+<section class="intro" id="introBox">
+
+  <button class="close-intro" onclick="closeIntro()">
+    ✕
+  </button>
+
+  <p class="desc">
+    Tool untuk membuat Grid/Tabel dengan cepat.
+  </p>
 
   <p class="hint-main">
-    🔧 Mulai dengan tombol <b>+ Row</b> atau <b>+ Column</b> untuk membuat struktur grid.
-    Setelah itu, langsung klik cell untuk mengisi data.
+    Mulai dengan tekan tombol <b>+ Row</b> atau <b>+ Column</b> untuk membuat struktur Grid.
   </p>
+
 </section>
 
-<p class="hint">👉 Klik cell untuk mulai mengedit</p>
-
   <h2 id="tableTitle" contenteditable="true" class="table-title">
-  Tabel Baru
+  Judul Tabel
   </h2>
   
 <main class="workspace">
@@ -72,15 +87,15 @@
     <table id="gridTable">
   <tbody>
     <tr>
-      <th contenteditable="true">No</th>
-      <th contenteditable="true">isi</th>
-      <th contenteditable="true">isi</th>
+      <th contenteditable="true">NO</th>
+      <th contenteditable="true">ISI</th>
+      <th contenteditable="true">ISI</th>
     </tr>
 
     <tr>
       <td contenteditable="true">1</td>
-      <td contenteditable="true">isi</td>
-      <td contenteditable="true">isi</td>
+      <td contenteditable="true">Isi</td>
+      <td contenteditable="true">Isi</td>
     </tr>
   </tbody>
     </table> 
@@ -100,4 +115,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </body>
+
+</div>
 </html>
