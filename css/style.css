@@ -52,7 +52,6 @@ button{
   background:#2563eb;
   color:white;
   cursor:pointer;
-
   transition:all 0.15s ease;
 }
 
@@ -62,16 +61,31 @@ button:hover{
 }
 
 button:active{
-  transform:scale(0.97);
+  transform:scale(0.96);
 }
 
 /* primary buttons */
 #addRowBtn,
-#addColumnBtn,
+#addColumnBtn{
+
+  background:linear-gradient(
+    180deg,
+    #57d88f 0%,
+    #1fa866 100%
+  );
+
+  color:white;
+
+  border:1px solid rgba(255,255,255,.15);
+
+  box-shadow:
+    inset 0 4px 0 rgba(255,255,255,.4),
+    0 4px 8px rgba(0,0,0,.2);
+}
+
 #autoNumberBtn{
   background:#16a34a;
 }
-
 /* =========================
    TABLE
 ========================= */
@@ -80,6 +94,7 @@ button:active{
   padding-top:16px;
   overflow:auto;
   transition:all 0.2s ease;
+  max-height:70vh;
   
 }
 
@@ -195,7 +210,9 @@ td,
 th{
   text-align: left;
   vertical-align: middle;
-  padding-left: 8px;
+  padding-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .resizer{
@@ -298,8 +315,9 @@ td {
   background: var(--bg-color, #fff);
 }
 #searchInput{
-  width:120px;
-  padding:6px;
+  width: 200px;
+  padding: 10px;
+  font-size: 20px;
   border:1px solid #666;
   border-radius:6px;
 }
@@ -311,13 +329,14 @@ td {
   background:#fff;
 }
 
-#gridTable td,
 #gridTable th{
-  background:#fff;
-  color:#000;
+  background:#dbeafe;
+  color:#1e3a8a;
+  font-weight:700;
   border:1px solid #000;
-   text-align:left;
+  text-align:left;
   vertical-align:middle;
+  height: 40px;
 }
 
 .table-title{
@@ -345,4 +364,159 @@ th {
   color: #000;
   text-align: center;
   vertical-align: middle;
+}
+#gridTable th{
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+
+  text-align: normal;
+  vertical-align: middle;
+}
+.intro{
+  position:relative;
+  margin:16px;
+  padding:14px;
+
+  background:#eef6ff;
+  border:1px solid #bfdbfe;
+  border-radius:12px;
+}
+
+.close-intro{
+  position:absolute;
+  top:8px;
+  right:8px;
+
+  background:none;
+  border:none;
+
+  color:#666;
+  font-size:18px;
+  cursor:pointer;
+}
+#menuBtn{
+  font-size:20px;
+  padding:10px 14px;
+}
+
+#menuPanel{
+  position:absolute;
+  top:70px;
+  right:10px;
+
+  display:none;
+
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:12px;
+
+  padding:10px;
+
+  z-index:9999;
+
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+#menuPanel button{
+  display:block;
+  width:100%;
+  margin:4px 0;
+}
+.search-box{
+  position:relative;
+  display:inline-block;
+}
+
+.search-box input{
+  padding-right:35px;
+}
+
+.search-icon{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+
+  #menuBtn{
+  background:#1e293b;
+  color:#cbd5e1;
+  border:1px solid #475569;
+  box-shadow:
+  inset 0 2px 0 rgba(255,255,255,.2),
+  0 4px 12px rgba(79,70,229,.3);
+}
+button[onclick="deleteRow()"],
+button[onclick="deleteColumn()"]{
+
+  background:#7f1d1d;
+
+  color:#fee2e2;
+
+  border:1px solid #991b1b;
+
+  border-radius:12px;
+
+  font-weight:600;
+  box-shadow:
+  inset 0 2px 0 rgba(255,255,255,.2),
+  0 4px 12px rgba(79,70,229,.3);
+}
+button[onclick="resetGrid()"]{
+
+  background:#451a03;
+
+  color:#fde68a;
+
+  border:1px solid #92400e;
+
+  border-radius:12px;
+
+  font-weight:600;
+  box-shadow:
+  inset 0 2px 0 rgba(255,255,255,.2),
+  0 4px 12px rgba(185,28,28,.3);
+}
+button[onclick="undoAction()"],
+button[onclick="redoAction()"]{
+
+  background:#334155;
+
+  color:#e2e8f0;
+
+  border:1px solid #475569;
+
+  border-radius:12px;
+
+  font-weight:600;
+
+  box-shadow:
+  0 3px 10px rgba(51,65,85,.15);
+  box-shadow:
+  inset 0 2px 0 rgba(255,255,255,.2),
+  0 4px 12px rgba(71,85,105,.3);
+}
+#gridTable tr:first-child th,
+#gridTable tr:first-child td{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:100;
+
+  background:#e2e8f0;
+}
+#gridTable td:first-child,
+#gridTable th:first-child{
+
+  min-width:35px;
+
+  width:35px;
+
+  white-space:nowrap;
+
+  text-align:center;
 }
