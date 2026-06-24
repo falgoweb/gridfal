@@ -137,6 +137,7 @@ function loadGrid(){
 
   });
 }
+
 function loadTitle(){
 
   const savedTitle =
@@ -255,9 +256,9 @@ function resetGrid(){
 
   tbody.innerHTML = `
     <tr>
-      <th contenteditable="true">No</th>
-      <th contenteditable="true">isi</th>
-      <th contenteditable="true">isi</th>
+      <th contenteditable="true">NO</th>
+      <th contenteditable="true">ISI</th>
+      <th contenteditable="true">ISI</th>
     </tr>
 
     <tr>
@@ -397,15 +398,12 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =======================
    COLUMN RESIZE
 ======================= */
-
 function initColumnResize(){
 console.log("Resize aktif");
   const firstRow = document.querySelector("#gridTable tr");
   if(!firstRow) return;
-
-  const cells = firstRow.querySelectorAll("td, th");
-
-  cells.forEach((cell, index) => {
+const cells = firstRow.querySelectorAll("td");
+cells.forEach((cell, index) => {
 
     if(cell.querySelector(".resizer")) return;
 
@@ -511,7 +509,7 @@ const templateBtn = document.getElementById("templateBtn");
 
 templateBtn.addEventListener("click", () => {
 
-  const pilihan = prompt(
+const pilihan = prompt(
 `Pilih Template
 
   1. Daftar Hadir
@@ -688,7 +686,7 @@ document.addEventListener("DOMContentLoaded", function () {
     temp.style.position = "absolute";
     temp.style.font = window.getComputedStyle(cell).font;
 
-    temp.innerText = cell.innerText || " ";
+    temp.innerText = cell.innerText.trim() || "A";
 
     document.body.appendChild(temp);
     const width = temp.offsetWidth + 30;
@@ -700,30 +698,39 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
   // RESIZE SEMUA KOLOM SEKALIGUS (SAFE MODE)
   // =========================
-  function resizeAllColumns() {
-    const rows = table.querySelectorAll("tr");
-    if (!rows.length) return;
+function resizeAllColumns() {
+  const rows = table.querySelectorAll("tr");
+  if (!rows.length) return;
 
-    const colCount = rows[0].children.length;
+  const colCount = rows[0].children.length;
 
-    for (let i = 0; i < colCount; i++) {
-      let maxWidth = 60;
+  for (let i = 0; i < colCount; i++) {
 
-      rows.forEach(row => {
-        const cell = row.children[i];
-        if (cell) {
-          const w = getTextWidth(cell);
-          if (w > maxWidth) maxWidth = w;
-        }
-      });
+    let maxWidth = 60;
 
-      rows.forEach(row => {
-        if (row.children[i]) {
-          row.children[i].style.width = maxWidth + "px";
-        }
-      });
-    }
+    rows.forEach(row => {
+      const cell = row.children[i];
+
+      if (cell) {
+        const w = getTextWidth(cell);
+        if (w > maxWidth) maxWidth = w;
+      }
+    });
+
+    rows.forEach(row => {
+
+      const cell = row.children[i];
+
+      if (!cell) return;
+
+      if (cell === document.activeElement) return;
+
+      cell.style.width = maxWidth + "px";
+
+    });
+
   }
+}
 
   // =========================
   // INPUT LISTENER (LIVE RESIZE)
@@ -796,11 +803,32 @@ function searchCell(){
 
   alert("Data tidak ditemukan");
 }
+/* =======================
+   FIX BACKSPACE HEADER
+======================= */
+
+document.addEventListener("keydown", function(e){
+
+  const cell = e.target;
+
+  if(
+    e.key === "Backspace" &&
+    (cell.tagName === "TH" || cell.tagName === "TD")
+  ){
+
+    if(cell.innerText.trim() === ""){
+      e.preventDefault();
+    }
+
+  }
+
+});
+
 function exportExcel(){
 
   const title =
     document.getElementById("tableTitle").innerText ||
-    "Tabel Baru";
+    "Judul Tabel";
 
   const rows = [];
 
@@ -919,6 +947,13 @@ doc.setFontSize(9);
 
   theme: "grid",
 
+  columnStyles: {
+    0: { cellWidth: 12
+    }
+},
+
+  
+
   headStyles: {
   fillColor: [240,240,240],
   textColor: [0,0,0],
@@ -975,26 +1010,4 @@ document.addEventListener("DOMContentLoaded", () => {
   const templateBtn = document.getElementById("templateBtn");
   const tableContainer = document.querySelector(".table-container");
 
-  if (zoomInBtn) zoomInBtn.addEventListener("click", zoomIn);
-  if (zoomOutBtn) zoomOutBtn.addEventListener("click", zoomOut);
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      themeToggle.textContent =
-        document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
-    });
-  }
-
-  if (templateBtn) {
-    templateBtn.addEventListener("click", () => {
-      const pilihan = prompt("Pilih Template ...");
-      if (!pilihan) return;
-    });
-  }
-
-  if (tableContainer) {
-    applyZoom();
-  }
-
-});
+  if (zoomInBtn) zoomInBtn.add
