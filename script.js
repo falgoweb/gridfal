@@ -1010,4 +1010,76 @@ document.addEventListener("DOMContentLoaded", () => {
   const templateBtn = document.getElementById("templateBtn");
   const tableContainer = document.querySelector(".table-container");
 
-  if (zoomInBtn) zoomInBtn.add
+  if (zoomInBtn) zoomInBtn.addEventListener("click", zoomIn);
+  if (zoomOutBtn) zoomOutBtn.addEventListener("click", zoomOut);
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      themeToggle.textContent =
+        document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    });
+  }
+
+  if (templateBtn) {
+    templateBtn.addEventListener("click", () => {
+      const pilihan = prompt("Pilih Template ...");
+      if (!pilihan) return;
+    });
+  }
+
+  if (tableContainer) {
+    applyZoom();
+  }
+
+});
+/* FIX BACKSPACE EMPTY CELL */
+document.addEventListener("keydown", function(e){
+
+  if(e.key !== "Backspace") return;
+
+  const cell = e.target;
+
+  if(cell.tagName !== "TH") return;
+
+  if(cell.innerText.trim() === ""){
+    e.preventDefault();
+  }
+
+});
+function closeIntro(){
+
+  document.getElementById("introBox")
+    .style.display = "none";
+
+  localStorage.setItem(
+    "hideIntro",
+    "true"
+  );
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  if(localStorage.getItem("hideIntro") === "true"){
+
+    document.getElementById("introBox")
+      .style.display = "none";
+
+  }
+
+});
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const menuPanel =
+  document.getElementById("menuPanel");
+
+menuBtn.addEventListener("click", () => {
+
+  if(menuPanel.style.display === "block"){
+    menuPanel.style.display = "none";
+  }else{
+    menuPanel.style.display = "block";
+  }
+
+});
